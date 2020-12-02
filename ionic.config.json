@@ -1,0 +1,7 @@
+{
+  "name": "hospital-repiar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
