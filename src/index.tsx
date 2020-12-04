@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './firebase';
+import AppProvider from './contexts/AppProvider';
 
 ReactDOM.render(
-    <App />, 
+    <AppProvider>
+        <App />
+    </AppProvider>, 
     document.getElementById('root')
 );
 
