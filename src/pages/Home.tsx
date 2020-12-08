@@ -76,7 +76,6 @@ const Home = () => {
                                             <small>แจ้งโดย 10 นาทีที่แล้ว</small>
                                         </IonCol>
                                     </IonRow>
-                                   
                                 </IonCardContent>
                         </IonCard>
                         </IonCol>

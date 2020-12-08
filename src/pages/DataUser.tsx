@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
     width: 100vw;
     .dashbord{
         display:flex;
-        background-color: #7fabe4;
+        background-color: #00CBFF;
         padding: 13px;
     }
 
@@ -27,25 +27,52 @@ const StyledWrapper = styled.div`
     }
     .contianer{
         align-items: center;
-    padding-top: 14px;
+        padding-top: 14px;
+    }
+    .position{
+        opacity: 0.5;
+    }
+    .name{
+        font-size: 14px;
     }
     #image{
-        border-radius: 66%;
-    width: 67%;
-    height: 100%;
-    margin-left: 15px;
+        border-radius: 66% !important;
+        width: 67%;
+        height: 100%;
+        margin-left: 15px;
     }
     ion-icon {
-  font-size: 30px;
-  image{
+        font-size: 30px;
+    }
+    h1{
+        margin: 0px;
+        padding-left: 15px;
+        font-size: 20px;
+    }
+    .title-card{
+       display: flex;
+       justify-content: space-between;
+    align-items: center;
+   }
+   .status{
+    display: flex;
+    margin-left: 8px;
+    margin-right: 8px;
+   }
+
+
+
+
+
+  /* ion-img{
     display: block;
     width: 100%;
     height: 100%;
     object-fit: inherit;
     object-position: inherit;
     border-radius: 100%;
-}
-}
+} */
+
 `
 
 const DataUser = () => {
@@ -53,34 +80,54 @@ const DataUser = () => {
     return (
         <StyledWrapper>
             <Topbar title={'ข้อมูลผู้ใช้งาน'} />
-                <IonRow className="contianer">
-                   <IonCol>  
-                       <img  src={image} /></IonCol>
-                   <IonCol>
-                       <IonRow>ผู้ดูแลระบบ</IonRow>
-                       <IonRow>สมชายทันเพื่อน</IonRow>
-                   </IonCol>
-                   <IonCol className="icon"><IonIcon icon={settings}  ></IonIcon></IonCol>
-                </IonRow>
+            <IonRow className="contianer">
+                <IonCol>
+                    <IonImg src={image} id="image" /></IonCol>
+                <IonCol>
+                    <IonRow className="position">ผู้ดูแลระบบ</IonRow>
+                    <IonRow className="name">สมชายทันเพื่อน</IonRow>
+                </IonCol>
+                <IonCol className="icon"><IonIcon icon={settings}  ></IonIcon></IonCol>
+            </IonRow>
             <IonGrid>
                 <h1>ภาพรวม</h1>
+                    <IonRow>
+                        <IonCard  >
+                            <IonCardContent className="dashbord" >
+                                <RadialProgress percent={80} />
+                                <div className="gg">
+                                    <h3>ความพึงพอใจ</h3>
+                                    <h3>20 งาน</h3>
+                                </div>
+                            </IonCardContent>
+                        </IonCard>
+                    </IonRow>
                 <IonRow>
-                    <IonCard  >
-                        <IonCardContent className="dashbord" >
-                        <RadialProgress percent={80} />
-                           <div className="gg">
-                           <h3>ความพึงพอใจ</h3>
-                            <h3>20 งาน</h3>
-                           </div>
-                           
-                        </IonCardContent>
-                    </IonCard>
+                    <h1>งานที่ดำเนินการ</h1>
                 </IonRow>
                 <IonRow>
-
-                </IonRow>
-                <IonRow>
-
+                <IonCard>
+                                <IonCardContent>
+                                    <div className="title-card">
+                                    <h2>เครื่องปริ้นต์เสีย  </h2>
+                                    <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
+                                    </div>
+                                    <h3>แผนกบัญชี</h3>
+                                    <p className="topic">แจ้งโดย</p>
+                                    <IonRow>
+                                        <IonCol>
+                                       
+                                        
+                                        <IonImg className="img" src={image} />
+                                        
+                                        </IonCol>
+                                        <IonCol>
+                                            <p>สมชาย  เชื่อมัน</p>
+                                            <small>แจ้งโดย 10 นาทีที่แล้ว</small>
+                                        </IonCol>
+                                    </IonRow>
+                                </IonCardContent>
+                        </IonCard>
                 </IonRow>
             </IonGrid>
         </StyledWrapper>
