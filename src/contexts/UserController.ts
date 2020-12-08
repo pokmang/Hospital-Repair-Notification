@@ -8,43 +8,41 @@ const UserController = () => {
     const [positions, setPositions] = useState([]);
 
     const getUsers = () => {
-        let unsub = col.onSnapshot((s) => {
+        return col.onSnapshot((s) => {
             const data = s.docs.map((doc) => {
-                const data = doc.data();
-                return { ...data, id: doc.id }
+                return { ...doc.data(), id: doc.id }
             });
             setUsers(data)
         });
-
-        return () => {
-            unsub();
-        }
     }
 
     const getDepartments = () => {
-        firebase.firestore().collection('departments').onSnapshot((querySnapshot) => {
-            const x = []
-            querySnapshot.forEach((doc) => {
-                x.push({ ...doc.data() })
+        return firebase.firestore().collection('departments').onSnapshot((s) => {
+            const data = s.docs.map((doc) => {
+                return { ...doc.data(), id: doc.id }
             });
-            setDepartments(x)
+            setDepartments(data)
         })
     }
 
     const getPositions = () => {
-        firebase.firestore().collection('positions').onSnapshot((querySnapshot) => {
-            const x = []
-            querySnapshot.forEach((doc) => {
-                x.push({ ...doc.data() })
+        return firebase.firestore().collection('positions').onSnapshot((s) => {
+            const data = s.docs.map((doc) => {
+                return { ...doc.data(), id: doc.id }
             });
-            setPositions(x)
+            setPositions(data)
         })
     }
 
     useEffect(() => {
-        getUsers()
-        getDepartments()
-        getPositions()
+        let unsub1 = getUsers();
+        let unsub2 = getDepartments();
+        let unsub3 = getPositions();
+        return () => {
+            unsub1();
+            unsub2();
+            unsub3();
+        }
     }, [])
 
     return {

@@ -13,8 +13,6 @@ const Users = () => {
     const { userController } = useContext(AppContext)
     const { users } = userController
 
-    console.log(users);
-
     return (
         <IonPage>
             <Topbar title={'รายชื่อผู้ใช้'}/>

@@ -55,7 +55,7 @@ const DataUser = () => {
     const { users } = userController
     const params = useParams<{ id: string }>();
     const user = users ? users.find(p => p.id === params.id) : null;
-    console.log(user);
+    console.log(users);
     
     return (
         <StyledWrapper>
