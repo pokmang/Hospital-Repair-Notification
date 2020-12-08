@@ -1,14 +1,10 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
 import {
-  IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs
-} from '@ionic/react';
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
@@ -30,16 +26,24 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import DataUser from './pages/DataUser';
 
 const App: React.FC = () => (
+
   <IonApp>
-    <IonReactRouter>
-        <IonRouterOutlet>
-          <Route path="/" component={Login}  />
-        </IonRouterOutlet>
-       
-    </IonReactRouter>
+    <Router>
+      <Switch>
+      
+        <Route path="/register" component={Register} />
+        <Route path="/home" component={Home} />
+        <Route path="/user/id" component={DataUser} />
+        <Route path="/" component={Login} />
+      </Switch>
+    </Router>
   </IonApp>
+
 );
 
 export default App;
