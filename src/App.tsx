@@ -30,6 +30,7 @@ import Register from './pages/Register';
 import Users from './pages/Users';
 import Home from './pages/Home';
 import DataUser from './pages/DataUser';
+import RequestRepair from './pages/RequestRepair';
 
 const App: React.FC = () => (
 
@@ -38,9 +39,12 @@ const App: React.FC = () => (
       <Switch>
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
+        <Route path="/user/id" component={DataUser} />
+        <Route path="/request-repairing" component={RequestRepair} />
         <Route path="/users/:id" component={DataUser} />
         <Route path="/users" component={Users} />
         <Route path="/" component={Login} />
+        
       </Switch>
     </Router>
   </IonApp>

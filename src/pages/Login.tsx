@@ -5,6 +5,7 @@ import { Input, Form, Checkbox, Button, notification } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import logo from '../img/logo.png';
 import bg from '../img/background.jpg';
+import { AppContext } from '../contexts/AppProvider';
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -66,16 +67,27 @@ const StyledWrapper = styled.div`
 `
 
 const Login = () => {
-
+    const { authController } = useContext(AppContext);    
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+console.log();
 
-    const onFinish = () => {
-        history.push('/home');
-        console.log("login");
+const onFinish = async values => {
+    setLoading(true);
+    console.log(values); 
+    try {
+        await authController.login(values.email, values.password);
+        console.log("dd");
         
-    };
-
+        history.push('/');
+    } catch (e) {
+        notification['error']({
+            message: 'Failed',
+            description: e.message
+        })
+    }
+    setLoading(false);
+};
     return (
         <StyledWrapper>
         <div className='container'>

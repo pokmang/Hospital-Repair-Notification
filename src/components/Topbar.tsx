@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Styled from 'styled-components'
 import { Drawer, Button } from 'antd'
 import { IonCol, IonGrid, IonIcon, IonRow } from '@ionic/react';
 import { reorderThreeOutline } from 'ionicons/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { AppContext } from '../contexts/AppProvider';
 
 const StyledWrapper = Styled.div`
   border-bottom: solid;
@@ -28,7 +29,8 @@ const StyledWrapper = Styled.div`
 `
 
 const Topbar = (props: { title: React.ReactNode }) => {
-
+  const { authController } = useContext(AppContext);
+  const history = useHistory();
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -36,7 +38,14 @@ const Topbar = (props: { title: React.ReactNode }) => {
   const onClose = () => {
     setVisible(false);
   };
-
+  const handleLogout = async () => {
+    try {
+        await authController.logout();
+        history.replace('/login')
+    } catch (e) {
+        console.error(e);
+    }
+}
   return (
     <StyledWrapper>
       <IonGrid>
@@ -79,6 +88,10 @@ const Topbar = (props: { title: React.ReactNode }) => {
           <IonRow>
             <Link to="">หัวข้อประเมิน</Link>
           </IonRow>
+          <IonRow>
+            <Button  key="logout" onClick={handleLogout}>Logout</Button>
+          </IonRow>
+
         </IonGrid>
       </Drawer>
     </StyledWrapper>
