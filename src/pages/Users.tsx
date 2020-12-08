@@ -19,14 +19,14 @@ const Users = () => {
             <IonSearchbar value={searchUser} onIonChange={e => setSearchUser(e.detail.value!)}></IonSearchbar>
             <IonContent>
                 <StyledWrapper>
-                    {!users ? 'No user' :
+                    {users &&
                         users.map((user, index) => {
                             return (
                                 <IonCard key={index}>
                                     <Link to={`/users/${user.id}`}>
                                         <IonCardHeader>
                                             <IonCardTitle>{user.name}</IonCardTitle>
-                                            <IonCardSubtitle>{user.department}</IonCardSubtitle>
+                                            <IonCardSubtitle>{user.department.name}</IonCardSubtitle>
                                         </IonCardHeader>
                                     </Link>
                                 </IonCard>

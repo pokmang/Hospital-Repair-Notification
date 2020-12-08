@@ -19,7 +19,7 @@ const UserController = () => {
     const getDepartments = () => {
         return firebase.firestore().collection('departments').onSnapshot((s) => {
             const data = s.docs.map((doc) => {
-                return { ...doc.data(), id: doc.id }
+                return { ...doc.data() }
             });
             setDepartments(data)
         })
@@ -28,7 +28,7 @@ const UserController = () => {
     const getPositions = () => {
         return firebase.firestore().collection('positions').onSnapshot((s) => {
             const data = s.docs.map((doc) => {
-                return { ...doc.data(), id: doc.id }
+                return { ...doc.data() }
             });
             setPositions(data)
         })

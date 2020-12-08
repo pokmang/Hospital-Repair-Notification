@@ -7,7 +7,7 @@ import Topbar from '../components/Topbar';
 const StyledWrapper = styled.div`
     .title{
         padding:0 13px;
-        margin:13px 0 0 0;
+        margin:13px 0 0 0 ;
     }
     .button{
         margin-top:20px;
@@ -36,6 +36,7 @@ const Register = () => {
     const handleRegister = () => {
         setShowAlert1(true)
     }
+    console.log(name, phone, email, password, position["name"], department["name"]);
 
     return (
         <StyledWrapper>
@@ -81,7 +82,7 @@ const Register = () => {
                             isOpen={showAlert1}
                             onDidDismiss={() => {
                                 setShowAlert1(false)
-                                console.log(register(email, password, { name, phone, email, position, department }));
+                                register(email, password, { name, phone, email, position, department });
 
                             }}
                             cssClass='my-custom-class'
