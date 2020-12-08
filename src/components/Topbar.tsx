@@ -6,34 +6,28 @@ import { reorderThreeOutline } from 'ionicons/icons';
 import { Link } from 'react-router-dom';
 
 const StyledWrapper = Styled.div`
-        border-bottom: solid;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-  
-    .menu{
-      text-align-last: end;
-      align-self: center;
-    }
-    .title{
-      text-align: end;
-      margin-right: -89px;
-    }
-
-    ion-icon {
-  font-size: 60px;
-  margin-top: 5px;
-}
-.drawer-body {
-
+  border-bottom: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .menu{
+    text-align-last: end;
+    align-self: center;
+  }
+  .title{
+    text-align: end;
+    margin-right: -89px;
+  }
+  ion-icon {
+    font-size: 60px;
+    margin-top: 5px;
+  }
+  .drawer-body {
     padding: 0px 0px 0px 23px;
-
-}
-}
+  }
 `
 
 const Topbar = (props: { title: React.ReactNode }) => {
-
 
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
@@ -42,7 +36,6 @@ const Topbar = (props: { title: React.ReactNode }) => {
   const onClose = () => {
     setVisible(false);
   };
-
 
   return (
     <StyledWrapper>
@@ -69,10 +62,10 @@ const Topbar = (props: { title: React.ReactNode }) => {
             <Link to="/home">หน้าแรก</Link>
           </IonRow>
           <IonRow>
-            <Link to="">เพิ่มผู้ใช้</Link>
+            <Link to="/users">รายชื่อผู้ใช้</Link>
           </IonRow>
           <IonRow>
-            <Link to="/user/id">ข้อมูลผู้ใช้</Link>
+            <Link to="/register">เพิ่มผู้ใช้</Link>
           </IonRow>
           <IonRow>
             <Link to="">จัดการผู้ใช้</Link>

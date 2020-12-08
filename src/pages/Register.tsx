@@ -2,10 +2,12 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components'
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/react';
 import { AppContext } from '../contexts/AppProvider'
+import Topbar from '../components/Topbar';
 
 const StyledWrapper = styled.div`
     .title{
-        padding:0 13px
+        padding:0 13px;
+        margin:13px 0 0 0;
     }
     .button{
         margin-top:20px;
@@ -39,9 +41,7 @@ const Register = () => {
         <StyledWrapper>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar>
-                        <IonTitle>เพิ่มผู้ใช้</IonTitle>
-                    </IonToolbar>
+                    <Topbar title={'เพิ่มผู้ใช้'} />
                 </IonHeader>
                 <IonContent>
                     <h1 className="title">ข้อมูลผู้ใช้</h1>

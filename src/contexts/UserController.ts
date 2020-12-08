@@ -8,13 +8,17 @@ const UserController = () => {
     const [positions, setPositions] = useState([]);
 
     const getUsers = () => {
-        col.onSnapshot((querySnapshot) => {
-            const x = []
-            querySnapshot.forEach((doc) => {
-                x.push({ ...doc.data() })
+        let unsub = col.onSnapshot((s) => {
+            const data = s.docs.map((doc) => {
+                const data = doc.data();
+                return { ...data, id: doc.id }
             });
-            setUsers(x)
-        })
+            setUsers(data)
+        });
+
+        return () => {
+            unsub();
+        }
     }
 
     const getDepartments = () => {

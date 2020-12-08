@@ -1,10 +1,13 @@
 import { IonGrid, IonRow, IonCol, IonIcon, IonButton, IonCard, IonCardContent, IonImg, DefaultIonLifeCycleContext } from '@ionic/react';
 import { settings } from 'ionicons/icons';
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import image from '../img/avatar.png';
 import RadialProgress from '../components/RadialProgress';
+import { useParams } from 'react-router';
+import { AppContext } from '../contexts/AppProvider';
+
 const StyledWrapper = styled.div`
     height: 100vh;
     width: 100vw;
@@ -48,30 +51,35 @@ const StyledWrapper = styled.div`
 `
 
 const DataUser = () => {
-
+    const { userController } = useContext(AppContext)
+    const { users } = userController
+    const params = useParams<{ id: string }>();
+    const user = users ? users.find(p => p.id === params.id) : null;
+    console.log(user);
+    
     return (
         <StyledWrapper>
             <Topbar title={'ข้อมูลผู้ใช้งาน'} />
-                <IonRow className="contianer">
-                   <IonCol>  
-                       <img  src={image} /></IonCol>
-                   <IonCol>
-                       <IonRow>ผู้ดูแลระบบ</IonRow>
-                       <IonRow>สมชายทันเพื่อน</IonRow>
-                   </IonCol>
-                   <IonCol className="icon"><IonIcon icon={settings}  ></IonIcon></IonCol>
-                </IonRow>
+            <IonRow className="contianer">
+                <IonCol>
+                    <img src={image} /></IonCol>
+                <IonCol>
+                    <IonRow>ผู้ดูแลระบบ</IonRow>
+                    <IonRow>สมชายทันเพื่อน</IonRow>
+                </IonCol>
+                <IonCol className="icon"><IonIcon icon={settings}  ></IonIcon></IonCol>
+            </IonRow>
             <IonGrid>
                 <h1>ภาพรวม</h1>
                 <IonRow>
                     <IonCard  >
                         <IonCardContent className="dashbord" >
-                        <RadialProgress percent={80} />
-                           <div className="gg">
-                           <h3>ความพึงพอใจ</h3>
-                            <h3>20 งาน</h3>
-                           </div>
-                           
+                            <RadialProgress percent={80} />
+                            <div className="gg">
+                                <h3>ความพึงพอใจ</h3>
+                                <h3>20 งาน</h3>
+                            </div>
+
                         </IonCardContent>
                     </IonCard>
                 </IonRow>
