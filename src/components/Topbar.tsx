@@ -1,40 +1,36 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Styled from 'styled-components'
 import { Drawer, Button } from 'antd'
 import { IonCol, IonGrid, IonIcon, IonRow } from '@ionic/react';
 import { reorderThreeOutline } from 'ionicons/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { AppContext } from '../contexts/AppProvider';
 
 const StyledWrapper = Styled.div`
-        border-bottom: solid;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-  
-    .menu{
-      text-align-last: end;
-      align-self: center;
-    }
-    .title{
-      text-align: end;
-      margin-right: -89px;
-    }
-
-    ion-icon {
-  font-size: 60px;
-  margin-top: 5px;
-}
-.drawer-body {
-
+  border-bottom: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .menu{
+    text-align-last: end;
+    align-self: center;
+  }
+  .title{
+    text-align: end;
+    margin-right: -89px;
+  }
+  ion-icon {
+    font-size: 60px;
+    margin-top: 5px;
+  }
+  .drawer-body {
     padding: 0px 0px 0px 23px;
-
-}
-}
+  }
 `
 
 const Topbar = (props: { title: React.ReactNode }) => {
-
-
+  const { authController } = useContext(AppContext);
+  const history = useHistory();
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -42,8 +38,14 @@ const Topbar = (props: { title: React.ReactNode }) => {
   const onClose = () => {
     setVisible(false);
   };
-
-
+  const handleLogout = async () => {
+    try {
+        await authController.logout();
+        history.replace('/login')
+    } catch (e) {
+        console.error(e);
+    }
+}
   return (
     <StyledWrapper>
       <IonGrid>
@@ -69,10 +71,10 @@ const Topbar = (props: { title: React.ReactNode }) => {
             <Link to="/home">หน้าแรก</Link>
           </IonRow>
           <IonRow>
-            <Link to="">เพิ่มผู้ใช้</Link>
+            <Link to="/users">รายชื่อผู้ใช้</Link>
           </IonRow>
           <IonRow>
-            <Link to="/user/id">ข้อมูลผู้ใช้</Link>
+            <Link to="/register">เพิ่มผู้ใช้</Link>
           </IonRow>
           <IonRow>
             <Link to="">จัดการผู้ใช้</Link>
@@ -86,6 +88,10 @@ const Topbar = (props: { title: React.ReactNode }) => {
           <IonRow>
             <Link to="">หัวข้อประเมิน</Link>
           </IonRow>
+          <IonRow>
+            <Button  key="logout" onClick={handleLogout}>Logout</Button>
+          </IonRow>
+
         </IonGrid>
       </Drawer>
     </StyledWrapper>

@@ -1,11 +1,13 @@
 import { IonGrid, IonRow, IonCol, IonIcon, IonButton, IonCard, IonCardContent, IonImg, DefaultIonLifeCycleContext } from '@ionic/react';
 import { settings } from 'ionicons/icons';
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
-import { Doughnut } from 'react-chartjs-2';
 import image from '../img/avatar.png';
 import RadialProgress from '../components/RadialProgress';
+import { useParams } from 'react-router';
+import { AppContext } from '../contexts/AppProvider';
+
 const StyledWrapper = styled.div`
     height: 100vh;
     width: 100vw;
@@ -76,7 +78,12 @@ const StyledWrapper = styled.div`
 `
 
 const DataUser = () => {
-
+    const { userController } = useContext(AppContext)
+    const { users } = userController
+    const params = useParams<{ id: string }>();
+    const user = users ? users.find(p => p.id === params.id) : null;
+    console.log(user);
+    
     return (
         <StyledWrapper>
             <Topbar title={'ข้อมูลผู้ใช้งาน'} />
