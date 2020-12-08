@@ -2,13 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-<<<<<<< HEAD
 import './firebase';
 import AppProvider from './contexts/AppProvider';
-=======
 import 'antd/dist/antd.css';
 import 'antd-mobile/dist/antd-mobile.css';
->>>>>>> 93ab0093fc3d708fd177a972b16b0db19471761c
 
 ReactDOM.render(
     <AppProvider>
