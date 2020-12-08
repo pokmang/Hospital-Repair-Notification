@@ -19,9 +19,10 @@ const StyledWrapper = styled.div`
         margin-right:auto;
     }
 `
-const Register: React.FC = () => {
-    const { authController } = useContext(AppContext)
-    const { register } = authController
+const Register = () => {
+    const { authController, userController } = useContext(AppContext);
+    const { register } = authController;
+    const { positions, departments } = userController;
     const [name, setName] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -52,19 +53,13 @@ const Register: React.FC = () => {
                         <IonItem>
                             <IonLabel>ตำแหน่ง</IonLabel>
                             <IonSelect value={position} okText="Okay" cancelText="Dismiss" onIonChange={e => setPosition(e.detail.value)}>
-                                <IonSelectOption value="brown">Brown</IonSelectOption>
-                                <IonSelectOption value="blonde">Blonde</IonSelectOption>
-                                <IonSelectOption value="black">Black</IonSelectOption>
-                                <IonSelectOption value="red">Red</IonSelectOption>
+                                {positions.map(value => (<IonSelectOption value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
                         <IonItem>
                             <IonLabel>แผนก</IonLabel>
                             <IonSelect value={department} okText="Okay" cancelText="Dismiss" onIonChange={e => setDepartment(e.detail.value)}>
-                                <IonSelectOption value="brown">Brown</IonSelectOption>
-                                <IonSelectOption value="blonde">Blonde</IonSelectOption>
-                                <IonSelectOption value="black">Black</IonSelectOption>
-                                <IonSelectOption value="red">Red</IonSelectOption>
+                                {departments.map(value => (<IonSelectOption value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
                         <IonItem>
