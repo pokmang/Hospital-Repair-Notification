@@ -7,6 +7,7 @@ import image from '../img/avatar.png';
 import RadialProgress from '../components/RadialProgress';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
+import { Link } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -94,7 +95,11 @@ const DataUser = () => {
                     <IonRow className="position">ผู้ดูแลระบบ</IonRow>
                     <IonRow className="name">สมชายทันเพื่อน</IonRow>
                 </IonCol>
-                <IonCol className="icon"><IonIcon icon={settings}  ></IonIcon></IonCol>
+                <IonCol className="icon">
+                    <Link to={`/users/${params.id}/edit-profile`}>
+                        <IonIcon icon={settings} />
+                    </Link>
+                </IonCol>
             </IonRow>
             <IonGrid>
                 <h1>ภาพรวม</h1>
@@ -123,7 +128,14 @@ const DataUser = () => {
                             <p className="topic">แจ้งโดย</p>
                             <IonRow>
                                 <IonCol>
+<<<<<<< HEAD
                                     <IonImg className="img" src={image} />
+=======
+
+
+                                    <IonImg className="img" src={image} />
+
+>>>>>>> ac65a27e2bc5838c792b2f43ffb9bad7d9d87bbc
                                 </IonCol>
                                 <IonCol>
                                     <p>สมชาย  เชื่อมัน</p>
@@ -134,7 +146,7 @@ const DataUser = () => {
                     </IonCard>
                 </IonRow>
             </IonGrid>
-        </StyledWrapper>
+        </StyledWrapper >
     )
 }
 
