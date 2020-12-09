@@ -9,9 +9,8 @@ import { AppContext } from '../contexts/AppProvider';
 
 
 const StyledWrapper = styled.div`
-    ant-upload ant-upload-select ant-upload-select-picture-card {
-        margin-left: 14px;
-    margin-top: 18px;
+    h1{
+        margin-left: 16px;
     }
 `
 const RequestRepair = () => {
@@ -52,7 +51,7 @@ const RequestRepair = () => {
                                 {departments.map(value => (<IonSelectOption value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
-                        
+
                         <UploadGallery />
                         <IonButton expand="block" className="button" onClick={handleConfirm}>ยืนยัน</IonButton>
                     </IonList>

@@ -76,10 +76,10 @@ const Login = () => {
         setLoading(true);
         console.log(values);
         try {
-            await authController.login(values.username, values.password);
+            await authController.login(values.email, values.password);
             console.log("dd");
 
-            history.push('/');
+            history.push('/home');
         } catch (e) {
             notification['error']({
                 message: 'Failed',

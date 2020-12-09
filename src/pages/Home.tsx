@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react'
 import styled from 'styled-components';
 import avatar from '../img/avatar.png';
@@ -66,7 +66,10 @@ const Home = () => {
                                     <p className="topic">แจ้งโดย</p>
                                     <IonRow>
                                         <IonCol>
-                                            <IonImg className="img" src={avatar} />
+                                            <IonAvatar>
+                                                <img src={avatar} />
+                                            </IonAvatar>
+                                            {/* <IonImg className="img" src={avatar} /> */}
                                         </IonCol>
                                         <IonCol>
                                             <p>สมชาย  เชื่อมัน</p>
