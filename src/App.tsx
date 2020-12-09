@@ -32,6 +32,7 @@ import DataUser from './pages/DataUser';
 import RequestRepair from './pages/RequestRepair';
 import RepairList from './pages/RepairList';
 import Evaluate from './pages/Evaluate';
+import EditProfile from './pages/EditProfile';
 
 const App: React.FC = () => (
 
@@ -40,13 +41,11 @@ const App: React.FC = () => (
       <Switch>
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
-        <Route path="/user/id" component={DataUser} />
-        <Route path="/users/:id" component={DataUser} />
         <Route path="/request-repairing" component={RequestRepair} />
         <Route path="/evaluate" component={Evaluate} />
         <Route path="/repairlist" component={RepairList} />
-        
-        
+        <Route path="/users/:id/edit-profile" component={EditProfile} />
+        <Route path="/users/:id" component={DataUser} />
         <Route path="/users" component={Users} />
         <Route path="/" component={Login} />
       </Switch>

@@ -128,14 +128,7 @@ const DataUser = () => {
                             <p className="topic">แจ้งโดย</p>
                             <IonRow>
                                 <IonCol>
-<<<<<<< HEAD
                                     <IonImg className="img" src={image} />
-=======
-
-
-                                    <IonImg className="img" src={image} />
-
->>>>>>> ac65a27e2bc5838c792b2f43ffb9bad7d9d87bbc
                                 </IonCol>
                                 <IonCol>
                                     <p>สมชาย  เชื่อมัน</p>
