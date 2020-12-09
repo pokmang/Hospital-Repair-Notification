@@ -44,7 +44,7 @@ const Home = () => {
                 <IonGrid>
                     <IonRow>
                         <IonCol>
-                            <Topbar title={'หน้าแรก'}/>
+                            <Topbar title={'หน้าแรก'} />
                         </IonCol>
                     </IonRow>
                     <IonRow>
@@ -52,24 +52,21 @@ const Home = () => {
                     </IonRow>
                     <IonRow className="status">
                         <IonCol> <IonButton className="bnt" color="tertiary" expand="block"  >รอดำเนินการ</IonButton></IonCol>
-                        <IonCol><IonButton className="bnt" color="light"  expand="block">เสร็จสิ้น</IonButton></IonCol>
+                        <IonCol><IonButton className="bnt" color="light" expand="block">เสร็จสิ้น</IonButton></IonCol>
                     </IonRow>
                     <IonRow>
                         <IonCol>
                             <IonCard>
                                 <IonCardContent>
                                     <div className="title-card">
-                                    <h2>เครื่องปริ้นต์เสีย  </h2>
-                                    <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
+                                        <h2>เครื่องปริ้นต์เสีย  </h2>
+                                        <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
                                     </div>
                                     <h3>แผนกบัญชี</h3>
                                     <p className="topic">แจ้งโดย</p>
                                     <IonRow>
                                         <IonCol>
-                                       
-                                        
-                                        <IonImg className="img" src={avatar} />
-                                        
+                                            <IonImg className="img" src={avatar} />
                                         </IonCol>
                                         <IonCol>
                                             <p>สมชาย  เชื่อมัน</p>
@@ -77,7 +74,7 @@ const Home = () => {
                                         </IonCol>
                                     </IonRow>
                                 </IonCardContent>
-                        </IonCard>
+                            </IonCard>
                         </IonCol>
                     </IonRow>
                 </IonGrid>

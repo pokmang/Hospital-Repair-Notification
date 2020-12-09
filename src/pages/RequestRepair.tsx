@@ -1,16 +1,63 @@
-import React from 'react'
+import { IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonPage, IonHeader, IonContent, IonList } from '@ionic/react';
+import React, { useContext } from 'react'
+import { useState } from 'react';
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
+import UploadGallery from '../components/UploadGallery';
+import { AppContext } from '../contexts/AppProvider';
 
 
 
 const StyledWrapper = styled.div`
-
+    ant-upload ant-upload-select ant-upload-select-picture-card {
+        margin-left: 14px;
+    margin-top: 18px;
+    }
 `
 const RequestRepair = () => {
+    const { authController, userController } = useContext(AppContext);
+    const { positions, departments } = userController;
+    const [title, settitle] = useState<string>();
+    const [detail, setdetail] = useState<string>();
+    const [department, setDepartment] = useState<string>('');
+    console.log(title);
+    console.log(detail);
+
+    const handleConfirm = () => {
+        console.log("ยืนยัน");
+
+    }
+
+
     return (
         <StyledWrapper>
-            <Topbar title={"แจ้งซ่อม"}/>
+            <IonPage>
+                <IonHeader>
+                    <Topbar title={'แจ้งซ่อม'} />
+                </IonHeader>
+                <IonContent>
+                    <h1>แจ้งซ่อม</h1>
+                    <IonList>
+                        <IonItem>
+                            <IonLabel position="floating">หัวข้อการแจ้งซ่อม</IonLabel>
+                            <IonInput value={title}></IonInput>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel position="floating">รายละเอียดการแจ้งซ่อม</IonLabel>
+                            <IonInput value={detail}></IonInput>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel>แผนก</IonLabel>
+                            <IonSelect value={department} okText="Okay" cancelText="Dismiss" onIonChange={e => setDepartment(e.detail.value)}>
+                                {departments.map(value => (<IonSelectOption value={value}>{value.name}</IonSelectOption>))}
+                            </IonSelect>
+                        </IonItem>
+                        
+                        <UploadGallery />
+                        <IonButton expand="block" className="button" onClick={handleConfirm}>ยืนยัน</IonButton>
+                    </IonList>
+                </IonContent>
+            </IonPage>
         </StyledWrapper>
     )
 }

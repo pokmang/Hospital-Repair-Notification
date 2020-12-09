@@ -83,7 +83,7 @@ const DataUser = () => {
     const params = useParams<{ id: string }>();
     const user = users ? users.find(p => p.id === params.id) : null;
     console.log(user);
-    
+
     return (
         <StyledWrapper>
             <Topbar title={'ข้อมูลผู้ใช้งาน'} />
@@ -98,43 +98,40 @@ const DataUser = () => {
             </IonRow>
             <IonGrid>
                 <h1>ภาพรวม</h1>
-                    <IonRow>
-                        <IonCard  >
-                            <IonCardContent className="dashbord" >
-                                <RadialProgress percent={80} />
-                                <div className="gg">
-                                    <h3>ความพึงพอใจ</h3>
-                                    <h3>20 งาน</h3>
-                                </div>
-                            </IonCardContent>
-                        </IonCard>
-                    </IonRow>
+                <IonRow>
+                    <IonCard  >
+                        <IonCardContent className="dashbord" >
+                            <RadialProgress percent={80} />
+                            <div className="gg">
+                                <h3>ความพึงพอใจ</h3>
+                                <h3>20 งาน</h3>
+                            </div>
+                        </IonCardContent>
+                    </IonCard>
+                </IonRow>
                 <IonRow>
                     <h1>งานที่ดำเนินการ</h1>
                 </IonRow>
                 <IonRow>
-                <IonCard>
-                                <IonCardContent>
-                                    <div className="title-card">
-                                    <h2>เครื่องปริ้นต์เสีย  </h2>
-                                    <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
-                                    </div>
-                                    <h3>แผนกบัญชี</h3>
-                                    <p className="topic">แจ้งโดย</p>
-                                    <IonRow>
-                                        <IonCol>
-                                       
-                                        
-                                        <IonImg className="img" src={image} />
-                                        
-                                        </IonCol>
-                                        <IonCol>
-                                            <p>สมชาย  เชื่อมัน</p>
-                                            <small>แจ้งโดย 10 นาทีที่แล้ว</small>
-                                        </IonCol>
-                                    </IonRow>
-                                </IonCardContent>
-                        </IonCard>
+                    <IonCard>
+                        <IonCardContent>
+                            <div className="title-card">
+                                <h2>เครื่องปริ้นต์เสีย  </h2>
+                                <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
+                            </div>
+                            <h3>แผนกบัญชี</h3>
+                            <p className="topic">แจ้งโดย</p>
+                            <IonRow>
+                                <IonCol>
+                                    <IonImg className="img" src={image} />
+                                </IonCol>
+                                <IonCol>
+                                    <p>สมชาย  เชื่อมัน</p>
+                                    <small>แจ้งโดย 10 นาทีที่แล้ว</small>
+                                </IonCol>
+                            </IonRow>
+                        </IonCardContent>
+                    </IonCard>
                 </IonRow>
             </IonGrid>
         </StyledWrapper>

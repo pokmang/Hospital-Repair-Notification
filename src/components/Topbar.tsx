@@ -32,6 +32,8 @@ const Topbar = (props: { title: React.ReactNode }) => {
   const { authController } = useContext(AppContext);
   const history = useHistory();
   const [visible, setVisible] = useState(false);
+
+
   const showDrawer = () => {
     setVisible(true);
   };
@@ -88,6 +90,19 @@ const Topbar = (props: { title: React.ReactNode }) => {
           <IonRow>
             <Link to="">หัวข้อประเมิน</Link>
           </IonRow>
+          
+          <IonRow>
+            <Link to="/request-repairing">แจ้งซ่อม</Link>
+          </IonRow>
+          <IonRow>
+            <Link to="/repairlist">รายการแจ้งซ่อม</Link>
+          </IonRow>
+          <IonRow>
+            <Link to="/evaluate">ประเมินแจ้งซ่อม</Link>
+          </IonRow>
+
+
+
           <IonRow>
             <Button  key="logout" onClick={handleLogout}>Logout</Button>
           </IonRow>
