@@ -4,8 +4,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import { IonApp } from '@ionic/react';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -31,6 +30,7 @@ import Users from './pages/Users';
 import Home from './pages/Home';
 import DataUser from './pages/DataUser';
 import RequestRepair from './pages/RequestRepair';
+import EditProfile from './pages/EditProfile';
 
 const App: React.FC = () => (
 
@@ -40,10 +40,10 @@ const App: React.FC = () => (
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
         <Route path="/request-repairing" component={RequestRepair} />
+        <Route path="/users/:id/edit-profile" component={EditProfile} />
         <Route path="/users/:id" component={DataUser} />
         <Route path="/users" component={Users} />
         <Route path="/" component={Login} />
-        
       </Switch>
     </Router>
   </IonApp>

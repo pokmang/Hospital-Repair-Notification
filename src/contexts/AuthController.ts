@@ -37,7 +37,7 @@ const AuthController = () => {
         try {
             const cra = await auth.createUserWithEmailAndPassword(email, password)
             const uid = cra.user.uid;
-            // return col.doc(uid).set({ email, ...data });
+            return col.doc(uid).set({ email, ...data, avatar: "https://www.w3schools.com/howto/img_avatar.png" });
         } catch (e) {
             throw e;
         }

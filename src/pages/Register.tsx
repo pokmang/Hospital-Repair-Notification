@@ -12,14 +12,6 @@ const StyledWrapper = styled.div`
     .button{
         margin-top:20px;
     }
-    .grid{
-        justify-content:center;
-        align-items:center;
-        display:flex;
-    }
-    .right{
-        margin-right:auto;
-    }
 `
 const Register = () => {
     const { authController, userController } = useContext(AppContext);
@@ -83,7 +75,6 @@ const Register = () => {
                             onDidDismiss={() => {
                                 setShowAlert1(false)
                                 register(email, password, { name, phone, email, position, department });
-
                             }}
                             cssClass='my-custom-class'
                             header={'Register?'}

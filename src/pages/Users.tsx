@@ -1,4 +1,5 @@
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonPage, IonSearchbar } from '@ionic/react'
+import { IonAvatar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip, IonCol, IonContent, IonGrid, IonItem, IonLabel, IonPage, IonRow, IonSearchbar } from '@ionic/react'
+import avatar from '../img/avatar.png';
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
@@ -6,7 +7,9 @@ import Topbar from '../components/Topbar';
 import { AppContext } from "../contexts/AppProvider";
 
 const StyledWrapper = styled.div`
-
+    .avatar{
+        align-items:center
+    }
 `
 const Users = () => {
     const [searchUser, setSearchUser] = useState('');
@@ -15,26 +18,30 @@ const Users = () => {
 
     return (
         <IonPage>
-            <Topbar title={'รายชื่อผู้ใช้'}/>
+            <Topbar title={'รายชื่อผู้ใช้'} />
             <IonSearchbar value={searchUser} onIonChange={e => setSearchUser(e.detail.value!)}></IonSearchbar>
             <IonContent>
                 <StyledWrapper>
                     {users &&
                         users.map((user, index) => {
                             return (
-                                <IonCard key={index}>
-                                    <Link to={`/users/${user.id}`}>
-                                        <IonCardHeader>
-                                            <IonCardTitle>{user.name}</IonCardTitle>
-                                            <IonCardSubtitle>{user.department.name}</IonCardSubtitle>
-                                        </IonCardHeader>
-                                    </Link>
-                                </IonCard>
+                                <Link to={`/users/${user.id}`}>
+                                    <IonItem key={index}>
+
+                                        <IonAvatar slot="start">
+                                            <img src={user.avatar}></img>
+                                        </IonAvatar >
+                                        <IonLabel>
+                                            <h3>{user.name}</h3>
+                                            <p>{user.department.name}</p>
+                                            </IonLabel>
+                                    </IonItem>
+                                </Link>
                             )
                         })}
                 </StyledWrapper>
             </IonContent>
-        </IonPage>
+        </IonPage >
 
     )
 }

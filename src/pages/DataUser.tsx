@@ -7,6 +7,7 @@ import image from '../img/avatar.png';
 import RadialProgress from '../components/RadialProgress';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
+import { Link } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -83,7 +84,7 @@ const DataUser = () => {
     const params = useParams<{ id: string }>();
     const user = users ? users.find(p => p.id === params.id) : null;
     console.log(users);
-    
+
     return (
         <StyledWrapper>
             <Topbar title={'ข้อมูลผู้ใช้งาน'} />
@@ -94,50 +95,54 @@ const DataUser = () => {
                     <IonRow className="position">ผู้ดูแลระบบ</IonRow>
                     <IonRow className="name">สมชายทันเพื่อน</IonRow>
                 </IonCol>
-                <IonCol className="icon"><IonIcon icon={settings}  ></IonIcon></IonCol>
+                <IonCol className="icon">
+                    <Link to={`/users/${params.id}/edit-profile`}>
+                        <IonIcon icon={settings} />
+                    </Link>
+                </IonCol>
             </IonRow>
             <IonGrid>
                 <h1>ภาพรวม</h1>
-                    <IonRow>
-                        <IonCard  >
-                            <IonCardContent className="dashbord" >
-                                <RadialProgress percent={80} />
-                                <div className="gg">
-                                    <h3>ความพึงพอใจ</h3>
-                                    <h3>20 งาน</h3>
-                                </div>
-                            </IonCardContent>
-                        </IonCard>
-                    </IonRow>
+                <IonRow>
+                    <IonCard  >
+                        <IonCardContent className="dashbord" >
+                            <RadialProgress percent={80} />
+                            <div className="gg">
+                                <h3>ความพึงพอใจ</h3>
+                                <h3>20 งาน</h3>
+                            </div>
+                        </IonCardContent>
+                    </IonCard>
+                </IonRow>
                 <IonRow>
                     <h1>งานที่ดำเนินการ</h1>
                 </IonRow>
                 <IonRow>
-                <IonCard>
-                                <IonCardContent>
-                                    <div className="title-card">
-                                    <h2>เครื่องปริ้นต์เสีย  </h2>
-                                    <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
-                                    </div>
-                                    <h3>แผนกบัญชี</h3>
-                                    <p className="topic">แจ้งโดย</p>
-                                    <IonRow>
-                                        <IonCol>
-                                       
-                                        
-                                        <IonImg className="img" src={image} />
-                                        
-                                        </IonCol>
-                                        <IonCol>
-                                            <p>สมชาย  เชื่อมัน</p>
-                                            <small>แจ้งโดย 10 นาทีที่แล้ว</small>
-                                        </IonCol>
-                                    </IonRow>
-                                </IonCardContent>
-                        </IonCard>
+                    <IonCard>
+                        <IonCardContent>
+                            <div className="title-card">
+                                <h2>เครื่องปริ้นต์เสีย  </h2>
+                                <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
+                            </div>
+                            <h3>แผนกบัญชี</h3>
+                            <p className="topic">แจ้งโดย</p>
+                            <IonRow>
+                                <IonCol>
+
+
+                                    <IonImg className="img" src={image} />
+
+                                </IonCol>
+                                <IonCol>
+                                    <p>สมชาย  เชื่อมัน</p>
+                                    <small>แจ้งโดย 10 นาทีที่แล้ว</small>
+                                </IonCol>
+                            </IonRow>
+                        </IonCardContent>
+                    </IonCard>
                 </IonRow>
             </IonGrid>
-        </StyledWrapper>
+        </StyledWrapper >
     )
 }
 

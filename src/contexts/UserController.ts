@@ -1,18 +1,26 @@
 import { useState, useEffect } from "react";
 import firebase from "../firebase";
+import TUser from "../types/TUser";
 
 const col = firebase.firestore().collection('users');
 const UserController = () => {
-    const [users, setUsers] = useState([]);
+    let [userObj, setUserObj] = useState<{ [key: string]: TUser }>(null);
+
     const [departments, setDepartments] = useState([]);
     const [positions, setPositions] = useState([]);
 
     const getUsers = () => {
         return col.onSnapshot((s) => {
-            const data = s.docs.map((doc) => {
-                return { ...doc.data(), id: doc.id }
-            });
-            setUsers(data)
+
+            if (!userObj) userObj = {};
+
+            s.docs.forEach((doc) => {
+                const dataObj = doc.data();
+                const data = { ...dataObj, id: doc.id } as TUser;
+                userObj[doc.id] = data;
+            })
+
+            setUserObj({ ...userObj });
         });
     }
 
@@ -45,10 +53,16 @@ const UserController = () => {
         }
     }, [])
 
+    const updateUser = (id, data) => {
+        return col.doc(id).update({ ...data })
+    }
+
     return {
-        users,
+        userObj,
+        users: !userObj ? null : Object.values(userObj),
         departments,
-        positions
+        positions,
+        updateUser,
     }
 }
 
