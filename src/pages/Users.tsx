@@ -1,5 +1,4 @@
-import { IonAvatar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip, IonCol, IonContent, IonGrid, IonItem, IonLabel, IonPage, IonRow, IonSearchbar } from '@ionic/react'
-import avatar from '../img/avatar.png';
+import { IonAvatar, IonContent, IonItem, IonLabel, IonPage, IonSearchbar } from '@ionic/react'
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
@@ -7,8 +6,11 @@ import Topbar from '../components/Topbar';
 import { AppContext } from "../contexts/AppProvider";
 
 const StyledWrapper = styled.div`
-    .avatar{
-        align-items:center
+    .testCss{
+        --background:red;
+    }
+    .testColor{
+        color:blue !important;
     }
 `
 const Users = () => {
@@ -25,16 +27,15 @@ const Users = () => {
                     {users &&
                         users.map((user, index) => {
                             return (
-                                <Link to={`/users/${user.id}`}>
-                                    <IonItem key={index}>
-
+                                <Link key={index} to={`/users/${user.id}`}>
+                                    <IonItem className="testCss">
                                         <IonAvatar slot="start">
                                             <img src={user.avatar}></img>
                                         </IonAvatar >
-                                        <IonLabel>
-                                            <h3>{user.name}</h3>
+                                        <IonLabel >
+                                            <h3 className="testColor">{user.name}</h3>
                                             <p>{user.department.name}</p>
-                                            </IonLabel>
+                                        </IonLabel>
                                     </IonItem>
                                 </Link>
                             )
