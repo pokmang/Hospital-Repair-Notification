@@ -6,12 +6,12 @@ import Topbar from '../components/Topbar';
 import { AppContext } from "../contexts/AppProvider";
 
 const StyledWrapper = styled.div`
-    .testCss{
+    /* .testCss{
         --background:red;
     }
     .testColor{
         color:blue !important;
-    }
+    } */
 `
 const Users = () => {
     const [searchUser, setSearchUser] = useState('');

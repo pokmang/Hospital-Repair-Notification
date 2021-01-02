@@ -1,4 +1,5 @@
-import { IonAlert, IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonSelect, IonSelectOption } from '@ionic/react'
+import { IonAlert, IonAvatar, IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonSelect, IonSelectOption } from '@ionic/react'
+import Avatar from 'antd/lib/avatar/avatar'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import styled from 'styled-components'
@@ -34,6 +35,7 @@ const EditProfile = () => {
     const userPhone = user ? user.phone : null;
     const userPosition = user ? user.position : { name: null };
     const userDepartment = user ? user.department : { name: null };
+    const userAvatar = user ? user.avatar : null;
 
     useEffect(() => {
         if (user) {
@@ -51,6 +53,14 @@ const EditProfile = () => {
                 <IonContent>
                     <h1 className="title">ข้อมูลทั่วไป</h1>
                     <IonList>
+                        <IonItem>
+                            <IonAvatar>
+                                <img src={userAvatar} />
+                            </IonAvatar>
+                            <IonLabel>
+                                
+                            </IonLabel>
+                        </IonItem>
                         <IonItem>
                             <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
                             <IonInput value={name} onIonChange={e => setName(e.detail.value)}></IonInput>

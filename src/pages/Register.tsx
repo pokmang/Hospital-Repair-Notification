@@ -28,8 +28,7 @@ const Register = () => {
     const handleRegister = () => {
         setShowAlert1(true)
     }
-    console.log(name, phone, email, password, position["name"], department["name"]);
-
+    
     return (
         <StyledWrapper>
             <IonPage>

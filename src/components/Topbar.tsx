@@ -94,7 +94,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
         onClose={onClose}
         visible={visible}
       >
-        <IonItem style={{ "--background": "#13e070", "border-radius": "10px" }}>
+        <IonItem style={{ "--background": "#13e070", "borderRadius": "10px" }}>
           <IonAvatar slot="start">
             <img src={imguser} />
           </IonAvatar>
