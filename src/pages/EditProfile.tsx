@@ -1,11 +1,11 @@
 import { IonAlert, IonAvatar, IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonSelect, IonSelectOption } from '@ionic/react'
-import Avatar from 'antd/lib/avatar/avatar'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import styled from 'styled-components'
 import Topbar from '../components/Topbar'
 import { AppContext } from '../contexts/AppProvider'
-
+import { Upload, message } from 'antd';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 const StyledWrapper = styled.div`
     .title{
         padding:0 13px;
@@ -15,6 +15,23 @@ const StyledWrapper = styled.div`
         margin-top:20px;
     }
 `
+const getBase64 = (img, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
+const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+        message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+}
 const EditProfile = () => {
     const { userController } = useContext(AppContext);
     const { userObj, users, updateUser, positions, departments } = userController;
@@ -23,6 +40,8 @@ const EditProfile = () => {
     const [position, setPosition] = useState<string>('');
     const [department, setDepartment] = useState<string>('');
     const [showAlert1, setShowAlert1] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [imageUrl, setImageUrl] = useState();
 
     const handleRegister = () => {
         setShowAlert1(true)
@@ -46,6 +65,38 @@ const EditProfile = () => {
         }
     }, [params, user]);
 
+    const handleChange = info => {
+        if (info.file.status === 'uploading') {
+            setLoading(true)
+            return;
+        }
+        if (info.file.status === 'done') {
+            // Get this url from response in real world.
+            getBase64(info.file.originFileObj, imageUrl =>
+                setLoading(false),
+            );
+        }
+    };
+    const uploadButton = (
+        <div>
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+    );
+    const onPreview = async file => {
+        let src = file.url;
+        if (!src) {
+          src = await new Promise(resolve => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj);
+            reader.onload = () => resolve(reader.result);
+          });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        imgWindow.document.write(image.outerHTML);
+      };
     return (
         <StyledWrapper>
             <IonPage>
@@ -54,11 +105,20 @@ const EditProfile = () => {
                     <h1 className="title">ข้อมูลทั่วไป</h1>
                     <IonList>
                         <IonItem>
-                            <IonAvatar>
-                                <img src={userAvatar} />
-                            </IonAvatar>
+                            <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                beforeUpload={beforeUpload}
+                                onChange={handleChange}
+                                onPreview={onPreview}
+                            >
+                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                            </Upload>
                             <IonLabel>
-                                
+
                             </IonLabel>
                         </IonItem>
                         <IonItem>

@@ -55,8 +55,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
   const imguser = user ? user.avatar : '';
   const name = user ? user.name : '';
   const position = user ? user.position.name : '';
-
-  console.log(user);
+  const uid = user ? user.uid : '0;'
 
   const showDrawer = () => {
     setVisible(true);
@@ -72,6 +71,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
       console.error(e);
     }
   }
+
   return (
     <StyledWrapper>
       {/* หัวข้อหลัก */}
@@ -88,7 +88,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
 
       {/* side */}
       <Drawer
-        bodyStyle={{ backgroundColor: "#3395f0", padding: "0" ,}}
+        bodyStyle={{ backgroundColor: "#3395f0", padding: "0", }}
         placement="right"
         closable={false}
         onClose={onClose}
@@ -102,66 +102,61 @@ const Topbar = (props: { title: React.ReactNode }) => {
             <h3 style={{ color: "#000000" }}>{name}</h3>
             <p style={{ color: "#020202" }}>{position}</p>
           </IonLabel>
-          <Link to="/editprofile">
+          <Link to={`/users/${uid}/edit-profile`}>
             <IonIcon icon={settings} />
           </Link>
         </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0"}}>
+        <IonItem style={{ "--background": "#3395f0" }}>
           <IonIcon icon={homeOutline} />
           <IonLabel>
             <Link to="/home" style={{ color: "#fafafa" }}> หน้าแรก</Link>
           </IonLabel>
         </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0"}}>
+        <IonItem style={{ "--background": "#3395f0" }}>
           <IonIcon icon={personOutline} />
           <IonLabel>
             <Link to="/users" style={{ color: "#fafafa" }}>รายชื่อผู้ใช้</Link>
           </IonLabel>
         </IonItem>
-        <IonItem style={{ "--background": "#3395f0"}}>
+
+        <IonItem style={{ "--background": "#3395f0" }}>
           <IonIcon icon={personAddOutline} />
           <IonLabel>
             <Link to="/register" style={{ color: "#fafafa" }}>เพิ่มผู้ใช้</Link>
           </IonLabel>
         </IonItem>
-        <IonItem style={{ "--background": "#3395f0"}}>
-          <IonIcon icon={personCircleOutline} />
-          <IonLabel>
-            <Link to="" style={{ color: "#fafafa" }}>แก้ไข้ข้อมูลผู้ใช้</Link>
-          </IonLabel>
-        </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0"}}>
+        <IonItem style={{ "--background": "#3395f0" }}>
           <IonIcon icon={newspaperOutline} />
           <IonLabel>
             <Link to="" style={{ color: "#fafafa" }}>หัวข้อประเมิน</Link>
           </IonLabel>
         </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0"}}>
+        <IonItem style={{ "--background": "#3395f0" }}>
           <IonIcon icon={newspaper} />
           <IonLabel>
             <Link to="/request-repairing" style={{ color: "#fafafa" }}>แจ้งซ่อม</Link>
           </IonLabel>
         </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0"}}>
+        <IonItem style={{ "--background": "#3395f0" }}>
           <IonIcon icon={list} />
           <IonLabel>
             <Link to="/repairlist" style={{ color: "#fafafa" }}>รายการแจ้งซ่อม</Link>
           </IonLabel>
         </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0"}}>
+        <IonItem style={{ "--background": "#3395f0" }}>
           <IonIcon icon={newspaper} />
           <IonLabel>
             <Link to="/evaluate" style={{ color: "#fafafa" }} >ประเมินแจ้งซ่อม</Link>
           </IonLabel>
         </IonItem>
-        <IonButton expand="block" className="button" onClick={handleLogout} style={{ "--background": "#14ecec"}}>ออกจากระบบ</IonButton>
-       
+        <IonButton expand="block" className="button" onClick={handleLogout} style={{ "--background": "#14ecec" }}>ออกจากระบบ</IonButton>
+
       </Drawer>
     </StyledWrapper >
   )
