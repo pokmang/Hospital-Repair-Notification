@@ -6,6 +6,8 @@ import Topbar from '../components/Topbar';
 import { AppContext } from "../contexts/AppProvider";
 
 const StyledWrapper = styled.div`
+
+   
     /* .testCss{
         --background:red;
     }
@@ -19,11 +21,11 @@ const Users = () => {
     const { users } = userController
 
     return (
-        <IonPage>
+        <IonPage >
             <Topbar title={'รายชื่อผู้ใช้'} />
             <IonSearchbar value={searchUser} onIonChange={e => setSearchUser(e.detail.value!)}></IonSearchbar>
-            <IonContent>
-                <StyledWrapper>
+            <IonContent >
+                <StyledWrapper >
                     {users &&
                         users.map((user, index) => {
                             return (
