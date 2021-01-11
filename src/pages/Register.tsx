@@ -2,21 +2,15 @@ import React, { useState, useContext } from 'react';
 import styled from 'styled-components'
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/react';
 import { AppContext } from '../contexts/AppProvider'
+import Topbar from '../components/Topbar';
 
 const StyledWrapper = styled.div`
     .title{
-        padding:0 13px
+        padding:0 13px;
+        margin:13px 0 0 0 ;
     }
     .button{
         margin-top:20px;
-    }
-    .grid{
-        justify-content:center;
-        align-items:center;
-        display:flex;
-    }
-    .right{
-        margin-right:auto;
     }
 `
 const Register = () => {
@@ -34,14 +28,12 @@ const Register = () => {
     const handleRegister = () => {
         setShowAlert1(true)
     }
-
+    
     return (
         <StyledWrapper>
             <IonPage>
                 <IonHeader>
-                    <IonToolbar>
-                        <IonTitle>เพิ่มผู้ใช้</IonTitle>
-                    </IonToolbar>
+                    <Topbar title={'เพิ่มผู้ใช้'} />
                 </IonHeader>
                 <IonContent>
                     <h1 className="title">ข้อมูลผู้ใช้</h1>
@@ -81,8 +73,7 @@ const Register = () => {
                             isOpen={showAlert1}
                             onDidDismiss={() => {
                                 setShowAlert1(false)
-                                console.log(register(email, password, { name, phone, email, position, department }));
-
+                                register(email, password, { name, phone, email, position, department });
                             }}
                             cssClass='my-custom-class'
                             header={'Register?'}

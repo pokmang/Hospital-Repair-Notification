@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react'
 import styled from 'styled-components';
 import avatar from '../img/avatar.png';
@@ -44,7 +44,7 @@ const Home = () => {
                 <IonGrid>
                     <IonRow>
                         <IonCol>
-                            <Topbar title={'หน้าแรก'}/>
+                            <Topbar title={'หน้าแรก'} />
                         </IonCol>
                     </IonRow>
                     <IonRow>
@@ -52,33 +52,32 @@ const Home = () => {
                     </IonRow>
                     <IonRow className="status">
                         <IonCol> <IonButton className="bnt" color="tertiary" expand="block"  >รอดำเนินการ</IonButton></IonCol>
-                        <IonCol><IonButton className="bnt" color="light"  expand="block">เสร็จสิ้น</IonButton></IonCol>
+                        <IonCol><IonButton className="bnt" color="light" expand="block">เสร็จสิ้น</IonButton></IonCol>
                     </IonRow>
                     <IonRow>
                         <IonCol>
                             <IonCard>
                                 <IonCardContent>
                                     <div className="title-card">
-                                    <h2>เครื่องปริ้นต์เสีย  </h2>
-                                    <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
+                                        <h2>เครื่องปริ้นต์เสีย  </h2>
+                                        <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
                                     </div>
                                     <h3>แผนกบัญชี</h3>
                                     <p className="topic">แจ้งโดย</p>
                                     <IonRow>
                                         <IonCol>
-                                       
-                                        
-                                        <IonImg className="img" src={avatar} />
-                                        
+                                            <IonAvatar>
+                                                <img src={avatar} />
+                                            </IonAvatar>
+                                            {/* <IonImg className="img" src={avatar} /> */}
                                         </IonCol>
                                         <IonCol>
                                             <p>สมชาย  เชื่อมัน</p>
                                             <small>แจ้งโดย 10 นาทีที่แล้ว</small>
                                         </IonCol>
                                     </IonRow>
-                                   
                                 </IonCardContent>
-                        </IonCard>
+                            </IonCard>
                         </IonCol>
                     </IonRow>
                 </IonGrid>

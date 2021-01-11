@@ -5,6 +5,7 @@ import { Input, Form, Checkbox, Button, notification } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import logo from '../img/logo.png';
 import bg from '../img/background.jpg';
+import { AppContext } from '../contexts/AppProvider';
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -66,58 +67,69 @@ const StyledWrapper = styled.div`
 `
 
 const Login = () => {
-
+    const { authController } = useContext(AppContext);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+    console.log();
 
-    const onFinish = () => {
-        history.push('/home');
-        console.log("login");
-        
+    const onFinish = async values => {
+        setLoading(true);
+        console.log(values);
+        try {
+            await authController.login(values.email, values.password);
+            console.log("dd");
+
+            history.push('/home');
+        } catch (e) {
+            notification['error']({
+                message: 'Failed',
+                description: e.message
+            })
+        }
+        setLoading(false);
     };
-
     return (
         <StyledWrapper>
-        <div className='container'>
-           
-            <Form
-                name="normal_login"
-                className="login-form"
-                initialValues={{ remember: true }}
-                onFinish={onFinish}
-            >
-                 <div className="title">
-                    <h1>เข้าสู่ระบบ</h1>     
-                    <small className="item">กรุณาเข้าสู่ระบบเพื่อใช้งานบัญชีคุณ</small>
-                </div>
-                <Form.Item
-                    name="username"
-                    rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้งาน หรืออีเมล!' }]}
+            <div className='container'>
+
+                <Form
+                    name="normal_login"
+                    className="login-form"
+                    initialValues={{ remember: true }}
+                    onFinish={onFinish}
                 >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" id="input" />} placeholder="ชื่อผู้ใช้งาน หรืออีเมล" />
-                </Form.Item>
-                <Form.Item
-                    name="password"
-                    rules={[{ required: true, message: 'กรุณาใส่รหัสผ่าน!' }]}
-                >
-                    <Input
-                        prefix={<LockOutlined className="site-form-item-icon" />}
-                        type="password"
-                        placeholder="รหัสผ่าน"
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-                        เข้าสู่ระบบ
-                    </Button>
-                    <div className="forgot-bnt">
-                         <Link to="/register">ลืมรหัสผ่าน ? </Link>
+                    <div className="title">
+                        <h1>เข้าสู่ระบบ</h1>
+                        <small className="item">กรุณาเข้าสู่ระบบเพื่อใช้งานบัญชีคุณ</small>
                     </div>
-               
-                </Form.Item>
-            </Form>
-        </div>
-    </StyledWrapper>
+                    <Form.Item
+                        name="email"
+                        rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้งาน หรืออีเมล!' }]}
+                    >
+                        <Input prefix={<UserOutlined className="site-form-item-icon" id="input" />} placeholder="ชื่อผู้ใช้งาน หรืออีเมล" />
+                    </Form.Item>
+                    <Form.Item
+                        name="password"
+                        rules={[{ required: true, message: 'กรุณาใส่รหัสผ่าน!' }]}
+                    >
+                        <Input
+                            prefix={<LockOutlined className="site-form-item-icon" />}
+                            type="password"
+                            placeholder="รหัสผ่าน"
+                        />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
+                            เข้าสู่ระบบ
+                    </Button>
+                        <div className="forgot-bnt">
+                            <Link to="/register">ลืมรหัสผ่าน ? </Link>
+                        </div>
+
+                    </Form.Item>
+                </Form>
+            </div>
+        </StyledWrapper>
     )
 }
 

@@ -21,13 +21,13 @@ const StyledWrapper = styled.div<any>`
   .text {
     position: absolute;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
   }
 `;
 
 const RadialProgress = (props:any) => {
   const percent = props.percent ? Math.min(100, Math.max(0, props.percent)) : 0;
-  const size = props.width || 120;
+  const size = props.width || 100;
 
   const strokeWidth = 8;
   const center = size / 2;
