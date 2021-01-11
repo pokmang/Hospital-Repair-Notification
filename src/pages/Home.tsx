@@ -34,16 +34,20 @@ const StyledWrapper = styled.div`
    .img {
     border-radius: 50px;
 }
+    .col{
+        padding: 0px;
+    }
+
 
 `
 
 const Home = () => {
     return (
         <StyledWrapper>
-            <IonContent>
-                <IonGrid>
+            <IonPage >
+                <IonContent>
                     <IonRow>
-                        <IonCol>
+                        <IonCol className="col">
                             <Topbar title={'หน้าแรก'} />
                         </IonCol>
                     </IonRow>
@@ -56,8 +60,8 @@ const Home = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol>
-                            <IonCard>
-                                <IonCardContent>
+                         
+                                {/* <IonCardContent>
                                     <div className="title-card">
                                         <h2>เครื่องปริ้นต์เสีย  </h2>
                                         <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
@@ -70,18 +74,20 @@ const Home = () => {
                                                 <img src={avatar} />
                                             </IonAvatar>
                                             {/* <IonImg className="img" src={avatar} /> */}
-                                        </IonCol>
+                                        {/* </IonCol>
                                         <IonCol>
                                             <p>สมชาย  เชื่อมัน</p>
                                             <small>แจ้งโดย 10 นาทีที่แล้ว</small>
                                         </IonCol>
-                                    </IonRow>
-                                </IonCardContent>
-                            </IonCard>
+                                    </IonRow> */}
+                                {/* </IonCardContent> */} 
+                                <CardStatus/>
+                        
                         </IonCol>
                     </IonRow>
-                </IonGrid>
-            </IonContent>
+
+                </IonContent>
+            </IonPage>
         </StyledWrapper>
     )
 }

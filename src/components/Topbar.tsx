@@ -45,6 +45,15 @@ const StyledWrapper = styled.div`
   .text{
     color:#5af700 !important;
   }
+  .drw{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+  }
+  .gg{
+    background-color: #18e4cf;
+  }
 `
 
 const Topbar = (props: { title: React.ReactNode }) => {
@@ -75,8 +84,8 @@ const Topbar = (props: { title: React.ReactNode }) => {
   return (
     <StyledWrapper>
       {/* หัวข้อหลัก */}
-      <IonGrid>
-        <IonRow>
+      <IonGrid className='gg' >
+        <IonRow >
           <IonCol className="title">
             <h1 >{props.title}</h1>
           </IonCol>
@@ -94,69 +103,75 @@ const Topbar = (props: { title: React.ReactNode }) => {
         onClose={onClose}
         visible={visible}
       >
-        <IonItem style={{ "--background": "#13e070", "borderRadius": "10px" }}>
-          <IonAvatar slot="start">
-            <img src={imguser} />
-          </IonAvatar>
-          <IonLabel>
-            <h3 style={{ color: "#000000" }}>{name}</h3>
-            <p style={{ color: "#020202" }}>{position}</p>
-          </IonLabel>
-          <Link to={`/users/${uid}/edit-profile`}>
-            <IonIcon icon={settings} />
-          </Link>
-        </IonItem>
+        <div className="drw" style={{ "height": "100vh", "display": "flex", "flexDirection": "column", "justifyContent": "space-between" }}>
+          <div>
+            <IonItem style={{ "--background": "#13e070", "height": "10vh", }}>
+              <IonAvatar slot="start">
+                <img src={imguser} />
+              </IonAvatar>
+              <IonLabel>
+                <h3 style={{ color: "#000000" }}>{name}</h3>
+                <p style={{ color: "#020202" }}>{position}</p>
+              </IonLabel>
+              <Link to={`/users/${uid}/edit-profile`}>
+                <IonIcon icon={settings} />
+              </Link>
+            </IonItem>
+            <IonItem style={{ "--background": "#3395f0" ,"margin-bottom":"10px"}}>
+              <IonIcon icon={homeOutline} />
+              <IonLabel>
+                <Link to="/home" style={{ color: "#fafafa" ,"paddingLeft": "10px"}}> หน้าแรก</Link>
+              </IonLabel>
+            </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0" }}>
-          <IonIcon icon={homeOutline} />
-          <IonLabel>
-            <Link to="/home" style={{ color: "#fafafa" }}> หน้าแรก</Link>
-          </IonLabel>
-        </IonItem>
+            <IonItem style={{ "--background": "#3395f0","margin-bottom":"10px" }}>
+              <IonIcon icon={personOutline} />
+              <IonLabel>
+                <Link to="/users" style={{ color: "#fafafa","paddingLeft": "10px" }}>รายชื่อผู้ใช้</Link>
+              </IonLabel>
+            </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0" }}>
-          <IonIcon icon={personOutline} />
-          <IonLabel>
-            <Link to="/users" style={{ color: "#fafafa" }}>รายชื่อผู้ใช้</Link>
-          </IonLabel>
-        </IonItem>
+            <IonItem style={{ "--background": "#3395f0","margin-bottom":"10px" }}>
+              <IonIcon icon={personAddOutline} />
+              <IonLabel>
+                <Link to="/register" style={{ color: "#fafafa","paddingLeft": "10px" }}>เพิ่มผู้ใช้</Link>
+              </IonLabel>
+            </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0" }}>
-          <IonIcon icon={personAddOutline} />
-          <IonLabel>
-            <Link to="/register" style={{ color: "#fafafa" }}>เพิ่มผู้ใช้</Link>
-          </IonLabel>
-        </IonItem>
+            <IonItem style={{ "--background": "#3395f0","margin-bottom":"10px" }}>
+              <IonIcon icon={newspaperOutline} />
+              <IonLabel>
+                <Link to="" style={{ color: "#fafafa","paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
+              </IonLabel>
+            </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0" }}>
-          <IonIcon icon={newspaperOutline} />
-          <IonLabel>
-            <Link to="" style={{ color: "#fafafa" }}>หัวข้อประเมิน</Link>
-          </IonLabel>
-        </IonItem>
+            <IonItem style={{ "--background": "#3395f0","margin-bottom":"10px" }}>
+              <IonIcon icon={newspaper} />
+              <IonLabel>
+                <Link to="/request-repairing" style={{ color: "#fafafa","paddingLeft": "10px" }}>แจ้งซ่อม</Link>
+              </IonLabel>
+            </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0" }}>
-          <IonIcon icon={newspaper} />
-          <IonLabel>
-            <Link to="/request-repairing" style={{ color: "#fafafa" }}>แจ้งซ่อม</Link>
-          </IonLabel>
-        </IonItem>
+            <IonItem style={{ "--background": "#3395f0","margin-bottom":"10px" }}>
+              <IonIcon icon={list} />
+              <IonLabel>
+                <Link to="/repairlist" style={{ color: "#fafafa","paddingLeft": "10px" }}>รายการแจ้งซ่อม</Link>
+              </IonLabel>
+            </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0" }}>
-          <IonIcon icon={list} />
-          <IonLabel>
-            <Link to="/repairlist" style={{ color: "#fafafa" }}>รายการแจ้งซ่อม</Link>
-          </IonLabel>
-        </IonItem>
+            <IonItem style={{ "--background": "#3395f0","margin-bottom":"10px" }}>
+              <IonIcon icon={newspaper} />
+              <IonLabel>
+                <Link to="/evaluate" style={{ color: "#fafafa","paddingLeft": "10px" }} >ประเมินแจ้งซ่อม</Link>
+              </IonLabel>
+            </IonItem>
 
-        <IonItem style={{ "--background": "#3395f0" }}>
-          <IonIcon icon={newspaper} />
-          <IonLabel>
-            <Link to="/evaluate" style={{ color: "#fafafa" }} >ประเมินแจ้งซ่อม</Link>
-          </IonLabel>
-        </IonItem>
-        <IonButton expand="block" className="button" onClick={handleLogout} style={{ "--background": "#14ecec" }}>ออกจากระบบ</IonButton>
+          </div>
+          <div>
+            <IonButton expand="block" className="button" onClick={handleLogout} style={{ "--background": "#14ecec" }}>ออกจากระบบ</IonButton>
 
+          </div>
+        </div>
       </Drawer>
     </StyledWrapper >
   )

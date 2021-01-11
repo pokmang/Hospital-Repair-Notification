@@ -11,6 +11,7 @@ const StyledWrapper = styled.div`
     }
     .button{
         margin-top:20px;
+
     }
 `
 const Register = () => {
@@ -67,7 +68,9 @@ const Register = () => {
                             <IonInput value={password} onIonChange={e => setPassword(e.detail.value)}></IonInput>
                         </IonItem>
                     </IonList>
-                    <IonButton expand="block" className="button" onClick={handleRegister}>เพิ่มผู้ใช้งาน</IonButton>
+                    <div className="button">
+                    <IonButton expand="block"  onClick={handleRegister}>เพิ่มผู้ใช้งาน</IonButton>
+                    </div>    
                     {name !== '' && phone !== '' && email !== '' && password !== '' && position !== '' && department !== '' ?
                         <IonAlert
                             isOpen={showAlert1}
