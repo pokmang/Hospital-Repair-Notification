@@ -1,10 +1,11 @@
 import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonHeader, IonIcon, IonImg, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import avatar from '../img/avatar.png';
 import { IonMenu, IonContent, IonList, IonItem, IonRouterOutlet } from '@ionic/react';
 import Topbar from '../components/Topbar';
 import CardStatus from '../components/CardStatus';
+import { AppContext } from '../contexts/AppProvider';
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -38,6 +39,11 @@ const StyledWrapper = styled.div`
 `
 
 const Home = () => {
+    const { repairsController } = useContext(AppContext)
+    const { repairs } = repairsController
+
+    console.log(repairs);
+
     return (
         <StyledWrapper>
             <IonContent>

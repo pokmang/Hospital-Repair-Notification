@@ -6,27 +6,28 @@ import Topbar from '../components/Topbar';
 import UploadGallery from '../components/UploadGallery';
 import { AppContext } from '../contexts/AppProvider';
 
-
-
 const StyledWrapper = styled.div`
     h1{
         margin-left: 16px;
     }
 `
+
 const RequestRepair = () => {
-    const { authController, userController } = useContext(AppContext);
+    const { userController, repairsController } = useContext(AppContext);
     const { positions, departments } = userController;
-    const [title, settitle] = useState<string>();
+    const { addRepair } = repairsController;
+    const [device, setTitle] = useState<string>();
     const [detail, setdetail] = useState<string>();
     const [department, setDepartment] = useState<string>('');
-    console.log(title);
-    console.log(detail);
 
     const handleConfirm = () => {
         console.log("ยืนยัน");
-
+        addRepair({
+            detail,
+            device,
+             //รวม UploadGallery
+        })
     }
-
 
     return (
         <StyledWrapper>
@@ -39,7 +40,7 @@ const RequestRepair = () => {
                     <IonList>
                         <IonItem>
                             <IonLabel position="floating">หัวข้อการแจ้งซ่อม</IonLabel>
-                            <IonInput value={title}></IonInput>
+                            <IonInput value={device}></IonInput>
                         </IonItem>
                         <IonItem>
                             <IonLabel position="floating">รายละเอียดการแจ้งซ่อม</IonLabel>

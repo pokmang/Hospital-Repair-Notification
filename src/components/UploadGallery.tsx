@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Upload } from 'antd';
 
 
-const UploadGallery = () => {
+const UploadGallery = (props) => {
+  const { images } = props
   const [fileList, setFileList] = useState([
     {
       uid: '-1',
@@ -32,17 +33,16 @@ const UploadGallery = () => {
   };
 
   return (
+    <Upload
+      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      listType="picture-card"
 
-      <Upload 
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
+      onChange={onChange}
+      onPreview={onPreview}
+    >
+      {fileList.length < 5 && '+ รูปภาพ'}
+    </Upload>
 
-        onChange={onChange}
-        onPreview={onPreview}
-      >
-        {fileList.length < 5 && '+ รูปภาพ'}
-      </Upload>
-  
   );
 };
 

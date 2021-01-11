@@ -43,7 +43,6 @@ const Users = () => {
                 </StyledWrapper>
             </IonContent>
         </IonPage >
-
     )
 }
 
