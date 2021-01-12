@@ -3,7 +3,6 @@ import { Upload } from 'antd';
 
 
 const UploadGallery = (props) => {
-  const { images } = props
   const [fileList, setFileList] = useState([
     {
       uid: '-1',
