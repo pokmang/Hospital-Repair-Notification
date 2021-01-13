@@ -55,7 +55,7 @@ const CardStatus = () => {
     const { repairsController } = useContext(AppContext)
     const { repairs } = repairsController
 
-
+    console.log(repairs);
 
 
     return (
