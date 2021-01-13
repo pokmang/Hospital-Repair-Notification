@@ -1,10 +1,12 @@
 import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import bg from '../img/background.jpg';
 import { IonMenu, IonContent, IonList, IonItem, IonRouterOutlet } from '@ionic/react';
 import Topbar from '../components/Topbar';
 import avatar from '../img/avatar.png';
+import { AppContext } from '../contexts/AppProvider';
+import { phonePortraitSharp } from 'ionicons/icons';
 const StyledWrapper = styled.div`
     height: 100vh;
     width: 100vw;
@@ -50,34 +52,46 @@ const StyledWrapper = styled.div`
 `
 
 const CardStatus = () => {
+    const { repairsController } = useContext(AppContext)
+    const { repairs } = repairsController
+
+
+
+
     return (
+
         <StyledWrapper>
-            <IonContent >
-                <IonCard className="card">
-                    <IonCardContent >
-                        <div className="title-card">
-                            <h2>เครื่องปริ้นต์เสีย</h2>
-                            <h2 color="light" className="status">รอดำเนินการ</h2>
-                        </div>
-                        <div >
-                            <p className="depart">แผนกบัญชี</p>
-                            <div className="box">
-                                <div>
-                                    <p className="noti">แจ้งโดย</p>
-                                    <IonAvatar>
-                                        <img src={avatar} />
-                                    </IonAvatar>
+            {repairs && repairs.map((repair) => {
+                return (
+                    <IonContent >
+                        <IonCard className="card">
+                            <IonCardContent >
+                                <div className="title-card">
+                                    <h2>{repair.detail}</h2>
+                                    <h2 color="light" className="status">รอดำเนินการ</h2>
                                 </div>
-                                <div className="name">
-                                    <p>สมชาย  เชื่อมัน</p>
-                                    <small>แจ้งโดย 10 นาทีที่แล้ว</small>
+                                <div >
+                                    <p className="depart">แผนกบัญชี</p>
+                                    <div className="box">
+                                        <div>
+                                            <p className="noti">แจ้งโดย</p>
+                                            <IonAvatar>
+                                                <img src={avatar} />
+                                            </IonAvatar>
+                                        </div>
+                                        <div className="name">
+                                            <p>{repair.repairer}</p>
+                                            <small>แจ้งโดย 10 นาทีที่แล้ว</small>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </IonCardContent>
-                </IonCard>
-            </IonContent>
+                            </IonCardContent>
+                        </IonCard>
+                    </IonContent>)
+            })
+            }
         </StyledWrapper>
+
     )
 }
 

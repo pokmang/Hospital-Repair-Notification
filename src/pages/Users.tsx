@@ -19,7 +19,7 @@ const Users = () => {
     const [searchUser, setSearchUser] = useState('');
     const { userController } = useContext(AppContext)
     const { users } = userController
-
+    
     return (
         <IonPage >
             <Topbar title={'รายชื่อผู้ใช้'} />
@@ -28,6 +28,8 @@ const Users = () => {
                 <StyledWrapper >
                     {users &&
                         users.map((user, index) => {
+                            console.log(user);
+                            
                             return (
                                 <Link key={index} to={`/users/${user.id}`}>
                                     <IonItem className="testCss">

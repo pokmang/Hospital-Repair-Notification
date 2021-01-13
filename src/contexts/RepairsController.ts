@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import firebase from '../firebase'
+import TRepair from '../types/TRepair';
 
 const col = firebase.firestore().collection('repairs');
 
 const RepairsController = () => {
-    let [repairObj, setRepairObj] = useState(null);
-
+    let [repairObj, setRepairObj] = useState<{[key:string]:TRepair}>(null);
+    
     const getRepair = () => {
         return col.onSnapshot((s) => {
 
@@ -14,7 +15,7 @@ const RepairsController = () => {
             s.docs.forEach((doc) => {
                 const dataObj = doc.data();
                 const data = { ...dataObj, id: doc.id };
-                repairObj[doc.id] = data;
+                repairObj[doc.id] = data as TRepair;
             })
             setRepairObj({ ...repairObj });
         });

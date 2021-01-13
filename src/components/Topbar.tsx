@@ -49,7 +49,7 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh;
+    height: calc(100vh - 80px);
   }
   .gg{
     background-color: #18e4cf;
@@ -169,7 +169,6 @@ const Topbar = (props: { title: React.ReactNode }) => {
           </div>
           <div>
             <IonButton expand="block" className="button" onClick={handleLogout} style={{ "--background": "#14ecec" }}>ออกจากระบบ</IonButton>
-
           </div>
         </div>
       </Drawer>
