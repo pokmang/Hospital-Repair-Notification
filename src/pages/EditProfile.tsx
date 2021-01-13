@@ -6,6 +6,9 @@ import Topbar from '../components/Topbar'
 import { AppContext } from '../contexts/AppProvider'
 import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { uploadFile } from '../firebase'
+
+
 const StyledWrapper = styled.div`
     .title{
         padding:0 13px;
@@ -15,35 +18,28 @@ const StyledWrapper = styled.div`
         margin-top:20px;
     }
 `
-const getBase64 = (img, callback) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
+const getBase64 = (img) => {
+    return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => resolve(reader.result as string));
+        reader.readAsDataURL(img);
+    })
 }
 
-const beforeUpload = (file) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-        message.error('You can only upload JPG/PNG file!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-        message.error('Image must smaller than 2MB!');
-    }
-    return isJpgOrPng && isLt2M;
-}
+
 const EditProfile = () => {
     const { userController } = useContext(AppContext);
     const { userObj, users, updateUser, positions, departments } = userController;
-    const [name, setName] = useState<string>('');
-    const [phone, setPhone] = useState<string>('');
-    const [position, setPosition] = useState<string>('');
-    const [department, setDepartment] = useState<string>('');
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [position, setPosition] = useState('');
+    const [department, setDepartment] = useState('');
     const [showAlert1, setShowAlert1] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState();
+    const [imageUrl, setImageUrl] = useState('');
+    const [file, setFile] = useState();
 
-    const handleRegister = () => {
+    const handleAlert = () => {
         setShowAlert1(true)
     }
 
@@ -62,6 +58,7 @@ const EditProfile = () => {
             setPhone(userPhone);
             setPosition(userPosition.name);
             setDepartment(userDepartment.name);
+            setImageUrl(userAvatar)
         }
     }, [params, user]);
 
@@ -72,31 +69,66 @@ const EditProfile = () => {
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl =>
-                setLoading(false),
-            );
+            getBase64(info.file.originFileObj).then(() => {
+                setFile(null)
+            });
         }
     };
+
+    const beforeUpload = (file) => {
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJpgOrPng) {
+            message.error('You can only upload JPG/PNG file!');
+        }
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isLt2M) {
+            message.error('Image must smaller than 2MB!');
+        }
+        else {
+            setFile(file)
+            getBase64(file).then(url => {
+                setImageUrl(url)
+            })
+        }
+        return false;
+    }
+
     const uploadButton = (
         <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}
             <div style={{ marginTop: 8 }}>Upload</div>
         </div>
     );
+
     const onPreview = async file => {
         let src = file.url;
         if (!src) {
-          src = await new Promise(resolve => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file.originFileObj);
-            reader.onload = () => resolve(reader.result);
-          });
+            src = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
         }
         const image = new Image();
         image.src = src;
         const imgWindow = window.open(src);
         imgWindow.document.write(image.outerHTML);
-      };
+    };
+
+    const handleUpdate = async () => {
+        setShowAlert1(false);
+        let imgUrl = null;
+        if (file) {
+            imgUrl = await uploadFile(file)
+        }
+        updateUser(params.id, {
+            name,
+            phone,
+            position: { name: position },
+            department: { name: department },
+            avatar: imgUrl || imageUrl
+        })
+    }
     return (
         <StyledWrapper>
             <IonPage>
@@ -110,16 +142,12 @@ const EditProfile = () => {
                                 listType="picture-card"
                                 className="avatar-uploader"
                                 showUploadList={false}
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                 beforeUpload={beforeUpload}
                                 onChange={handleChange}
                                 onPreview={onPreview}
                             >
                                 {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
                             </Upload>
-                            <IonLabel>
-
-                            </IonLabel>
                         </IonItem>
                         <IonItem>
                             <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
@@ -158,19 +186,11 @@ const EditProfile = () => {
                             <IonInput value={phone} onIonChange={e => setPhone(e.detail.value)}></IonInput>
                         </IonItem>
                     </IonList>
-                    <IonButton expand="block" className="button" onClick={handleRegister}>บันทึก</IonButton>
+                    <IonButton expand="block" className="button" onClick={handleAlert}>บันทึก</IonButton>
                     {name !== '' && phone !== '' && position !== '' && department !== '' ?
                         <IonAlert
                             isOpen={showAlert1}
-                            onDidDismiss={() => {
-                                setShowAlert1(false)
-                                updateUser(params.id, {
-                                    name,
-                                    phone,
-                                    position: { name: position },
-                                    department: { name: department }
-                                })
-                            }}
+                            onDidDismiss={handleUpdate}
                             cssClass='my-custom-class'
                             header={'Edit?'}
                             message={`Please confirm ${name} to edit.`}

@@ -8,7 +8,7 @@ import avatar from '../img/avatar.png';
 import { AppContext } from '../contexts/AppProvider';
 import { phonePortraitSharp } from 'ionicons/icons';
 const StyledWrapper = styled.div`
-    height: 100vh;
+    height: 30vh;
     width: 100vw;
     background-size: cover;
    .title-card{
@@ -51,45 +51,37 @@ const StyledWrapper = styled.div`
 
 `
 
-const CardStatus = () => {
-    const { repairsController } = useContext(AppContext)
-    const { repairs } = repairsController
+const CardStatus = (props) => {
+    const { repair } = props
 
-    console.log(repairs);
-
+    const department = repair.department && repair.department.name
+    console.log(repair.department);
 
     return (
-
         <StyledWrapper>
-            {repairs && repairs.map((repair) => {
-                return (
-                    <IonContent >
-                        <IonCard className="card">
-                            <IonCardContent >
-                                <div className="title-card">
-                                    <h2>{repair.detail}</h2>
-                                    <h2 color="light" className="status">รอดำเนินการ</h2>
+                <IonCard className="card">
+                    <IonCardContent >
+                        <div className="title-card">
+                            <h2>{repair.detail}</h2>
+                            <h2 color="light" className="status">รอดำเนินการ</h2>
+                        </div>
+                        <div >
+                            <p className="depart">แผนก:{department}</p>
+                            <div className="box">
+                                <div>
+                                    <p className="noti">แจ้งโดย</p>
+                                    <IonAvatar>
+                                        <img src={avatar} />
+                                    </IonAvatar>
                                 </div>
-                                <div >
-                                    <p className="depart">แผนกบัญชี</p>
-                                    <div className="box">
-                                        <div>
-                                            <p className="noti">แจ้งโดย</p>
-                                            <IonAvatar>
-                                                <img src={avatar} />
-                                            </IonAvatar>
-                                        </div>
-                                        <div className="name">
-                                            <p>{repair.repairer}</p>
-                                            <small>แจ้งโดย 10 นาทีที่แล้ว</small>
-                                        </div>
-                                    </div>
+                                <div className="name">
+                                    <p>{repair.repairer}</p>
+                                    <small>แจ้งโดย 10 นาทีที่แล้ว</small>
                                 </div>
-                            </IonCardContent>
-                        </IonCard>
-                    </IonContent>)
-            })
-            }
+                            </div>
+                        </div>
+                    </IonCardContent>
+                </IonCard>
         </StyledWrapper>
 
     )

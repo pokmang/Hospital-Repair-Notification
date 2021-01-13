@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import UploadGallery from '../components/UploadGallery';
 import { AppContext } from '../contexts/AppProvider';
+import { uploadFile } from '../firebase';
 
 const StyledWrapper = styled.div`
     h1{
@@ -16,16 +17,31 @@ const RequestRepair = () => {
     const { userController, repairsController } = useContext(AppContext);
     const { positions, departments } = userController;
     const { addRepair } = repairsController;
-    const [device, setTitle] = useState<string>();
-    const [detail, setdetail] = useState<string>();
+    const [device, setTitle] = useState<string>('');
+    const [detail, setdetail] = useState<string>('');
     const [department, setDepartment] = useState<string>('');
 
-    const handleConfirm = () => {
+    const [fileList, setFileList] = useState([]);
+
+    const handleConfirm = async () => {
         console.log("ยืนยัน");
+        const arrImg = []
+
+        // for (let i = 0; i < fileList.length; i++) {
+        //     arrImg.push(await uploadFile(fileList[i]))
+        // }
+
+        const promises = fileList.map((file) => {
+            console.log('file', file);
+            return uploadFile(file.originFileObj)
+        });
+        const urls = await Promise.all(promises);
+
         addRepair({
             detail,
             device,
-             //รวม UploadGallery
+            photo: urls,
+
         })
     }
 
@@ -53,7 +69,7 @@ const RequestRepair = () => {
                             </IonSelect>
                         </IonItem>
 
-                        <UploadGallery />
+                        <UploadGallery fileList={fileList} onChange={setFileList} />
                         <IonButton expand="block" className="button" onClick={handleConfirm}>ยืนยัน</IonButton>
                     </IonList>
                 </IonContent>
