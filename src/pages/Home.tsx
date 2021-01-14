@@ -67,10 +67,9 @@ const Home = () => {
                     <IonRow>
                         <IonCol>
                             {
-                                repairs && repairs.map((repair,index) => {
+                                repairs && repairs.map((repair, index) => {
                                     return (
-                                      
-                                            <CardStatus repair={repair} />
+                                        <CardStatus key={index} repair={repair} />
                                     )
                                 })
                             }

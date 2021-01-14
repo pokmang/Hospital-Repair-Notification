@@ -59,29 +59,29 @@ const CardStatus = (props) => {
 
     return (
         <StyledWrapper>
-                <IonCard className="card">
-                    <IonCardContent >
-                        <div className="title-card">
-                            <h2>{repair.detail}</h2>
-                            <h2 color="light" className="status">รอดำเนินการ</h2>
-                        </div>
-                        <div >
-                            <p className="depart">แผนก:{department}</p>
-                            <div className="box">
-                                <div>
-                                    <p className="noti">แจ้งโดย</p>
-                                    <IonAvatar>
-                                        <img src={avatar} />
-                                    </IonAvatar>
-                                </div>
-                                <div className="name">
-                                    <p>{repair.repairer}</p>
-                                    <small>แจ้งโดย 10 นาทีที่แล้ว</small>
-                                </div>
+            <IonCard className="card">
+                <IonCardContent >
+                    <div className="title-card">
+                        <h2>{repair.detail}</h2>
+                        <h2 color="light" className="status">รอดำเนินการ</h2>
+                    </div>
+                    <div >
+                        <p className="depart">แผนก:{department}</p>
+                        <div className="box">
+                            <div>
+                                <p className="noti">แจ้งโดย</p>
+                                <IonAvatar>
+                                    <img src={avatar} />
+                                </IonAvatar>
+                            </div>
+                            <div className="name">
+                                <p>{repair.repairer}</p>
+                                <small>แจ้งโดย 10 นาทีที่แล้ว</small>
                             </div>
                         </div>
-                    </IonCardContent>
-                </IonCard>
+                    </div>
+                </IonCardContent>
+            </IonCard>
         </StyledWrapper>
 
     )
