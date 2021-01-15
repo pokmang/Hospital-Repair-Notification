@@ -1,4 +1,4 @@
-import { IonPage, IonHeader, IonContent, IonList, IonItem, IonCol, IonRow, IonButton, IonImg, IonIcon } from '@ionic/react';
+import { IonPage, IonHeader, IonContent, IonCol, IonRow, IonButton, IonImg, IonIcon } from '@ionic/react';
 import React from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';

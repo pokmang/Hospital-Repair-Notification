@@ -1,4 +1,4 @@
-import { IonGrid, IonRow, IonCol, IonIcon, IonButton, IonCard, IonCardContent, IonImg, DefaultIonLifeCycleContext } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonIcon, IonButton, IonCard, IonCardContent, IonImg } from '@ionic/react';
 import { settings } from 'ionicons/icons';
 import React, { useContext } from 'react'
 import styled from 'styled-components';
@@ -80,9 +80,9 @@ const StyledWrapper = styled.div`
 
 const DataUser = () => {
     const { userController } = useContext(AppContext)
-    const { users } = userController
+    const { userObj } = userController
     const params = useParams<{ id: string }>();
-    const user = users ? users.find(p => p.id === params.id) : null;
+    const user = userObj ? userObj[params.id] : null;
     console.log(user);
 
     return (

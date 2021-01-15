@@ -117,52 +117,52 @@ const Topbar = (props: { title: React.ReactNode }) => {
                 <IonIcon icon={settings} />
               </Link>
             </IonItem>
-            <IonItem style={{ "--background": "#3395f0" ,"marginBottom":"10px"}}>
+            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={homeOutline} />
               <IonLabel>
-                <Link to="/home" style={{ color: "#fafafa" ,"paddingLeft": "10px"}}> หน้าแรก</Link>
+                <Link to="/home" style={{ color: "#fafafa", "paddingLeft": "10px" }}> หน้าแรก</Link>
               </IonLabel>
             </IonItem>
 
-            <IonItem style={{ "--background": "#3395f0","marginBottom":"10px" }}>
+            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={personOutline} />
               <IonLabel>
-                <Link to="/users" style={{ color: "#fafafa","paddingLeft": "10px" }}>รายชื่อผู้ใช้</Link>
+                <Link to="/users" style={{ color: "#fafafa", "paddingLeft": "10px" }}>รายชื่อผู้ใช้</Link>
               </IonLabel>
             </IonItem>
 
-            <IonItem style={{ "--background": "#3395f0","marginBottom":"10px" }}>
+            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={personAddOutline} />
               <IonLabel>
-                <Link to="/register" style={{ color: "#fafafa","paddingLeft": "10px" }}>เพิ่มผู้ใช้</Link>
+                <Link to="/register" style={{ color: "#fafafa", "paddingLeft": "10px" }}>เพิ่มผู้ใช้</Link>
               </IonLabel>
             </IonItem>
 
-            <IonItem style={{ "--background": "#3395f0","marginBottom":"10px" }}>
+            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaperOutline} />
               <IonLabel>
-                <Link to="" style={{ color: "#fafafa","paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
+                <Link to="" style={{ color: "#fafafa", "paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
               </IonLabel>
             </IonItem>
 
-            <IonItem style={{ "--background": "#3395f0","marginBottom":"10px" }}>
+            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaper} />
               <IonLabel>
-                <Link to="/request-repairing" style={{ color: "#fafafa","paddingLeft": "10px" }}>แจ้งซ่อม</Link>
+                <Link to={`/users/${uid}/request-repairing`} style={{ color: "#fafafa", "paddingLeft": "10px" }}>แจ้งซ่อม</Link>
               </IonLabel>
             </IonItem>
 
-            <IonItem style={{ "--background": "#3395f0","marginBottom":"10px" }}>
+            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={list} />
               <IonLabel>
-                <Link to="/repairlist" style={{ color: "#fafafa","paddingLeft": "10px" }}>รายการแจ้งซ่อม</Link>
+                <Link to="/repairlist" style={{ color: "#fafafa", "paddingLeft": "10px" }}>รายการแจ้งซ่อม</Link>
               </IonLabel>
             </IonItem>
 
-            <IonItem style={{ "--background": "#3395f0","marginBottom":"10px" }}>
+            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaper} />
               <IonLabel>
-                <Link to="/evaluate" style={{ color: "#fafafa","paddingLeft": "10px" }} >ประเมินแจ้งซ่อม</Link>
+                <Link to="/evaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }} >ประเมินแจ้งซ่อม</Link>
               </IonLabel>
             </IonItem>
 

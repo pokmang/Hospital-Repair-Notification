@@ -41,9 +41,9 @@ const App: React.FC = () => (
       <Switch>
         <Route path="/register" component={Register} />
         <Route path="/home" component={Home} />
-        <Route path="/request-repairing" component={RequestRepair} />
         <Route path="/evaluate" component={Evaluate} />
         <Route path="/repairlist" component={RepairList} />
+        <Route path="/users/:id/request-repairing" component={RequestRepair} />
         <Route path="/users/:id/edit-profile" component={EditProfile} />
         <Route path="/users/:id" component={DataUser} />
         <Route path="/users" component={Users} />

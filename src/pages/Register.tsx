@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components'
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/react';
 import { AppContext } from '../contexts/AppProvider'
 import Topbar from '../components/Topbar';
+import { useHistory } from 'react-router';
 
 const StyledWrapper = styled.div`
     .title{
@@ -15,6 +16,7 @@ const StyledWrapper = styled.div`
     }
 `
 const Register = () => {
+    const history = useHistory();
     const { authController, userController } = useContext(AppContext);
     const { register } = authController;
     const { positions, departments } = userController;
@@ -29,7 +31,11 @@ const Register = () => {
     const handleRegister = () => {
         setShowAlert1(true)
     }
-    
+    const confirmRegister = () => {
+        setShowAlert1(false)
+        register(email, password, { name, phone, email, position, department });
+        history.push("/users")
+    }
     return (
         <StyledWrapper>
             <IonPage>
@@ -46,13 +52,13 @@ const Register = () => {
                         <IonItem>
                             <IonLabel>ตำแหน่ง</IonLabel>
                             <IonSelect value={position} okText="Okay" cancelText="Dismiss" onIonChange={e => setPosition(e.detail.value)}>
-                                {positions.map(value => (<IonSelectOption value={value}>{value.name}</IonSelectOption>))}
+                                {positions.map((value, index) => (<IonSelectOption key={index} value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
                         <IonItem>
                             <IonLabel>แผนก</IonLabel>
                             <IonSelect value={department} okText="Okay" cancelText="Dismiss" onIonChange={e => setDepartment(e.detail.value)}>
-                                {departments.map(value => (<IonSelectOption value={value}>{value.name}</IonSelectOption>))}
+                                {departments.map((value, index) => (<IonSelectOption key={index} value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
                         <IonItem>
@@ -69,15 +75,12 @@ const Register = () => {
                         </IonItem>
                     </IonList>
                     <div className="button">
-                    <IonButton expand="block"  onClick={handleRegister}>เพิ่มผู้ใช้งาน</IonButton>
-                    </div>    
+                        <IonButton expand="block" onClick={handleRegister}>เพิ่มผู้ใช้งาน</IonButton>
+                    </div>
                     {name !== '' && phone !== '' && email !== '' && password !== '' && position !== '' && department !== '' ?
                         <IonAlert
                             isOpen={showAlert1}
-                            onDidDismiss={() => {
-                                setShowAlert1(false)
-                                register(email, password, { name, phone, email, position, department });
-                            }}
+                            onDidDismiss={() => setShowAlert1(false)}
                             cssClass='my-custom-class'
                             header={'Register?'}
                             message={`Please confirm ${name} to register.`}
@@ -89,6 +92,7 @@ const Register = () => {
                                 },
                                 {
                                     text: 'Okay',
+                                    handler: confirmRegister
                                 }
                             ]}
                         /> : <IonAlert

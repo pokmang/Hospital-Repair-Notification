@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom'
 import { Input, Form, Checkbox, Button, notification } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import logo from '../img/logo.png';
 import bg from '../img/background.jpg';
 import { AppContext } from '../contexts/AppProvider';
 
@@ -78,7 +77,6 @@ const Login = () => {
         try {
             await authController.login(values.email, values.password);
             console.log("dd");
-
             history.push('/home');
         } catch (e) {
             notification['error']({

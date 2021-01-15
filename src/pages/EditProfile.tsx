@@ -1,4 +1,4 @@
-import { IonAlert, IonAvatar, IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonSelect, IonSelectOption } from '@ionic/react'
+import { IonAlert, IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonSelect, IonSelectOption } from '@ionic/react'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import styled from 'styled-components'
@@ -29,7 +29,7 @@ const getBase64 = (img) => {
 
 const EditProfile = () => {
     const { userController } = useContext(AppContext);
-    const { userObj, users, updateUser, positions, departments } = userController;
+    const { userObj, updateUser, positions, departments } = userController;
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [position, setPosition] = useState('');

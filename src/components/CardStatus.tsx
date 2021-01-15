@@ -11,34 +11,34 @@ const StyledWrapper = styled.div`
     height: 30vh;
     width: 100vw;
     background-size: cover;
-   .title-card{
+    .title-card{
         display: flex;
         justify-content: space-between;
         align-items: center;
-   }
-   .status{
+    }
+    .status{
         opacity: 0.6;
-   }
-   .card{
-    background-color: cyan;
-    margin-left: 7px;
-    margin-right: 19px;
-    border-radius: 29px;
-   }
-   .depart{
-    font-size: 16px;
-    color: black;
-    padding-top: 16px;
-    padding-bottom: 10px;
-   }
-   h2{
-    color: black;
-    font-size: 18px;
-   }
-   .name{
-    place-self: center;
-    padding-left: 20px;
-    padding-top: 20px;
+    }
+    .card{
+        background-color: cyan;
+        margin-left: 7px;
+        margin-right: 19px;
+        border-radius: 29px;
+    }
+    .depart{
+        font-size: 16px;
+        color: black;
+        padding-top: 16px;
+        padding-bottom: 10px;
+    }
+    h2{
+        color: black;
+        font-size: 18px;
+    }
+    .name{
+        place-self: center;
+        padding-left: 20px;
+        padding-top: 20px;
     }
     .box{
         display:flex;
@@ -46,9 +46,6 @@ const StyledWrapper = styled.div`
     small{
         color: #fafafacc;
     }
-   
-
-
 `
 
 const CardStatus = (props) => {
