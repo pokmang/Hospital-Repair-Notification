@@ -18,27 +18,27 @@ const StyledWrapper = styled.div`
     }
     .status{
         opacity: 0.6;
-    }
-    .card{
-        background-color: cyan;
-        margin-left: 7px;
-        margin-right: 19px;
-        border-radius: 29px;
-    }
-    .depart{
-        font-size: 16px;
-        color: black;
-        padding-top: 16px;
-        padding-bottom: 10px;
-    }
-    h2{
-        color: black;
-        font-size: 18px;
-    }
-    .name{
-        place-self: center;
-        padding-left: 20px;
-        padding-top: 20px;
+   }
+   .card{
+    background-color: #E5C1CD;
+    margin-left: 7px;
+    margin-right: 19px;
+    border-radius: 29px;
+   }
+   .depart{
+    font-size: 16px;
+    color: black;
+    padding-top: 16px;
+    padding-bottom: 10px;
+   }
+   h2{
+    color: black;
+    font-size: 18px;
+   }
+   .name{
+    place-self: center;
+    padding-left: 20px;
+    padding-top: 20px;
     }
     .box{
         display:flex;
@@ -48,37 +48,54 @@ const StyledWrapper = styled.div`
     }
 `
 
-const CardStatus = (props) => {
+const CardStatus = props => {
     const { repair } = props
+    console.log(repair);
+    // const Detail = repair ? repair.repair.detail : '';
+    const repairDate = repair ? repair.repair_notification_date : null;
+    const repairDetail = repair ? repair.detail : null;
+    const repairDepartment = repair ? repair.department.name : null;
+    const repairName = repair ? repair.repairer : null;
 
-    const department = repair.department && repair.department.name
-    console.log(repair.department);
+
+
+    const repairDateStr = repairDate ? new Date().toLocaleDateString('th-TH', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    }) : ''
+    console.log(repairDate);
 
     return (
         <StyledWrapper>
-            <IonCard className="card">
-                <IonCardContent >
-                    <div className="title-card">
-                        <h2>{repair.detail}</h2>
-                        <h2 color="light" className="status">รอดำเนินการ</h2>
-                    </div>
-                    <div >
-                        <p className="depart">แผนก:{department}</p>
-                        <div className="box">
-                            <div>
-                                <p className="noti">แจ้งโดย</p>
-                                <IonAvatar>
-                                    <img src={avatar} />
-                                </IonAvatar>
-                            </div>
-                            <div className="name">
-                                <p>{repair.repairer}</p>
-                                <small>แจ้งโดย 10 นาทีที่แล้ว</small>
+            <div>
+                <IonCard className="card">
+                    <IonCardContent >
+                        <div className="title-card">
+                            <h2>{repairDetail}</h2>
+                            <h2 color="light" className="status">รอดำเนินการ</h2>
+                        </div>
+                        <div >
+                            <p className="depart">แผนก:{repairDepartment}</p>
+                            <div className="box">
+                                <div>
+                                    <p className="noti">แจ้งโดย</p>
+                                    <IonAvatar>
+                                        <img src={avatar} />
+                                    </IonAvatar>
+                                </div>
+                                <div className="name">
+                                    <p>{repairName}</p>
+                                    <small>{repairDateStr}</small>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </IonCardContent>
-            </IonCard>
+                    </IonCardContent>
+                </IonCard>
+            </div>
         </StyledWrapper>
 
     )

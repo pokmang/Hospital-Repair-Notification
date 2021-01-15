@@ -14,8 +14,13 @@ const RepairsController = () => {
 
             s.docs.forEach((doc) => {
                 const dataObj = doc.data();
-                const data = { ...dataObj, id: doc.id };
+                const data = { 
+                    ...dataObj, 
+                    id: doc.id, 
+                    repair_notification_date: dataObj.repair_notification_date ?  dataObj.repair_notification_date.toDate() : null
+                };
                 repairObj[doc.id] = data as TRepair;
+
             })
             setRepairObj({ ...repairObj });
         });
@@ -41,4 +46,3 @@ const RepairsController = () => {
 }
 
 export default RepairsController
-
