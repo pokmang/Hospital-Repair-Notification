@@ -1,4 +1,4 @@
-import { IonGrid, IonRow, IonCol, IonIcon, IonButton, IonCard, IonCardContent, IonImg, DefaultIonLifeCycleContext } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonIcon, IonButton, IonCard, IonCardContent, IonImg, DefaultIonLifeCycleContext, IonContent, IonPage } from '@ionic/react';
 import { settings } from 'ionicons/icons';
 import React, { useContext } from 'react'
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import RadialProgress from '../components/RadialProgress';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
 import { Link } from 'react-router-dom';
+import CardStatus from '../components/CardStatus';
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -83,17 +84,26 @@ const DataUser = () => {
     const { users } = userController
     const params = useParams<{ id: string }>();
     const user = users ? users.find(p => p.id === params.id) : null;
-    console.log(user);
+    const User = user ? user.name : '';
+    const Position = user ? user.position.name : '';
 
+    const { repairsController } = useContext(AppContext)
+    const { repairs } = repairsController
+    const repair = repairs ? repairs.find(p => p.id === params.id) : null;
+    console.log(repair);
+    
     return (
         <StyledWrapper>
+                   <IonPage> 
+                       <IonContent>
+     
             <Topbar title={'ข้อมูลผู้ใช้งาน'} />
             <IonRow className="contianer">
                 <IonCol>
                     <IonImg src={image} id="image" /></IonCol>
                 <IonCol>
-                    <IonRow className="position">ผู้ดูแลระบบ</IonRow>
-                    <IonRow className="name">สมชายทันเพื่อน</IonRow>
+                    <IonRow className="position">{Position}</IonRow>
+                    <IonRow className="name">{User}</IonRow>
                 </IonCol>
                 <IonCol className="icon">
                     <Link to={`/users/${params.id}/edit-profile`}>
@@ -118,27 +128,11 @@ const DataUser = () => {
                     <h1>งานที่ดำเนินการ</h1>
                 </IonRow>
                 <IonRow>
-                    <IonCard>
-                        <IonCardContent>
-                            <div className="title-card">
-                                <h2>เครื่องปริ้นต์เสีย  </h2>
-                                <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
-                            </div>
-                            <h3>แผนกบัญชี</h3>
-                            <p className="topic">แจ้งโดย</p>
-                            <IonRow>
-                                <IonCol>
-                                    <IonImg className="img" src={image} />
-                                </IonCol>
-                                <IonCol>
-                                    <p>สมชาย  เชื่อมัน</p>
-                                    <small>แจ้งโดย 10 นาทีที่แล้ว</small>
-                                </IonCol>
-                            </IonRow>
-                        </IonCardContent>
-                    </IonCard>
+                <CardStatus  />
                 </IonRow>
             </IonGrid>
+            </IonContent>
+            </IonPage>
         </StyledWrapper >
     )
 }

@@ -8,7 +8,7 @@ import avatar from '../img/avatar.png';
 import { AppContext } from '../contexts/AppProvider';
 import { phonePortraitSharp } from 'ionicons/icons';
 const StyledWrapper = styled.div`
-    height: 100vh;
+    height: 30vh;
     width: 100vw;
     background-size: cover;
    .title-card{
@@ -20,7 +20,7 @@ const StyledWrapper = styled.div`
         opacity: 0.6;
    }
    .card{
-    background-color: cyan;
+    background-color: #E5C1CD;
     margin-left: 7px;
     margin-right: 19px;
     border-radius: 29px;
@@ -51,27 +51,40 @@ const StyledWrapper = styled.div`
 
 `
 
-const CardStatus = () => {
-    const { repairsController } = useContext(AppContext)
-    const { repairs } = repairsController
+const CardStatus = props => {
+    const { repair } = props
+    console.log(repair);
+    // const Detail = repair ? repair.repair.detail : '';
+    const repairDate = repair ? repair.repair_notification_date : null;
+    const repairDetail = repair ? repair.detail : null;
+    const repairDepartment = repair ? repair.department.name : null;
+    const repairName = repair ? repair.repairer : null;
 
-    console.log(repairs);
+ 
 
+    const repairDateStr = repairDate ? new Date().toLocaleDateString('th-TH', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+    }) : ''
+console.log(repairDate);
 
     return (
 
         <StyledWrapper>
-            {repairs && repairs.map((repair) => {
-                return (
-                    <IonContent >
+          
+              <div>
                         <IonCard className="card">
                             <IonCardContent >
                                 <div className="title-card">
-                                    <h2>{repair.detail}</h2>
+                                    <h2>{repairDetail}</h2>
                                     <h2 color="light" className="status">รอดำเนินการ</h2>
                                 </div>
                                 <div >
-                                    <p className="depart">แผนกบัญชี</p>
+                                    <p className="depart">แผนก:{repairDepartment}</p>
                                     <div className="box">
                                         <div>
                                             <p className="noti">แจ้งโดย</p>
@@ -80,16 +93,14 @@ const CardStatus = () => {
                                             </IonAvatar>
                                         </div>
                                         <div className="name">
-                                            <p>{repair.repairer}</p>
-                                            <small>แจ้งโดย 10 นาทีที่แล้ว</small>
+                                            <p>{repairName}</p>
+                                            <small>{repairDateStr}</small>
                                         </div>
                                     </div>
                                 </div>
                             </IonCardContent>
                         </IonCard>
-                    </IonContent>)
-            })
-            }
+                        </div>
         </StyledWrapper>
 
     )

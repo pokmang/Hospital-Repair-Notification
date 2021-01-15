@@ -66,29 +66,16 @@ const Home = () => {
                     </IonRow>
                     <IonRow>
                         <IonCol>
-                         
-                                {/* <IonCardContent>
-                                    <div className="title-card">
-                                        <h2>เครื่องปริ้นต์เสีย  </h2>
-                                        <IonButton color="tertiary" className="status">รอดำเนินการ</IonButton>
-                                    </div>
-                                    <h3>แผนกบัญชี</h3>
-                                    <p className="topic">แจ้งโดย</p>
-                                    <IonRow>
-                                        <IonCol>
-                                            <IonAvatar>
-                                                <img src={avatar} />
-                                            </IonAvatar>
-                                            {/* <IonImg className="img" src={avatar} /> */}
-                                        {/* </IonCol>
-                                        <IonCol>
-                                            <p>สมชาย  เชื่อมัน</p>
-                                            <small>แจ้งโดย 10 นาทีที่แล้ว</small>
-                                        </IonCol>
-                                    </IonRow> */}
-                                {/* </IonCardContent> */} 
-                                <CardStatus/>
-                        
+                            {repairs && repairs.map((repair) => {
+                                console.log(repair);
+                                
+                                return (
+                             
+                                    
+                                    <CardStatus repair={repair} />
+                                )
+                            })
+                            }
                         </IonCol>
                     </IonRow>
 
