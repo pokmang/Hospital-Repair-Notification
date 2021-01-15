@@ -40,7 +40,7 @@ const App: React.FC = () => (
     <Router>
       <Switch>
         <Route path="/register" component={Register} />
-        <Route path="/home" component={Home} />
+        <Route path="/home/:id" component={Home} />
         <Route path="/evaluate" component={Evaluate} />
         <Route path="/repairlist" component={RepairList} />
         <Route path="/users/:id/request-repairing" component={RequestRepair} />

@@ -43,12 +43,13 @@ const RequestRepair = () => {
         addRepair({
             repairer,
             department,
-            repair_notification_date: new Date,
+            repair_notification_date: new Date(),
             detail,
             device,
             photo: urls,
+            status: "รอการตอบรับ"
         });
-        history.push('/home');
+        history.push(`/home/${user.id}`);
     }
 
     return (

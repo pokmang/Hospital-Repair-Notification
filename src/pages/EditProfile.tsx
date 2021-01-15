@@ -8,7 +8,6 @@ import { Upload, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { uploadFile } from '../firebase'
 
-
 const StyledWrapper = styled.div`
     .title{
         padding:0 13px;
@@ -25,7 +24,6 @@ const getBase64 = (img) => {
         reader.readAsDataURL(img);
     })
 }
-
 
 const EditProfile = () => {
     const { userController } = useContext(AppContext);
@@ -50,7 +48,7 @@ const EditProfile = () => {
     const userPhone = user ? user.phone : null;
     const userPosition = user ? user.position : { name: null };
     const userDepartment = user ? user.department : { name: null };
-    const userAvatar = user ? user.avatar : null;
+    const userAvatar = user && user.avatar;
 
     useEffect(() => {
         if (user) {

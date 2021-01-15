@@ -5,45 +5,47 @@ import { IonContent } from '@ionic/react';
 import Topbar from '../components/Topbar';
 import CardStatus from '../components/CardStatus';
 import { AppContext } from '../contexts/AppProvider';
+import { useParams } from 'react-router';
 
 const StyledWrapper = styled.div`
     height: 100vh;
     width: 100vw;
-   
-
     background-size: cover;
-   .title-card{
-       display: flex;
-       justify-content: space-between;
-    align-items: center;
-   }
-   .status{
-    display: flex;
-    margin-left: 8px;
-    margin-right: 8px;
-   }
-   h1{
-    padding-left: 16px;
-   }
-   .status{
-    opacity: 0.6;
-   }
-   .topic{
-    margin-top: 10px;
-   }
-   .img {
-    border-radius: 50px;
-}
+
+    .title-card{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .status{
+        display: flex;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+    h1{
+        padding-left: 16px;
+    }
+    .status{
+        opacity: 0.6;
+    }
+    .topic{
+        margin-top: 10px;
+    }
+    .img {
+        border-radius: 50px;
+    }
     .col{
         padding: 0px;
     }
-
-
 `
 
 const Home = () => {
-    const { repairsController } = useContext(AppContext)
+    const { repairsController, userController } = useContext(AppContext)
     const { repairs } = repairsController
+    const { userObj } = userController
+
+    const params = useParams<{ id: string }>();
+    const user = userObj ? userObj[params.id] : null;
 
     return (
         <StyledWrapper>

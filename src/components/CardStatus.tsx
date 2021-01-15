@@ -1,12 +1,7 @@
-import { IonAvatar, IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React, { useContext } from 'react'
+import { IonAvatar, IonCard, IonCardContent } from '@ionic/react';
+import React from 'react'
 import styled from 'styled-components';
-import bg from '../img/background.jpg';
-import { IonMenu, IonContent, IonList, IonItem, IonRouterOutlet } from '@ionic/react';
-import Topbar from '../components/Topbar';
 import avatar from '../img/avatar.png';
-import { AppContext } from '../contexts/AppProvider';
-import { phonePortraitSharp } from 'ionicons/icons';
 const StyledWrapper = styled.div`
     height: 30vh;
     width: 100vw;
@@ -50,7 +45,6 @@ const StyledWrapper = styled.div`
 
 const CardStatus = props => {
     const { repair } = props
-    console.log(repair);
     // const Detail = repair ? repair.repair.detail : '';
     const repairDate = repair ? repair.repair_notification_date : null;
     const repairDetail = repair ? repair.detail : null;
@@ -67,7 +61,6 @@ const CardStatus = props => {
         minute: 'numeric',
         second: 'numeric'
     }) : ''
-    console.log(repairDate);
 
     return (
         <StyledWrapper>

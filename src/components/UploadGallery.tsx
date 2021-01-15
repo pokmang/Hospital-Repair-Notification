@@ -1,15 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Upload, message } from 'antd';
 
 
 const UploadGallery = ({ fileList, onChange }) => {
-  const getBase64 = (img) => {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.addEventListener('load', () => resolve(reader.result as string));
-      reader.readAsDataURL(img);
-    })
-  }
 
   const handleChange = ({ fileList: newFileList }) => {
     console.log(newFileList)
