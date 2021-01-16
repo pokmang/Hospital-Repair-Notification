@@ -133,7 +133,10 @@ const EditProfile = () => {
         <StyledWrapper>
             <IonPage>
                 <Topbar title={'แก้ไขโปรไฟล์'} />
+              
                 <IonContent>
+                      <div className="gg">
+                          <div>
                     <h1 className="title">ข้อมูลทั่วไป</h1>
                     <IonList>
                         <IonItem>
@@ -157,7 +160,7 @@ const EditProfile = () => {
                             <IonLabel>ตำแหน่ง</IonLabel>
                             {
                                 positions && (
-                                    <IonSelect value={position} okText="Okay" cancelText="Dismiss" onIonChange={e => setPosition(e.detail.value)}>
+                                    <IonSelect value={position} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setPosition(e.detail.value)}>
                                         {
                                             positions.map((value, index) => (
                                                 <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
@@ -171,7 +174,7 @@ const EditProfile = () => {
                             <IonLabel>แผนก</IonLabel>
                             {
                                 department && (
-                                    <IonSelect value={department} okText="Okay" cancelText="Dismiss" onIonChange={e => setDepartment(e.detail.value)}>
+                                    <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
                                         {
                                             departments.map((value, index) => (
                                                 <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
@@ -185,8 +188,12 @@ const EditProfile = () => {
                             <IonLabel position="floating">เบอร์โทรศัพท์</IonLabel>
                             <IonInput value={phone} onIonChange={e => setPhone(e.detail.value)}></IonInput>
                         </IonItem>
+                        
                     </IonList>
+                    </div>
+                    <div>
                     <IonButton expand="block" className="button" onClick={handleAlert}>บันทึก</IonButton>
+                    </div>
                     {name !== '' && phone !== '' && position !== '' && department !== '' ?
                         <IonAlert
                             isOpen={showAlert1}
@@ -201,7 +208,7 @@ const EditProfile = () => {
                                     cssClass: 'secondary',
                                 },
                                 {
-                                    text: 'Okay',
+                                    text: 'ยืนยัน',
                                 }
                             ]}
                         /> : <IonAlert
@@ -214,8 +221,10 @@ const EditProfile = () => {
                             message={'Please fill in all information.'}
                             buttons={['OK']}
                         />
-                    }
+                    } 
+                      </div>
                 </IonContent>
+             
             </IonPage>
         </StyledWrapper>
     )

@@ -17,19 +17,19 @@ const StyledWrapper = styled.div`
         display:flex;
         background-color: #00CBFF;
         padding: 13px;
-    }
+    } 
 
-    .gg{
+   .gg{
         align-self: center;
         padding-right: 60px;
         padding-left: 20px;
-    }
-    .icon{
+    } 
+ .icon{
         text-align-last: end;
         padding-right: 10px;
     
     }
-    .contianer{
+     .contianer{
         align-items: center;
         padding-top: 14px;
     }
@@ -37,32 +37,26 @@ const StyledWrapper = styled.div`
         opacity: 0.5;
     }
     .name{
-        font-size: 14px;
+        font-size: 13px;
     }
     #image{
-        border-radius: 66% !important;
+        
         width: 67%;
         height: 100%;
         margin-left: 15px;
     }
-    ion-icon {
-        font-size: 30px;
-    }
-    h1{
-        margin: 0px;
-        padding-left: 15px;
-        font-size: 20px;
-    }
-    .title-card{
-       display: flex;
-       justify-content: space-between;
-    align-items: center;
-   }
+  
+
    .status{
     display: flex;
     margin-left: 8px;
     margin-right: 8px;
    }
+   h1{
+    font-size: 25px;
+    padding-left: 15px;
+  }
+
 
 
 
@@ -97,10 +91,13 @@ const DataUser = () => {
         <StyledWrapper>
             <IonPage>
                 <IonContent>
-                    <Topbar title={'ข้อมูลผู้ใช้งาน'} />
+                    <IonRow>
+                        <Topbar title={'ข้อมูลผู้ใช้งาน'} />
+                    </IonRow>
                     <IonRow className="contianer">
                         <IonCol>
-                            <IonImg src={image} id="image" /></IonCol>
+                            <IonImg src={image} id="image" />
+                        </IonCol>
                         <IonCol>
                             <IonRow className="position">{Position}</IonRow>
                             <IonRow className="name">{name}</IonRow>

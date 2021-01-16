@@ -8,6 +8,7 @@ import { AppContext } from '../contexts/AppProvider';
 
 
 const StyledWrapper = styled.div`
+  background-color: #86E3CE;
   .home{
     font-size: 30px;
   } 
@@ -54,6 +55,18 @@ const StyledWrapper = styled.div`
   .gg{
     background-color: #18e4cf;
   }
+  h1{
+    font-size: 25px;
+    padding-left: 15px;
+  }
+  .tt{
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    height: 69px;
+    
+  }
+
 `
 
 const Topbar = (props: { title: React.ReactNode }) => {
@@ -83,17 +96,12 @@ const Topbar = (props: { title: React.ReactNode }) => {
 
   return (
     <StyledWrapper>
-      {/* หัวข้อหลัก */}
-      <IonGrid className='gg' >
-        <IonRow >
-          <IonCol className="title">
-            <h1 >{props.title}</h1>
-          </IonCol>
-          <IonCol className="menu">
+            <div className="tt">
+              <h1 >{props.title}</h1>
             <IonIcon icon={reorderThreeOutline} onClick={showDrawer} />
-          </IonCol>
-        </IonRow>
-      </IonGrid>
+            </div>
+            
+  
 
       {/* side */}
       <Drawer
@@ -105,7 +113,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
       >
         <div className="drw" style={{ "height": "100vh", "display": "flex", "flexDirection": "column", "justifyContent": "space-between" }}>
           <div>
-            <IonItem style={{ "--background": "#13e070", "height": "10vh", }}>
+            <IonItem style={{ "--background": "#13e070", "height": "15vh", }}>
               <IonAvatar slot="start">
                 <img src={imguser} />
               </IonAvatar>
