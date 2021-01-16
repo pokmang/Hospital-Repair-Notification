@@ -10,12 +10,18 @@ import { uploadFile } from '../firebase'
 
 
 const StyledWrapper = styled.div`
+
     .title{
         padding:0 13px;
         margin:13px 0 0 0 ;
+        text-align: center;
     }
     .button{
         margin-top:20px;
+    }
+    .img{
+        text-align: center;
+        padding-top: 16px;
     }
 `
 const getBase64 = (img) => {
@@ -131,100 +137,100 @@ const EditProfile = () => {
     }
     return (
         <StyledWrapper>
-            <IonPage>
+            <IonPage className="page">
                 <Topbar title={'แก้ไขโปรไฟล์'} />
-              
+
                 <IonContent>
-                      <div className="gg">
-                          <div>
-                    <h1 className="title">ข้อมูลทั่วไป</h1>
-                    <IonList>
-                        <IonItem>
-                            <Upload
-                                name="avatar"
-                                listType="picture-card"
-                                className="avatar-uploader"
-                                showUploadList={false}
-                                beforeUpload={beforeUpload}
-                                onChange={handleChange}
-                                onPreview={onPreview}
-                            >
-                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-                            </Upload>
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
-                            <IonInput value={name} onIonChange={e => setName(e.detail.value)}></IonInput>
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel>ตำแหน่ง</IonLabel>
-                            {
-                                positions && (
-                                    <IonSelect value={position} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setPosition(e.detail.value)}>
-                                        {
-                                            positions.map((value, index) => (
-                                                <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
-                                            ))
-                                        }
-                                    </IonSelect>
-                                )
-                            }
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel>แผนก</IonLabel>
-                            {
-                                department && (
-                                    <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
-                                        {
-                                            departments.map((value, index) => (
-                                                <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
-                                            ))
-                                        }
-                                    </IonSelect>
-                                )
-                            }
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="floating">เบอร์โทรศัพท์</IonLabel>
-                            <IonInput value={phone} onIonChange={e => setPhone(e.detail.value)}></IonInput>
-                        </IonItem>
-                        
-                    </IonList>
+                    <div className="gg">
+                        <div>
+                            <h1 className="title">ข้อมูลทั่วไป</h1>
+                            <IonList>
+                                <IonItem className="img">
+                                    <Upload
+                                        name="avatar"
+                                        listType="picture-card"
+                                        className="avatar-uploader"
+                                        showUploadList={false}
+                                        beforeUpload={beforeUpload}
+                                        onChange={handleChange}
+                                        onPreview={onPreview}
+                                    >
+                                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                                    </Upload>
+                                </IonItem>
+                                <IonItem>
+                                    <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
+                                    <IonInput value={name} onIonChange={e => setName(e.detail.value)}></IonInput>
+                                </IonItem>
+                                <IonItem>
+                                    <IonLabel>ตำแหน่ง</IonLabel>
+                                    {
+                                        positions && (
+                                            <IonSelect value={position} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setPosition(e.detail.value)}>
+                                                {
+                                                    positions.map((value, index) => (
+                                                        <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
+                                                    ))
+                                                }
+                                            </IonSelect>
+                                        )
+                                    }
+                                </IonItem>
+                                <IonItem>
+                                    <IonLabel>แผนก</IonLabel>
+                                    {
+                                        department && (
+                                            <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
+                                                {
+                                                    departments.map((value, index) => (
+                                                        <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
+                                                    ))
+                                                }
+                                            </IonSelect>
+                                        )
+                                    }
+                                </IonItem>
+                                <IonItem>
+                                    <IonLabel position="floating">เบอร์โทรศัพท์</IonLabel>
+                                    <IonInput value={phone} onIonChange={e => setPhone(e.detail.value)}></IonInput>
+                                </IonItem>
+
+                            </IonList>
+                        </div>
+                        <div>
+                            <IonButton expand="block" className="button" onClick={handleAlert}>บันทึก</IonButton>
+                        </div>
+                        {name !== '' && phone !== '' && position !== '' && department !== '' ?
+                            <IonAlert
+                                isOpen={showAlert1}
+                                onDidDismiss={handleUpdate}
+                                cssClass='my-custom-class'
+                                header={'Edit?'}
+                                message={`Please confirm ${name} to edit.`}
+                                buttons={[
+                                    {
+                                        text: 'Cancel',
+                                        role: 'cancel',
+                                        cssClass: 'secondary',
+                                    },
+                                    {
+                                        text: 'ยืนยัน',
+                                    }
+                                ]}
+                            /> : <IonAlert
+                                isOpen={showAlert1}
+                                onDidDismiss={() => {
+                                    setShowAlert1(false)
+                                }}
+                                cssClass='my-custom-class'
+                                header={'Alert!'}
+                                message={'Please fill in all information.'}
+                                buttons={['OK']}
+                            />
+                        }
                     </div>
-                    <div>
-                    <IonButton expand="block" className="button" onClick={handleAlert}>บันทึก</IonButton>
-                    </div>
-                    {name !== '' && phone !== '' && position !== '' && department !== '' ?
-                        <IonAlert
-                            isOpen={showAlert1}
-                            onDidDismiss={handleUpdate}
-                            cssClass='my-custom-class'
-                            header={'Edit?'}
-                            message={`Please confirm ${name} to edit.`}
-                            buttons={[
-                                {
-                                    text: 'Cancel',
-                                    role: 'cancel',
-                                    cssClass: 'secondary',
-                                },
-                                {
-                                    text: 'ยืนยัน',
-                                }
-                            ]}
-                        /> : <IonAlert
-                            isOpen={showAlert1}
-                            onDidDismiss={() => {
-                                setShowAlert1(false)
-                            }}
-                            cssClass='my-custom-class'
-                            header={'Alert!'}
-                            message={'Please fill in all information.'}
-                            buttons={['OK']}
-                        />
-                    } 
-                      </div>
                 </IonContent>
-             
+
             </IonPage>
         </StyledWrapper>
     )
