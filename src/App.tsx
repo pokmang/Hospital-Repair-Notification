@@ -36,15 +36,16 @@ import EditProfile from './pages/EditProfile';
 import ToppicEvaluate from './pages/ToppicEvaluate';
 
 const App: React.FC = () => (
-
   <IonApp>
     <Router>
       <Switch>
         <Route path="/register" component={Register} />
-        <Route path="/home" component={Home} />
         <Route path="/evaluate" component={Evaluate} />
         <Route path="/toppicevaluate" component={ToppicEvaluate} />
         <Route path="/repairlist" component={RepairList} />
+        <Route path="/home/:id/:id/repairlist" component={RepairList} />
+        <Route path="/home/:id" component={Home} />
+        <Route path="/users/:id/:id/repairlist" component={RepairList} />
         <Route path="/users/:id/request-repairing" component={RequestRepair} />
         <Route path="/users/:id/edit-profile" component={EditProfile} />
         <Route path="/users/:id" component={DataUser} />

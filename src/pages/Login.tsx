@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom'
-import { Input, Form, Checkbox, Button, notification } from 'antd'
+import { Input, Form, Button, notification } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import bg from '../img/background.jpg';
 import { AppContext } from '../contexts/AppProvider';
@@ -66,18 +66,18 @@ const StyledWrapper = styled.div`
 `
 
 const Login = () => {
-    const { authController } = useContext(AppContext);
+    const { authController, userController } = useContext(AppContext);
+    const { users } = userController
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    console.log();
 
     const onFinish = async values => {
+        const user = users && users.find(user => user.email === values.email)
+
         setLoading(true);
-        console.log(values);
         try {
             await authController.login(values.email, values.password);
-            console.log("dd");
-            history.push('/home');
+            history.push(`/home/${user.id}`);
         } catch (e) {
             notification['error']({
                 message: 'Failed',
@@ -89,7 +89,6 @@ const Login = () => {
     return (
         <StyledWrapper>
             <div className='container'>
-
                 <Form
                     name="normal_login"
                     className="login-form"
@@ -119,7 +118,7 @@ const Login = () => {
                     <Form.Item>
                         <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
                             เข้าสู่ระบบ
-                    </Button>
+                        </Button>
                         <div className="forgot-bnt">
                             <Link to="/register">ลืมรหัสผ่าน ? </Link>
                         </div>

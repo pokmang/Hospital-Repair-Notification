@@ -7,7 +7,8 @@ type TUser = {
     department: TDepartment,
     position: TPosition,
     phone: string,
-    avatar: string
+    avatar: string,
+    email:string
 }
 
 export default TUser;

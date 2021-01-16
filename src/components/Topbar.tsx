@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { Drawer, Button } from 'antd'
+import { Drawer } from 'antd'
 import { IonAvatar, IonButton, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow } from '@ionic/react';
-import { homeOutline, list, newspaper, newspaperOutline, personAddOutline, personCircleOutline, personOutline, personRemove, personRemoveOutline, reorderThreeOutline, settings } from 'ionicons/icons';
+import { homeOutline, list, newspaper, newspaperOutline, personAddOutline, personOutline, reorderThreeOutline, settings } from 'ionicons/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { AppContext } from '../contexts/AppProvider';
 
@@ -115,7 +115,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
           <div>
             <IonItem style={{ "--background": "#13e070", "height": "10vh", }}>
               <IonAvatar slot="start">
-                <img src={imguser} />
+                <img alt="user" src={imguser} />
               </IonAvatar>
               <IonLabel>
                 <h3 style={{ color: "#000000" }}>{name}</h3>
@@ -128,7 +128,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={homeOutline} />
               <IonLabel>
-                <Link to="/home" style={{ color: "#fafafa", "paddingLeft": "10px" }}> หน้าแรก</Link>
+                <Link to={`/home/${uid}`} style={{ color: "#fafafa", "paddingLeft": "10px" }}> หน้าแรก</Link>
               </IonLabel>
             </IonItem>
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>

@@ -1,4 +1,4 @@
-import { IonGrid, IonRow, IonCol, IonIcon, IonButton, IonCard, IonCardContent, IonImg, DefaultIonLifeCycleContext, IonContent, IonPage } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonIcon, IonCard, IonCardContent, IonImg, IonContent, IonPage, IonItem } from '@ionic/react';
 import { settings } from 'ionicons/icons';
 import React, { useContext } from 'react'
 import styled from 'styled-components';
@@ -78,14 +78,11 @@ const DataUser = () => {
     const { userObj } = userController
     const params = useParams<{ id: string }>();
     const user = userObj ? userObj[params.id] : null;
-    const name = user ? user.name : '';
-    const Position = user ? user.position.name : '';
+    const name = user ? user.name : null;
+    const Position = user ? user.position.name : null;
 
     const { repairsController } = useContext(AppContext)
     const { repairs } = repairsController
-    // console.log(repair);
-    const repairData = repairs && repairs.filter(repair => repair.repairer == name)
-    console.log(name, repairData);
 
     return (
         <StyledWrapper>
@@ -126,7 +123,15 @@ const DataUser = () => {
                         </IonRow>
                         <IonRow>
                             {
-                                repairData && repairData.map(repair => <CardStatus repair={repair} />)
+                                repairs && repairs.filter(repair => repair.repairer === name)
+                                    .sort((a, b) => b.repair_notification_date.valueOf() - a.repair_notification_date.valueOf())
+                                    .map((repair, index) => {
+                                        return (
+                                            <Link key={index} to={`/users/${user.id}/${repair.id}/repairlist`}>
+                                                <CardStatus repair={repair} />
+                                            </Link>
+                                        )
+                                    })
                             }
                         </IonRow>
                     </IonGrid>
