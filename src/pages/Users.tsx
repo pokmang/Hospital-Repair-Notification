@@ -6,14 +6,6 @@ import Topbar from '../components/Topbar';
 import { AppContext } from "../contexts/AppProvider";
 
 const StyledWrapper = styled.div`
-
-   
-    /* .testCss{
-        --background:red;
-    }
-    .testColor{
-        color:blue !important;
-    } */
 `
 const Users = () => {
     const [searchUser, setSearchUser] = useState('');
@@ -28,7 +20,7 @@ const Users = () => {
                 <StyledWrapper >
                     <IonList>
                         {searchUser ?
-                            users && users.filter(vocab => vocab.name.indexOf(searchUser) >= 0)
+                            users && users.filter(user => user.name.toLocaleLowerCase().indexOf(searchUser) >= 0)
                                 .sort((a, b) => a.name.localeCompare(b.name))
                                 .map((user, index) => {
                                     return (
@@ -45,21 +37,23 @@ const Users = () => {
                                         </Link>
                                     )
                                 })
-                            : users && users.map((user, index) => {
-                                return (
-                                    <Link key={index} to={`/users/${user.id}`}>
-                                        <IonItem className="testCss">
-                                            <IonAvatar slot="start">
-                                                <img alt="" src={user.avatar}></img>
-                                            </IonAvatar >
-                                            <IonLabel >
-                                                <h3 className="testColor">{user.name}</h3>
-                                                <p>{user.department.name}</p>
-                                            </IonLabel>
-                                        </IonItem>
-                                    </Link>
-                                )
-                            })}
+                            : users && users
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((user, index) => {
+                                    return (
+                                        <Link key={index} to={`/users/${user.id}`}>
+                                            <IonItem className="testCss">
+                                                <IonAvatar slot="start">
+                                                    <img alt="" src={user.avatar}></img>
+                                                </IonAvatar >
+                                                <IonLabel >
+                                                    <h3 className="testColor">{user.name}</h3>
+                                                    <p>{user.department.name}</p>
+                                                </IonLabel>
+                                            </IonItem>
+                                        </Link>
+                                    )
+                                })}
                     </IonList>
                 </StyledWrapper>
             </IonContent>
