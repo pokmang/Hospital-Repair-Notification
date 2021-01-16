@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import avatar from '../img/avatar.png';
 import { time } from 'ionicons/icons';
-import { Timeline } from 'antd';
+import { Button, Timeline } from 'antd';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
+
 
 const StyledWrapper = styled.div`
     .status{
@@ -15,13 +16,30 @@ const StyledWrapper = styled.div`
     small{
         opacity: 0.6;
     }
+    .bnt{
+        margin-bottom: 3px;
+    }
+    .img{
+        height:150px;
+        width:150px
+        
+        
+    }
+    .photo{
+        display: flex;
+    place-content: center;
+    }
 `
 const RepairList = () => {
     const { repairsController, userController } = useContext(AppContext)
     const { repairObj } = repairsController
     const params = useParams<{ id: string }>();
     const repair = repairObj ? repairObj[params.id] : null;
-
+    const Detail = repair ? repair.detail : null;
+    const Device = repair ? repair.device : null;
+    const Department = repair ? repair.department.name : null;
+    const photos = repair ? repair.photos : null;
+    
     console.log(repair);
 
     return (
@@ -32,24 +50,26 @@ const RepairList = () => {
                 </IonHeader>
                 <IonContent>
                     <IonRow className="status">
-                        <IonCol> <h3 >เครื่องปริ้นเสีย</h3></IonCol>
+                        <IonCol> <h3 >{Device}</h3></IonCol>
                         <IonCol><IonButton className="bnt" color="light" expand="block">เสร็จสิ้น</IonButton></IonCol>
                     </IonRow>
                     <IonRow>
-                        <p>เครื่องปริ้นเปิดเครื่องไม่ได้ ไฟที่เครื่องไม่ติด ลองถอดเสียบใหม่หลายรอบแล้วก็ยังไม่ติด</p>
+                        <p>รายละเอียด: {Detail}</p>
                     </IonRow>
                     <IonRow>
-                        <IonCol>
-                            <IonImg className="img" src={avatar} />
-                        </IonCol>
-                        <IonCol>
-                            <IonImg className="img" src={avatar} />
-                        </IonCol>
-                        <IonCol>
-                            <IonImg className="img" src={avatar} />
+                        <IonCol className='photo'>
+                            {
+                                repair && repair.photos.map((repair)=>{
+                                    return(
+                                        <IonImg className="img" src={repair} />
+                                    )
+                                     
+                                })
+                            }
+                           
                         </IonCol>
                     </IonRow>
-                    <p>แผนกบัญชี</p>
+                    <p>แผนก: {Department}</p>
                     <IonRow>
                         <IonCol>
                             <IonIcon icon={time} ></IonIcon>
@@ -65,7 +85,8 @@ const RepairList = () => {
                         </Timeline>
                     </IonRow>
                     <IonRow>
-
+                        <Button type="primary" size="large" block className="bnt">ตอบรับ</Button>
+                        <Button type="primary" size="large" block danger>ยกเลิก</Button>
                     </IonRow>
                 </IonContent>
             </IonPage>
