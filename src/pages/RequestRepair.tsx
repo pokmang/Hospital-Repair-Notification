@@ -9,8 +9,11 @@ import { AppContext } from '../contexts/AppProvider';
 import { uploadFile } from '../firebase';
 
 const StyledWrapper = styled.div`
-    h1{
-        margin-left: 16px;
+    .title{
+        text-align: center;
+    }
+    .up{
+        padding: 15px;
     }
 `
 
@@ -58,7 +61,7 @@ const RequestRepair = () => {
                     <Topbar title={'แจ้งซ่อม'} />
                 </IonHeader>
                 <IonContent>
-                    <h1>แจ้งซ่อม</h1>
+                    <h1 className="title">แจ้งซ่อม</h1>
                     <IonList>
                         <IonItem>
                             <IonLabel position="floating">หัวข้อการแจ้งซ่อม</IonLabel>
@@ -74,8 +77,10 @@ const RequestRepair = () => {
                                 {departments.map((value, index) => (<IonSelectOption key={index} value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
-
-                        <UploadGallery fileList={fileList} onChange={setFileList} />
+                        <div className="up">
+                            <UploadGallery  fileList={fileList} onChange={setFileList} />
+                        </div>
+                        
                         <IonButton expand="block" className="button" onClick={handleConfirm}>ยืนยัน</IonButton>
                     </IonList>
                     {device !== '' && detail !== '' && department !== '' && fileList.length !== 0 ?

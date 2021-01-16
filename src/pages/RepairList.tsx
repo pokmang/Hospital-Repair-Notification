@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import avatar from '../img/avatar.png';
 import { time } from 'ionicons/icons';
-import { Timeline } from 'antd';
+import { Button, Timeline } from 'antd';
 
 const StyledWrapper = styled.div`
     .status{
@@ -12,6 +12,9 @@ const StyledWrapper = styled.div`
     }
     small{
         opacity: 0.6;
+    }
+    .bnt{
+        margin-bottom: 3px;
     }
 `
 const RepairList = () => {
@@ -56,7 +59,8 @@ const RepairList = () => {
                         </Timeline>
                     </IonRow>
                     <IonRow>
-                        
+                        <Button type="primary" size="large" block className="bnt">ตอบรับ</Button>
+                        <Button type="primary" size="large" block danger>ยกเลิก</Button>
                     </IonRow>
                 </IonContent>
             </IonPage>
