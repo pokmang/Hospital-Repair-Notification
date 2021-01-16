@@ -9,6 +9,7 @@ const StyledWrapper = styled.div`
     .title{
         padding:0 13px;
         margin:13px 0 0 0 ;
+        text-align: center;
     }
     .button{
         margin-top:20px;

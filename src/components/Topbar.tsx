@@ -113,7 +113,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
       >
         <div className="drw" style={{ "height": "100vh", "display": "flex", "flexDirection": "column", "justifyContent": "space-between" }}>
           <div>
-            <IonItem style={{ "--background": "#13e070", "height": "15vh", }}>
+            <IonItem style={{ "--background": "#13e070", "height": "10vh", }}>
               <IonAvatar slot="start">
                 <img alt="user" src={imguser} />
               </IonAvatar>
@@ -125,6 +125,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
                 <IonIcon icon={settings} />
               </Link>
             </IonItem>
+            
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={homeOutline} />
               <IonLabel>
