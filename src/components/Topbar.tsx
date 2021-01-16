@@ -148,13 +148,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
               <IonLabel>
                 <Link to={`/users/${uid}/request-repairing`} style={{ color: "#fafafa", "paddingLeft": "10px" }}>แจ้งซ่อม</Link>
               </IonLabel>
-            </IonItem>
-            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
-              <IonIcon icon={list} />
-              <IonLabel>
-                <Link to="/repairlist" style={{ color: "#fafafa", "paddingLeft": "10px" }}>รายการแจ้งซ่อม</Link>
-              </IonLabel>
-            </IonItem>        
+            </IonItem>      
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaperOutline} />
               <IonLabel>

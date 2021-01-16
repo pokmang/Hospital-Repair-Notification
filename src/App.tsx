@@ -42,7 +42,6 @@ const App: React.FC = () => (
         <Route path="/register" component={Register} />
         <Route path="/evaluate" component={Evaluate} />
         <Route path="/toppicevaluate" component={ToppicEvaluate} />
-        <Route path="/repairlist" component={RepairList} />
         <Route path="/home/:id/:id/repairlist" component={RepairList} />
         <Route path="/home/:id" component={Home} />
         <Route path="/users/:id/:id/repairlist" component={RepairList} />
