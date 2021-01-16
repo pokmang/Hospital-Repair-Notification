@@ -41,25 +41,24 @@ const StyledWrapper = styled.div`
 `
 
 const Home = () => {
-    const { repairsController, userController } = useContext(AppContext)
+    const { repairsController, authController } = useContext(AppContext)
     const { repairs } = repairsController
-    const { userObj } = userController
+    const { user } = authController
 
-    const params = useParams<{ id: string }>();
-    const user = userObj ? userObj[params.id] : null;
     const name = user ? user.name : null;
     const position = user ? user.position.name : null;
 
     const positionCheck = () => {
         if (position === "ผู้ดูแลระบบ" || position === "เจ้าหน้าที่") {
             return (
-                repairs && repairs.map((repair, index) => {
-                    return (
-                        <Link key={index} to={`/home/${user.id}/${repair.id}/repairlist`}>
-                            <CardStatus repair={repair} />
-                        </Link>
-                    )
-                })
+                repairs && repairs.sort((a, b) => b.repair_notification_date.valueOf() - a.repair_notification_date.valueOf())
+                    .map((repair, index) => {
+                        return (
+                            <Link key={index} to={`/home/${repair.id}/repairlist`}>
+                                <CardStatus repair={repair} />
+                            </Link>
+                        )
+                    })
             )
         }
         if (position === "ผู้ใช้งานทั่วไป") {
@@ -68,7 +67,7 @@ const Home = () => {
                     .sort((a, b) => b.repair_notification_date.valueOf() - a.repair_notification_date.valueOf())
                     .map((repair, index) => {
                         return (
-                            <Link key={index} to={`/home/${user.id}/${repair.id}/repairlist`}>
+                            <Link key={index} to={`/home/${repair.id}/repairlist`}>
                                 <IonItem>
                                     <CardStatus repair={repair} />
                                 </IonItem>

@@ -3,7 +3,6 @@ import { settings } from 'ionicons/icons';
 import React, { useContext } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
-import image from '../img/avatar.png';
 import RadialProgress from '../components/RadialProgress';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
@@ -79,6 +78,7 @@ const DataUser = () => {
     const params = useParams<{ id: string }>();
     const user = userObj ? userObj[params.id] : null;
     const name = user ? user.name : null;
+    const avatar = user ? user.avatar : null;
     const Position = user ? user.position.name : null;
 
     const { repairsController } = useContext(AppContext)
@@ -93,7 +93,7 @@ const DataUser = () => {
                     </IonRow>
                     <IonRow className="contianer">
                         <IonCol>
-                            <IonImg src={image} id="image" />
+                            <IonImg src={avatar} id="image" />
                         </IonCol>
                         <IonCol>
                             <IonRow className="position">{Position}</IonRow>
@@ -121,19 +121,19 @@ const DataUser = () => {
                         <IonRow>
                             <h1>งานที่ดำเนินการ</h1>
                         </IonRow>
-                        <IonRow>
-                            {
-                                repairs && repairs.filter(repair => repair.repairer === name)
-                                    .sort((a, b) => b.repair_notification_date.valueOf() - a.repair_notification_date.valueOf())
-                                    .map((repair, index) => {
-                                        return (
-                                            <Link key={index} to={`/users/${user.id}/${repair.id}/repairlist`}>
+                        {
+                            repairs && repairs.filter(repair => repair.repairer === name)
+                                .sort((a, b) => b.repair_notification_date.valueOf() - a.repair_notification_date.valueOf())
+                                .map((repair, index) => {
+                                    return (
+                                        <Link key={index} to={`/users/${user.id}/${repair.id}/repairlist`}>
+                                            <IonItem>
                                                 <CardStatus repair={repair} />
-                                            </Link>
-                                        )
-                                    })
-                            }
-                        </IonRow>
+                                            </IonItem>
+                                        </Link>
+                                    )
+                                })
+                        }
                     </IonGrid>
                 </IonContent>
             </IonPage>

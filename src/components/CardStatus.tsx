@@ -57,6 +57,7 @@ const CardStatus = props => {
     const repairDepartment = repair ? repair.department.name : null;
     const repairName = repair ? repair.repairer : null;
     const repairStatus = repair ? repair.status : null;
+    const userAvatar = repair ? repair.avatar : null;
 
     return (
         <StyledWrapper>
@@ -72,7 +73,7 @@ const CardStatus = props => {
                             <div>
                                 <p className="noti">แจ้งโดย</p>
                                 <IonAvatar>
-                                    <img src={avatar} />
+                                    <img src={userAvatar} />
                                 </IonAvatar>
                             </div>
                             <div className="name">

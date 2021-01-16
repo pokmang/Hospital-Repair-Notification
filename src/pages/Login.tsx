@@ -66,18 +66,16 @@ const StyledWrapper = styled.div`
 `
 
 const Login = () => {
-    const { authController, userController } = useContext(AppContext);
-    const { users } = userController
+    const { authController } = useContext(AppContext);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
     const onFinish = async values => {
-        const user = users && users.find(user => user.email === values.email)
 
         setLoading(true);
         try {
             await authController.login(values.email, values.password);
-            history.push(`/home/${user.id}`);
+            history.push(`/home`);
         } catch (e) {
             notification['error']({
                 message: 'Failed',

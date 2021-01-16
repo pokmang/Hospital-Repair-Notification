@@ -25,29 +25,16 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 // import './theme/variables.css';
 import Login from './pages/Login';
-import Register from './pages/Register';
-import Users from './pages/Users';
-import Home from './pages/Home';
-import DataUser from './pages/DataUser';
-import RequestRepair from './pages/RequestRepair';
-import RepairList from './pages/RepairList';
-import Evaluate from './pages/Evaluate';
-import EditProfile from './pages/EditProfile';
+import ProtectedRoute from './components/ProtectedRoute';
+import Main from './pages/Main';
 
 const App: React.FC = () => (
   <IonApp>
     <Router>
       <Switch>
-        <Route path="/register" component={Register} />
-        <Route path="/evaluate" component={Evaluate} />
-        <Route path="/home/:id/:id/repairlist" component={RepairList} />
-        <Route path="/home/:id" component={Home} />
-        <Route path="/users/:id/:id/repairlist" component={RepairList} />
-        <Route path="/users/:id/request-repairing" component={RequestRepair} />
-        <Route path="/users/:id/edit-profile" component={EditProfile} />
-        <Route path="/users/:id" component={DataUser} />
-        <Route path="/users" component={Users} />
-        <Route path="/" component={Login} />
+
+        <Route path="/login" component={Login} />
+        <ProtectedRoute path='/' component={Main} />
       </Switch>
     </Router>
   </IonApp>
