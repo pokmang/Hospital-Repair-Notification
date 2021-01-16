@@ -25,7 +25,7 @@ const Users = () => {
                                 .map((user, index) => {
                                     return (
                                         <Link key={index} to={`/users/${user.id}`}>
-                                            <IonItem className="testCss">
+                                            <IonItem>
                                                 <IonAvatar slot="start">
                                                     <img alt="" src={user.avatar}></img>
                                                 </IonAvatar >

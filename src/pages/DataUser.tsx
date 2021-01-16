@@ -1,4 +1,4 @@
-import { IonGrid, IonRow, IonCol, IonIcon, IonCard, IonCardContent, IonImg, IonContent, IonPage } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonIcon, IonCard, IonCardContent, IonImg, IonContent, IonPage, IonItem } from '@ionic/react';
 import { settings } from 'ionicons/icons';
 import React, { useContext } from 'react'
 import styled from 'styled-components';
@@ -83,7 +83,6 @@ const DataUser = () => {
 
     const { repairsController } = useContext(AppContext)
     const { repairs } = repairsController
-    const repairData = repairs && repairs.filter(repair => repair.repairer === name)
 
     return (
         <StyledWrapper>
@@ -124,7 +123,15 @@ const DataUser = () => {
                         </IonRow>
                         <IonRow>
                             {
-                                repairData && repairData.map((repair, index) => <CardStatus key={index} repair={repair} />)
+                                repairs && repairs.filter(repair => repair.repairer === name)
+                                    .sort((a, b) => b.repair_notification_date.valueOf() - a.repair_notification_date.valueOf())
+                                    .map((repair, index) => {
+                                        return (
+                                            <Link key={index} to={`/users/${user.id}/${repair.id}/repairlist`}>
+                                                <CardStatus repair={repair} />
+                                            </Link>
+                                        )
+                                    })
                             }
                         </IonRow>
                     </IonGrid>
