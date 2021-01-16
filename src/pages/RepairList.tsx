@@ -4,15 +4,10 @@ import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import avatar from '../img/avatar.png';
 import { time } from 'ionicons/icons';
-<<<<<<< HEAD
 import { Button, Timeline } from 'antd';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
-=======
-import { Timeline } from 'antd';
-import { useParams } from 'react-router';
-import { AppContext } from '../contexts/AppProvider';
->>>>>>> 3f19de56d585524592472d5f65a88aa848236e61
+
 
 const StyledWrapper = styled.div`
     .status{
