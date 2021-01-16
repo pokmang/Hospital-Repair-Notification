@@ -23,7 +23,7 @@ const RepairList = () => {
     const repair = repairObj ? repairObj[params.id] : null;
 
     console.log(repair);
-    
+
     return (
         <StyledWrapper>
             <IonPage>
