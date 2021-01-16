@@ -6,6 +6,7 @@ const StyledWrapper = styled.div`
     height: 30vh;
     width: 100vw;
     background-size: cover;
+    margin-bottom: 35px;
     .title-card{
         display: flex;
         justify-content: space-between;
@@ -50,7 +51,9 @@ const CardStatus = props => {
     const repairDetail = repair ? repair.detail : null;
     const repairDepartment = repair ? repair.department.name : null;
     const repairName = repair ? repair.repairer : null;
-
+    const repairStatus = repair ? repair.status : null;
+    
+    
 
 
     const repairDateStr = repairDate ? new Date().toLocaleDateString('th-TH', {
@@ -69,7 +72,7 @@ const CardStatus = props => {
                     <IonCardContent >
                         <div className="title-card">
                             <h2>{repairDetail}</h2>
-                            <h2 color="light" className="status">รอดำเนินการ</h2>
+                            <h2 color="light" className="status">{repairStatus}</h2>
                         </div>
                         <div >
                             <p className="depart">แผนก:{repairDepartment}</p>
