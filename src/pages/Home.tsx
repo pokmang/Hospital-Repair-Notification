@@ -44,7 +44,6 @@ const Home = () => {
     const { repairsController, authController } = useContext(AppContext)
     const { repairs } = repairsController
     const { user } = authController
-
     const name = user ? user.name : null;
     const position = user ? user.position.name : null;
 
@@ -56,7 +55,7 @@ const Home = () => {
                     .map((repair, index) => {
                         return (
                             <Link key={index} to={`/home/repairlist/${repair.id}`}>
-                                <CardStatus repair={repair} />
+                                <CardStatus repair={repair} bnt={'ซ่อนปุ่ม'} />
                             </Link>
                         )
                     })
@@ -70,7 +69,7 @@ const Home = () => {
                         return (
                             <Link key={index} to={`/home/repairlist/${repair.id}`}>
                                 <IonItem>
-                                    <CardStatus repair={repair} />
+                                    <CardStatus repair={repair} bnt={'ซ่อนปุ่ม'} />
                                 </IonItem>
                             </Link>
                         )
@@ -82,7 +81,7 @@ const Home = () => {
         <StyledWrapper>
             <IonPage >
                 <IonContent>
-                    <Topbar title={'หน้าแรก'} />
+                    <Topbar title={'หน้าแรก'} bnt={'ซ่อนปุ่ม'}/>
                     <h1>รายการแจ้งซ่อม</h1>
                     {
                         user && positionCheck()

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Drawer } from 'antd'
-import { IonAvatar, IonButton, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow } from '@ionic/react';
-import { homeOutline, list, newspaper, newspaperOutline, personAddOutline, personOutline, reorderThreeOutline, settings } from 'ionicons/icons';
+import { IonAvatar, IonButton,IonBackButton, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow } from '@ionic/react';
+import { arrowBack, arrowBackOutline, homeOutline, list, newspaper, newspaperOutline, personAddOutline, personOutline, reorderThreeOutline, settings } from 'ionicons/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { AppContext } from '../contexts/AppProvider';
 
@@ -66,10 +66,14 @@ const StyledWrapper = styled.div`
     height: 69px;
     
   }
+  .backbnt{
+    color: ghostwhite;
+
+  }
 
 `
 
-const Topbar = (props: { title: React.ReactNode }) => {
+const Topbar = (props) => {
   const { authController } = useContext(AppContext);
   const history = useHistory();
   const [visible, setVisible] = useState(false);
@@ -78,6 +82,8 @@ const Topbar = (props: { title: React.ReactNode }) => {
   const name = user ? user.name : '';
   const position = user ? user.position.name : '';
   const uid = user ? user.uid : ''
+console.log(props.title);
+console.log(props.bnt);
 
   const showDrawer = () => {
     setVisible(true);
@@ -94,9 +100,19 @@ const Topbar = (props: { title: React.ReactNode }) => {
     }
   }
 
+  const handleBack =()=> {
+    history.goBack();
+  }
+
+  
+
   return (
     <StyledWrapper>
       <div className="tt">
+        {
+         props.bnt==='ซ่อนปุ่ม' ? '': <IonIcon icon={arrowBackOutline} className="backbnt" onClick={handleBack} />
+        }
+
         <h1 >{props.title}</h1>
         <IonIcon icon={reorderThreeOutline} onClick={showDrawer} />
       </div>
