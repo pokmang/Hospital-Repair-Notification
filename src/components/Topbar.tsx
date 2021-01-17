@@ -168,7 +168,7 @@ console.log(props.bnt);
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaperOutline} />
               <IonLabel>
-                <Link to="/toppicevaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
+                <Link to="/toppicEvaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
               </IonLabel>
             </IonItem>
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
