@@ -55,7 +55,7 @@ const CardStatus = props => {
     }) : null;
     const repairDevice = repair ? repair.device : null;
     const repairDepartment = repair ? repair.department.name : null;
-    const repairName = repair ? repair.repairer : null;
+    const repairName = repair ? repair.informer : null;
     const repairStatus = repair ? repair.status : null;
     const userAvatar = repair ? repair.avatar : null;
 

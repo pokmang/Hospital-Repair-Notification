@@ -26,7 +26,6 @@ const Main = () => {
                 <Route path="/" render={() => (<Redirect to='/home' />)} />
             </Switch>
         </div>
-
     )
 }
 

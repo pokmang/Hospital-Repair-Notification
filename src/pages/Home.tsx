@@ -51,12 +51,14 @@ const Home = () => {
     const positionCheck = () => {
         if (position === "ผู้ดูแลระบบ" || position === "เจ้าหน้าที่") {
             return (
-                repairs && repairs.sort((a, b) => 
-                b.noti_date.valueOf() - a.noti_date.valueOf())
+                repairs && repairs.sort((a, b) =>
+                    b.noti_date.valueOf() - a.noti_date.valueOf())
                     .map((repair, index) => {
                         return (
                             <Link key={index} to={`/home/repairlist/${repair.id}`}>
-                                <CardStatus repair={repair} />
+                                <IonItem>
+                                    <CardStatus repair={repair} />
+                                </IonItem>
                             </Link>
                         )
                     })
@@ -64,7 +66,7 @@ const Home = () => {
         }
         if (position === "ผู้ใช้งานทั่วไป") {
             return (
-                repairs && repairs.filter(repair => repair.repairer === name)
+                repairs && repairs.filter(repair => repair.informer === name)
                     .sort((a, b) => b.noti_date.valueOf() - a.noti_date.valueOf())
                     .map((repair, index) => {
                         return (

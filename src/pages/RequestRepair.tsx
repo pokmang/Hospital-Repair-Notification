@@ -25,7 +25,7 @@ const RequestRepair = () => {
 
     const params = useParams<{ id: string }>();
     const user = userObj ? userObj[params.id] : null;
-    const repairer = user && user.name
+    const informer = user && user.name
 
     const [device, setDevail] = useState<string>('');
     const [detail, setDetail] = useState<string>('');
@@ -44,9 +44,9 @@ const RequestRepair = () => {
         });
         const urls = await Promise.all(promises);
         addRepair({
-            repairer,
+            informer,
             department,
-            repair_notification_date: new Date(),
+            noti_date: new Date(),
             detail,
             device,
             photos: urls,
