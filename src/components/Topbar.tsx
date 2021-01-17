@@ -77,7 +77,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
   const imguser = user ? user.avatar : '';
   const name = user ? user.name : '';
   const position = user ? user.position.name : '';
-  const uid = user ? user.uid : '0;'
+  const uid = user ? user.uid : ''
 
   const showDrawer = () => {
     setVisible(true);
@@ -98,10 +98,10 @@ const Topbar = (props: { title: React.ReactNode }) => {
     <StyledWrapper>
       <div className="tt">
         <h1 >{props.title}</h1>
-          <IonIcon icon={reorderThreeOutline} onClick={showDrawer} />
+        <IonIcon icon={reorderThreeOutline} onClick={showDrawer} />
       </div>
-            
-  
+
+
 
       {/* side */}
       <Drawer
@@ -128,7 +128,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={homeOutline} />
               <IonLabel>
-                <Link to={`/home/${uid}`} style={{ color: "#fafafa", "paddingLeft": "10px" }}> หน้าแรก</Link>
+                <Link to={`/home`} style={{ color: "#fafafa", "paddingLeft": "10px" }}> หน้าแรก</Link>
               </IonLabel>
             </IonItem>
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
@@ -148,7 +148,7 @@ const Topbar = (props: { title: React.ReactNode }) => {
               <IonLabel>
                 <Link to={`/users/${uid}/request-repairing`} style={{ color: "#fafafa", "paddingLeft": "10px" }}>แจ้งซ่อม</Link>
               </IonLabel>
-            </IonItem>      
+            </IonItem>
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaperOutline} />
               <IonLabel>

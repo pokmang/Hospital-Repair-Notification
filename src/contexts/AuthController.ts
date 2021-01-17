@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import firebase from '../firebase'
-
 const auth = firebase.auth()
 const col = firebase.firestore().collection('users');
 
@@ -42,7 +41,7 @@ const AuthController = () => {
             throw e;
         }
     }
-
+    
     const logout = () => {
         localStorage.removeItem('credential');
         setCredential(null);

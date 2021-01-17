@@ -49,8 +49,9 @@ const RequestRepair = () => {
             repair_notification_date: new Date(),
             detail,
             device,
-            photo: urls,
-            status: "รอการตอบรับ"
+            photos: urls,
+            status: "รอการตอบรับ",
+            avatar: user.avatar
         });
         history.push(`/home/${user.id}`);
     }

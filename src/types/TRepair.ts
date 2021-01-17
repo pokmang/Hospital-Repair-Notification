@@ -6,7 +6,8 @@ type TRepair = {
     device: string,
     photos: string[],
     repairer: string,
-    repair_notification_date: Date,
+    noti_date: Date,
+    repair_date: Date,
     repaired_date: Date,
     department: TDepartment
 }
