@@ -160,34 +160,38 @@ const EditProfile = () => {
                                     <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
                                     <IonInput value={name} onIonChange={e => setName(e.detail.value)}></IonInput>
                                 </IonItem>
-                                <IonItem>
-                                    <IonLabel>ตำแหน่ง</IonLabel>
-                                    {
-                                        positions && (
-                                            <IonSelect value={position} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setPosition(e.detail.value)}>
-                                                {
-                                                    positions.map((value, index) => (
-                                                        <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
-                                                    ))
-                                                }
-                                            </IonSelect>
-                                        )
-                                    }
-                                </IonItem>
-                                <IonItem>
-                                    <IonLabel>แผนก</IonLabel>
-                                    {
-                                        department && (
-                                            <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
-                                                {
-                                                    departments.map((value, index) => (
-                                                        <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
-                                                    ))
-                                                }
-                                            </IonSelect>
-                                        )
-                                    }
-                                </IonItem>
+                                {position !== "ผู้ใช้งานทั่วไป" ? (
+                                    <IonItem>
+                                        <IonLabel>ตำแหน่ง</IonLabel>
+                                        {
+                                            positions && (
+                                                <IonSelect value={position} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setPosition(e.detail.value)}>
+                                                    {
+                                                        positions.map((value, index) => (
+                                                            <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
+                                                        ))
+                                                    }
+                                                </IonSelect>
+                                            )
+                                        }
+                                    </IonItem>
+                                ) : null}
+                                {position !== "ผู้ใช้งานทั่วไป" ? (
+                                    <IonItem>
+                                        <IonLabel>แผนก</IonLabel>
+                                        {
+                                            department && (
+                                                <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
+                                                    {
+                                                        departments.map((value, index) => (
+                                                            <IonSelectOption key={index} value={value.name}>{value.name}</IonSelectOption>
+                                                        ))
+                                                    }
+                                                </IonSelect>
+                                            )
+                                        }
+                                    </IonItem>
+                                ) : null}
                                 <IonItem>
                                     <IonLabel position="floating">เบอร์โทรศัพท์</IonLabel>
                                     <IonInput value={phone} onIonChange={e => setPhone(e.detail.value)}></IonInput>

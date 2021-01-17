@@ -37,6 +37,7 @@ const RepairList = () => {
     const { repairsController, authController } = useContext(AppContext);
     const { user } = authController;
     const userName = user ? user.name : null;
+    const userPosition = user ? user.position.name : null;
     const { repairObj, updateRepair } = repairsController;
     const params = useParams<{ id: string }>();
     const repair = repairObj ? repairObj[params.id] : null;
@@ -88,6 +89,7 @@ const RepairList = () => {
         minute: 'numeric',
         second: 'numeric'
     }) : null;
+    console.log(user);
 
     const handleYes = () => {
         updateRepair(
@@ -126,8 +128,12 @@ const RepairList = () => {
                         <Timeline>
                             <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
                         </Timeline>
-                        <IonButton color="primary" expand="block" className="bnt" onClick={handleYes}>ตอบรับ</IonButton>
-                        <IonButton color="danger" expand="block" onClick={handleCancel}>ยกเลิก</IonButton>
+                        {userPosition === "ผู้ดูแลระบบ" || userPosition === "เจ้าหน้าที่" ? (
+                            <>
+                                <IonButton color="primary" expand="block" className="bnt" onClick={handleYes}>ตอบรับ</IonButton>
+                                <IonButton color="danger" expand="block" onClick={handleCancel}>ยกเลิก</IonButton>
+                            </>
+                        ) : null}
                     </>
 
                 )
@@ -138,8 +144,12 @@ const RepairList = () => {
                             <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
                             <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
                         </Timeline>
-                        <IonButton color="primary" expand="block" className="bnt" onClick={handleRepaired}>เสร็จสิ้น</IonButton>
-                        <IonButton color="danger" expand="block" onClick={handleCancel} >ยกเลิก</IonButton>
+                        {userPosition === "ผู้ดูแลระบบ" || userPosition === "เจ้าหน้าที่" ? (
+                            <>
+                                <IonButton color="primary" expand="block" className="bnt" onClick={handleRepaired}>เสร็จสิ้น</IonButton>
+                                <IonButton color="danger" expand="block" onClick={handleCancel}>ยกเลิก</IonButton>
+                            </>
+                        ) : null}
                     </>
 
                 )
@@ -151,7 +161,11 @@ const RepairList = () => {
                             <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
                             <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
                         </Timeline>
-                        <IonButton color="primary" expand="block" className="bnt">ประเมิน</IonButton>
+                        {userPosition === "ผู้ใช้งานทั่วไป" ? (
+                            <>
+                                <IonButton color="primary" expand="block" className="bnt">ประเมิน</IonButton>
+                            </>
+                        ) : null}
                     </>
 
                 )
