@@ -1,5 +1,5 @@
 import { IonPage, IonContent, IonCol, IonRow, IonButton, IonImg, IonIcon, IonGrid } from '@ionic/react';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import { time } from 'ionicons/icons';
@@ -89,7 +89,9 @@ const RepairList = () => {
         minute: 'numeric',
         second: 'numeric'
     }) : null;
-    console.log(user);
+
+    const [statuses, setStatus] = useState(status)
+    console.log(status, statuses);
 
     const handleYes = () => {
         updateRepair(
@@ -119,7 +121,14 @@ const RepairList = () => {
             }
         )
     }
-
+    const cancel = () => {
+        switch (status) {
+            case "ยกเลิกแล้ว":
+                return <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>
+            default:
+                break;
+        }
+    }
     const TimelineRepair = () => {
         switch (status) {
             case "รอการตอบรับ":
@@ -181,17 +190,14 @@ const RepairList = () => {
                     </>
                 )
             case "ยกเลิกแล้ว":
-                return (
-                    <>
-                        <Timeline>
-                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
-                            <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
-                            <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>
-                            <Timeline.Item color="#99D1A3">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
-                        </Timeline>
-                    </>
-                )
+            // return (
+            //     <>
+            //         <Timeline>
+            //             <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+            //             <Timeline.Item color="#99D1A3">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
+            //         </Timeline>
+            //     </>
+            // )
             default:
                 break;
         }

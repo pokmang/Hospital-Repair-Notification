@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Drawer } from 'antd'
-import { IonAvatar, IonButton,IonBackButton, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow } from '@ionic/react';
+import { IonAvatar, IonButton, IonBackButton, IonCol, IonGrid, IonIcon, IonItem, IonLabel, IonRow } from '@ionic/react';
 import { arrowBack, arrowBackOutline, homeOutline, list, newspaper, newspaperOutline, personAddOutline, personOutline, reorderThreeOutline, settings } from 'ionicons/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { AppContext } from '../contexts/AppProvider';
@@ -82,8 +82,6 @@ const Topbar = (props) => {
   const name = user ? user.name : '';
   const position = user ? user.position.name : '';
   const uid = user ? user.uid : ''
-console.log(props.title);
-console.log(props.bnt);
 
   const showDrawer = () => {
     setVisible(true);
@@ -100,17 +98,17 @@ console.log(props.bnt);
     }
   }
 
-  const handleBack =()=> {
+  const handleBack = () => {
     history.goBack();
   }
 
-  
+
 
   return (
     <StyledWrapper>
       <div className="tt">
         {
-         props.bnt==='ซ่อนปุ่ม' ? '': <IonIcon icon={arrowBackOutline} className="backbnt" onClick={handleBack} />
+          props.bnt === 'ซ่อนปุ่ม' ? '' : <IonIcon icon={arrowBackOutline} className="backbnt" onClick={handleBack} />
         }
 
         <h1 >{props.title}</h1>
