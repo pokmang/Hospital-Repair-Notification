@@ -1,6 +1,6 @@
 {
-  "short_name": "Ionic App",
-  "name": "My Ionic App",
+  "short_name": "Hospital Repair",
+  "name": "Hospital Repair Notification",
   "icons": [
     {
       "src": "assets/icon/favicon.png",
