@@ -161,7 +161,7 @@ const RepairList = () => {
                             <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
                             <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
                         </Timeline>
-                        {userPosition === "ผู้ใช้งานทั่วไป" ? (
+                        {userName === informer ? (
                             <>
                                 <IonButton color="primary" expand="block" className="bnt">ประเมิน</IonButton>
                             </>
