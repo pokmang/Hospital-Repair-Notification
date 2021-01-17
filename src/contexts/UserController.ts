@@ -54,8 +54,6 @@ const UserController = () => {
     }, [])
 
     const updateUser = (id, data) => {
-        console.log(data);
-
         return col.doc(id).update({ ...data })
     }
 

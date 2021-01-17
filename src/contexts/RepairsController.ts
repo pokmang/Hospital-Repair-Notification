@@ -34,6 +34,12 @@ const RepairsController = () => {
         return col.doc().set({ ...data })
     }
 
+    const updateRepair = (id, date) => {
+        return (
+            col.doc(id).update({ ...date })
+        )
+    }
+
     useEffect(() => {
         let unsub1 = getRepair();
 
@@ -45,7 +51,8 @@ const RepairsController = () => {
     return {
         repairObj,
         repairs: !repairObj ? null : Object.values(repairObj),
-        addRepair
+        addRepair,
+        updateRepair
     }
 }
 

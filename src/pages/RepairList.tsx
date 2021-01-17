@@ -34,8 +34,10 @@ const StyledWrapper = styled.div`
     }
 `
 const RepairList = () => {
-    const { repairsController, userController } = useContext(AppContext)
-    const { repairObj } = repairsController
+    const { repairsController, authController } = useContext(AppContext);
+    const { user } = authController;
+    const userName = user ? user.name : null;
+    const { repairObj, updateRepair } = repairsController;
     const params = useParams<{ id: string }>();
     const repair = repairObj ? repairObj[params.id] : null;
     const detail = repair ? repair.detail : null;
@@ -87,8 +89,99 @@ const RepairList = () => {
         second: 'numeric'
     }) : null;
 
-    console.log(repair);
+    const handleYes = () => {
+        updateRepair(
+            params.id,
+            {
+                status: "กำลังดำเนินการ",
+                repair_date: new Date,
+                repairer: userName
+            }
+        )
+    }
+    const handleRepaired = () => {
+        updateRepair(
+            params.id,
+            {
+                status: "รอประเมิน",
+                repaired_date: new Date
+            }
+        )
+    }
+    const handleCancel = () => {
+        updateRepair(
+            params.id,
+            {
+                status: "ยกเลิกแล้ว",
+                cancel_date: new Date
+            }
+        )
+    }
 
+    const TimelineRepair = () => {
+        switch (status) {
+            case "รอการตอบรับ":
+                return (
+                    <>
+                        <Timeline>
+                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+                        </Timeline>
+                        <IonButton color="primary" expand="block" className="bnt" onClick={handleYes}>ตอบรับ</IonButton>
+                        <IonButton color="danger" expand="block" onClick={handleCancel}>ยกเลิก</IonButton>
+                    </>
+
+                )
+            case "กำลังดำเนินการ":
+                return (
+                    <>
+                        <Timeline>
+                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
+                        </Timeline>
+                        <IonButton color="primary" expand="block" className="bnt" onClick={handleRepaired}>เสร็จสิ้น</IonButton>
+                        <IonButton color="danger" expand="block" onClick={handleCancel} >ยกเลิก</IonButton>
+                    </>
+
+                )
+            case "รอประเมิน":
+                return (
+                    <>
+                        <Timeline>
+                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
+                            <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
+                        </Timeline>
+                        <IonButton color="primary" expand="block" className="bnt">ประเมิน</IonButton>
+                    </>
+
+                )
+            case "เสร็จสิ้น":
+                return (
+                    <>
+                        <Timeline>
+                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
+                            <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
+                            <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>
+                        </Timeline>
+                    </>
+                )
+            case "ยกเลิกแล้ว":
+                return (
+                    <>
+                        <Timeline>
+                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
+                            <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
+                            <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>
+                            <Timeline.Item color="#99D1A3">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
+                        </Timeline>
+                    </>
+                )
+            default:
+                break;
+        }
+    }
     return (
         <StyledWrapper>
             <IonPage>
@@ -121,18 +214,10 @@ const RepairList = () => {
                                 <small>แจ้งเมื่อ 10 นาที่ที่แล้ว</small>
                             </IonCol>
                         </IonRow>
-                        <IonRow>
-                            <Timeline>
-                                <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย {informer} รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                                <Timeline.Item color="#618AE0">({repairDate}) {repairer} รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
-                                <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก {informer}</Timeline.Item>
-                                <Timeline.Item color="#99D1A3">({evaluateDate}) {informer} ประเมินการซ่อมเรียบร้อย</Timeline.Item>
-                                <Timeline.Item color="#99D1A3">({cancelDate}) {repairer} ยกเลิกการแจ้งซ่อม</Timeline.Item>
-                            </Timeline>
-                        </IonRow>
-                        <IonButton color="primary" expand="block" className="bnt">ตอบรับ</IonButton>
-                        <IonButton color="primary" expand="block" className="bnt">เสร็จสิ้น</IonButton>
-                        <IonButton color="danger" expand="block" >ยกเลิก</IonButton>
+                        {
+                            TimelineRepair()
+                        }
+
                     </IonGrid>
                 </IonContent>
             </IonPage>
