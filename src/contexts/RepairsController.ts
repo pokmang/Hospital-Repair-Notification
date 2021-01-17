@@ -17,7 +17,7 @@ const RepairsController = () => {
                 const data = {
                     ...dataObj,
                     id: doc.id,
-                    repair_notification_date: dataObj.repair_notification_date ? dataObj.repair_notification_date.toDate() : null
+                    noti_date: dataObj.noti_date ? dataObj.noti_date.toDate() : null
                 };
                 repairObj[doc.id] = data as TRepair;
 

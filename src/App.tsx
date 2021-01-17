@@ -32,9 +32,9 @@ const App: React.FC = () => (
   <IonApp>
     <Router>
       <Switch>
-
         <Route path="/login" component={Login} />
         <ProtectedRoute path='/' component={Main} />
+
       </Switch>
     </Router>
   </IonApp>

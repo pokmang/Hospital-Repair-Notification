@@ -98,17 +98,10 @@ const Topbar = (props: { title: React.ReactNode }) => {
     <StyledWrapper>
       <div className="tt">
         <h1 >{props.title}</h1>
-<<<<<<< HEAD
         <IonIcon icon={reorderThreeOutline} onClick={showDrawer} />
       </div>
 
 
-=======
-          <IonIcon icon={reorderThreeOutline} onClick={showDrawer} />
-      </div>
-            
-  
->>>>>>> a48f12f8a0a164420d7a67d7307e7b0ffae1128c
 
       {/* side */}
       <Drawer
@@ -132,10 +125,6 @@ const Topbar = (props: { title: React.ReactNode }) => {
                 <IonIcon icon={settings} />
               </Link>
             </IonItem>
-<<<<<<< HEAD
-
-=======
->>>>>>> a48f12f8a0a164420d7a67d7307e7b0ffae1128c
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={homeOutline} />
               <IonLabel>
@@ -159,17 +148,14 @@ const Topbar = (props: { title: React.ReactNode }) => {
               <IonLabel>
                 <Link to={`/users/${uid}/request-repairing`} style={{ color: "#fafafa", "paddingLeft": "10px" }}>แจ้งซ่อม</Link>
               </IonLabel>
-            </IonItem>      
+            </IonItem>
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
-<<<<<<< HEAD
-=======
               <IonIcon icon={newspaperOutline} />
               <IonLabel>
                 <Link to="/toppicevaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
               </IonLabel>
             </IonItem>
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
->>>>>>> a48f12f8a0a164420d7a67d7307e7b0ffae1128c
               <IonIcon icon={newspaper} />
               <IonLabel>
                 <Link to="/evaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }} >ประเมินแจ้งซ่อม</Link>

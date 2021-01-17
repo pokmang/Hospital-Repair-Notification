@@ -39,7 +39,7 @@ const RepairList = () => {
     const Device = repair ? repair.device : null;
     const Department = repair ? repair.department.name : null;
     const photos = repair ? repair.photos : null;
-    
+
     console.log(repair);
 
     return (
@@ -59,14 +59,14 @@ const RepairList = () => {
                     <IonRow>
                         <IonCol className='photo'>
                             {
-                                repair && repair.photos.map((repair)=>{
-                                    return(
-                                        <IonImg className="img" src={repair} />
+                                repair && repair.photos.map((repair, index) => {
+                                    return (
+                                        <IonImg key={index} className="img" src={repair} />
                                     )
-                                     
+
                                 })
                             }
-                           
+
                         </IonCol>
                     </IonRow>
                     <p>แผนก: {Department}</p>

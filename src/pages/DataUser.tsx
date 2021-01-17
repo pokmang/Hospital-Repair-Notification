@@ -123,10 +123,10 @@ const DataUser = () => {
                         </IonRow>
                         {
                             repairs && repairs.filter(repair => repair.repairer === name)
-                                .sort((a, b) => b.repair_notification_date.valueOf() - a.repair_notification_date.valueOf())
+                                .sort((a, b) => b.noti_date.valueOf() - a.noti_date.valueOf())
                                 .map((repair, index) => {
                                     return (
-                                        <Link key={index} to={`/users/${user.id}/${repair.id}/repairlist`}>
+                                        <Link key={index} to={`/users/${user.id}/repairlist/${repair.id}`}>
                                             <IonItem>
                                                 <CardStatus repair={repair} />
                                             </IonItem>

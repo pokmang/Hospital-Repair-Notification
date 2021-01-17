@@ -45,7 +45,7 @@ const StyledWrapper = styled.div`
 const CardStatus = props => {
     const { repair } = props
     // const Detail = repair ? repair.repair.detail : '';
-    const repairDate = repair ? repair.repair_notification_date.toLocaleDateString('th-TH', {
+    const repairDate = repair ? repair.noti_date.toLocaleDateString('th-TH', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
