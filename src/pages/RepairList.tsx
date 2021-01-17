@@ -90,9 +90,6 @@ const RepairList = () => {
         second: 'numeric'
     }) : null;
 
-    const [statuses, setStatus] = useState(status)
-    console.log(status, statuses);
-
     const handleYes = () => {
         updateRepair(
             params.id,
@@ -112,23 +109,27 @@ const RepairList = () => {
             }
         )
     }
+    const handleCanceled = () => {
+        updateRepair(
+            params.id,
+            {
+                status: "ยกเลิก",
+                cancel_date: new Date,
+                repairer: userName
+            }
+        )
+    }
     const handleCancel = () => {
         updateRepair(
             params.id,
             {
                 status: "ยกเลิกแล้ว",
-                cancel_date: new Date
+                cancel_date: new Date,
+                repairer: userName
             }
         )
     }
-    const cancel = () => {
-        switch (status) {
-            case "ยกเลิกแล้ว":
-                return <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>
-            default:
-                break;
-        }
-    }
+
     const TimelineRepair = () => {
         switch (status) {
             case "รอการตอบรับ":
@@ -140,11 +141,10 @@ const RepairList = () => {
                         {userPosition === "ผู้ดูแลระบบ" || userPosition === "เจ้าหน้าที่" ? (
                             <>
                                 <IonButton color="primary" expand="block" className="bnt" onClick={handleYes}>ตอบรับ</IonButton>
-                                <IonButton color="danger" expand="block" onClick={handleCancel}>ยกเลิก</IonButton>
+                                <IonButton color="danger" expand="block" onClick={handleCanceled}>ยกเลิก</IonButton>
                             </>
                         ) : null}
                     </>
-
                 )
             case "กำลังดำเนินการ":
                 return (
@@ -160,7 +160,6 @@ const RepairList = () => {
                             </>
                         ) : null}
                     </>
-
                 )
             case "รอประเมิน":
                 return (
@@ -176,7 +175,6 @@ const RepairList = () => {
                             </>
                         ) : null}
                     </>
-
                 )
             case "เสร็จสิ้น":
                 return (
@@ -189,15 +187,25 @@ const RepairList = () => {
                         </Timeline>
                     </>
                 )
+            case "ยกเลิก":
+                return (
+                    <>
+                        <Timeline>
+                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+                            <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
+                        </Timeline>
+                    </>
+                )
             case "ยกเลิกแล้ว":
-            // return (
-            //     <>
-            //         <Timeline>
-            //             <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-            //             <Timeline.Item color="#99D1A3">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
-            //         </Timeline>
-            //     </>
-            // )
+                return (
+                    <>
+                        <Timeline>
+                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
+                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
+                            <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
+                        </Timeline>
+                    </>
+                )
             default:
                 break;
         }
