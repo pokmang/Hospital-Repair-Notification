@@ -32,7 +32,8 @@ const getBase64 = (img) => {
 }
 
 const EditProfile = () => {
-    const { userController } = useContext(AppContext);
+    const { userController, authController } = useContext(AppContext);
+    const { user } = authController
     const { userObj, updateUser, positions, departments } = userController;
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
@@ -49,22 +50,23 @@ const EditProfile = () => {
 
     const params = useParams<{ id: string }>();
 
-    const user = userObj ? userObj[params.id] : null;
-    const userName = user ? user.name : null;
-    const userPhone = user ? user.phone : null;
-    const userPosition = user ? user.position : { name: null };
-    const userDepartment = user ? user.department : { name: null };
-    const userAvatar = user && user.avatar;
+    const userCk = userObj ? userObj[params.id] : null;
+    const userName = userCk ? userCk.name : null;
+    const userPhone = userCk ? userCk.phone : null;
+    const userPosition = userCk ? userCk.position : { name: null };
+    const userDepartment = userCk ? userCk.department : { name: null };
+    const userAvatar = userCk && userCk.avatar;
 
+    const authPosition = user ? user.position.name : null;
     useEffect(() => {
-        if (user) {
+        if (userCk) {
             setName(userName);
             setPhone(userPhone);
             setPosition(userPosition.name);
             setDepartment(userDepartment.name);
             setImageUrl(userAvatar)
         }
-    }, [params, user]);
+    }, [params, userCk]);
 
     const handleChange = info => {
         if (info.file.status === 'uploading') {
@@ -84,9 +86,9 @@ const EditProfile = () => {
         if (!isJpgOrPng) {
             message.error('You can only upload JPG/PNG file!');
         }
-        const isLt10M = file.size / 1024 / 1024 < 10;
+        const isLt10M = file.size / 1024 / 1024 < 4;
         if (!isLt10M) {
-            message.error('Image must smaller than 10MB!');
+            message.error('Image must smaller than 4MB!');
         }
         else {
             setFile(file)
@@ -160,7 +162,7 @@ const EditProfile = () => {
                                     <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
                                     <IonInput value={name} onIonChange={e => setName(e.detail.value)}></IonInput>
                                 </IonItem>
-                                {position !== "ผู้ใช้งานทั่วไป" ? (
+                                {authPosition !== "ผู้ใช้งานทั่วไป" ? (
                                     <IonItem>
                                         <IonLabel>ตำแหน่ง</IonLabel>
                                         {
@@ -176,7 +178,7 @@ const EditProfile = () => {
                                         }
                                     </IonItem>
                                 ) : null}
-                                {position !== "ผู้ใช้งานทั่วไป" ? (
+                                {authPosition !== "ผู้ใช้งานทั่วไป" ? (
                                     <IonItem>
                                         <IonLabel>แผนก</IonLabel>
                                         {

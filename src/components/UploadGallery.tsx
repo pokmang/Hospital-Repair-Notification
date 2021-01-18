@@ -30,9 +30,9 @@ const UploadGallery = ({ fileList, onChange }) => {
     if (!isJpgOrPng) {
       message.error('You can only upload JPG/PNG file!');
     }
-    const isLt10M = file.size / 1024 / 1024 < 10;
+    const isLt10M = file.size / 1024 / 1024 < 4;
     if (!isLt10M) {
-      message.error('Image must smaller than 10MB!');
+      message.error('Image must smaller than 4MB!');
     }
     return false;
   }

@@ -109,16 +109,6 @@ const RepairList = () => {
             }
         )
     }
-    const handleCanceled = () => {
-        updateRepair(
-            params.id,
-            {
-                status: "ยกเลิก",
-                cancel_date: new Date,
-                repairer: userName
-            }
-        )
-    }
     const handleCancel = () => {
         updateRepair(
             params.id,
@@ -135,13 +125,10 @@ const RepairList = () => {
             case "รอการตอบรับ":
                 return (
                     <>
-                        <Timeline>
-                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                        </Timeline>
                         {userPosition === "ผู้ดูแลระบบ" || userPosition === "เจ้าหน้าที่" ? (
                             <>
                                 <IonButton color="primary" expand="block" className="bnt" onClick={handleYes}>ตอบรับ</IonButton>
-                                <IonButton color="danger" expand="block" onClick={handleCanceled}>ยกเลิก</IonButton>
+                                <IonButton color="danger" expand="block" onClick={handleCancel}>ยกเลิก</IonButton>
                             </>
                         ) : null}
                     </>
@@ -149,10 +136,6 @@ const RepairList = () => {
             case "กำลังดำเนินการ":
                 return (
                     <>
-                        <Timeline>
-                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
-                        </Timeline>
                         {userPosition === "ผู้ดูแลระบบ" || userPosition === "เจ้าหน้าที่" ? (
                             <>
                                 <IonButton color="primary" expand="block" className="bnt" onClick={handleRepaired}>เสร็จสิ้น</IonButton>
@@ -164,11 +147,6 @@ const RepairList = () => {
             case "รอประเมิน":
                 return (
                     <>
-                        <Timeline>
-                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
-                            <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
-                        </Timeline>
                         {userName === informer ? (
                             <>
                                 <IonButton color="primary" expand="block" className="bnt">ประเมิน</IonButton>
@@ -176,40 +154,12 @@ const RepairList = () => {
                         ) : null}
                     </>
                 )
-            case "เสร็จสิ้น":
-                return (
-                    <>
-                        <Timeline>
-                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
-                            <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>
-                            <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>
-                        </Timeline>
-                    </>
-                )
-            case "ยกเลิก":
-                return (
-                    <>
-                        <Timeline>
-                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                            <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
-                        </Timeline>
-                    </>
-                )
-            case "ยกเลิกแล้ว":
-                return (
-                    <>
-                        <Timeline>
-                            <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>
-                            <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>
-                            <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>
-                        </Timeline>
-                    </>
-                )
             default:
                 break;
         }
     }
+    // console.log("po", status, userName, informer, notiDate, repairDate);
+
     return (
         <StyledWrapper>
             <IonPage>
@@ -232,7 +182,6 @@ const RepairList = () => {
                                         )
                                     })
                                 }
-
                             </IonCol>
                         </IonRow>
                         <p>แผนก: {department}</p>
@@ -242,10 +191,14 @@ const RepairList = () => {
                                 <small>แจ้งเมื่อ 10 นาที่ที่แล้ว</small>
                             </IonCol>
                         </IonRow>
-                        {
-                            TimelineRepair()
-                        }
-
+                        <Timeline>
+                            {notiDate && <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>}
+                            {repairDate && <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>}
+                            {repairedDate && <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>}
+                            {evaluateDate && <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>}
+                            {cancelDate && <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>}
+                        </Timeline>
+                        {TimelineRepair()}
                     </IonGrid>
                 </IonContent>
             </IonPage>
