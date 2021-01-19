@@ -1,11 +1,12 @@
 import { IonPage, IonContent, IonCol, IonRow, IonButton, IonImg, IonIcon, IonGrid } from '@ionic/react';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import { time } from 'ionicons/icons';
 import { Button, Timeline } from 'antd';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
+import { Link } from 'react-router-dom';
 
 
 const StyledWrapper = styled.div`
@@ -144,13 +145,19 @@ const RepairList = () => {
                         ) : null}
                     </>
                 )
+            case "เสร็จสิ้น":
+                return (
+                    <>
+                        <IonButton color="primary" expand="block" className="bnt">เสร็จสิ้น</IonButton>
+                    </>
+                )
             case "รอประเมิน":
                 return (
                     <>
                         {userName === informer ? (
-                            <>
+                            <Link to={`repairlist/${params.id}/evaluate`}>
                                 <IonButton color="primary" expand="block" className="bnt">ประเมิน</IonButton>
-                            </>
+                            </Link>
                         ) : null}
                     </>
                 )

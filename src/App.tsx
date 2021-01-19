@@ -34,7 +34,6 @@ const App: React.FC = () => (
       <Switch>
         <Route path="/login" component={Login} />
         <ProtectedRoute path='/' component={Main} />
-
       </Switch>
     </Router>
   </IonApp>

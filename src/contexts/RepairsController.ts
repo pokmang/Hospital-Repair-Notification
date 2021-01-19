@@ -6,7 +6,6 @@ const col = firebase.firestore().collection('repairs');
 
 const RepairsController = () => {
     let [repairObj, setRepairObj] = useState<{ [key: string]: TRepair }>(null);
-
     const getRepair = () => {
         return col.onSnapshot((s) => {
 
@@ -42,7 +41,6 @@ const RepairsController = () => {
 
     useEffect(() => {
         let unsub1 = getRepair();
-
         return () => {
             unsub1();
         }
@@ -52,7 +50,7 @@ const RepairsController = () => {
         repairObj,
         repairs: !repairObj ? null : Object.values(repairObj),
         addRepair,
-        updateRepair
+        updateRepair,
     }
 }
 
