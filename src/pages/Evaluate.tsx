@@ -136,12 +136,6 @@ const Evaluate = () => {
                                 </Radio.Group>
                             </div>
                         </Col >
-                        <Col className="list">
-                            <h3>5.อื่นๆ</h3>
-                            <div className="rdgp">
-                                <Input value={five} onChange={e => setFive(e.target.value)} />
-                            </div>
-                        </Col >
                     </Row>
                     <IonButton color="primary" expand="block" className="bnt">ส่งการประเมิน</IonButton>
                 </IonContent>

@@ -1,12 +1,10 @@
-import { IonPage, IonHeader, IonContent, IonList, IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/react';
-import { Button, Form, Input, Space } from 'antd';
-import React, { useContext, useEffect, useState } from 'react'
-import { useHistory } from 'react-router';
+import { IonPage, IonHeader, IonContent, IonList, IonAlert } from '@ionic/react';
+import { Button, Form, Input, } from 'antd';
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import { AppContext } from '../contexts/AppProvider';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
 
@@ -24,7 +22,6 @@ const StyledWrapper = styled.div`
     }
 `
 const ToppicEvaluate = () => {
-    const history = useHistory();
     const { topicsController } = useContext(AppContext);
     const { topicObj, deleteTopic, updateTopic } = topicsController;
     const topics = topicObj ? topicObj["R3HTlxTB9CYxSeYnpmMK"].item : null;
@@ -38,7 +35,6 @@ const ToppicEvaluate = () => {
         const newTopic = values["addTopic"].map(v => v.item)
         const topic = [...topics, ...newTopic]
         updateTopic({ item: topic })
-        // history.push('/toppicEvaluate');
     };
 
     return (
@@ -63,7 +59,7 @@ const ToppicEvaluate = () => {
                                             onDidDismiss={() => setShowAlert1(false)}
                                             cssClass='my-custom-class'
                                             header={'ลบ!'}
-                                            message={'กด "ยืนยัน" เพื่อลบหัวข้อนี้.'}
+                                            message={`โปรดกด "ยืนยัน" เพื่อทำการลบหัวข้อประเมินนี้.`}
                                             buttons={[
                                                 {
                                                     text: 'ยกเลิก',
@@ -98,7 +94,6 @@ const ToppicEvaluate = () => {
                                                         <Input />
                                                         <MinusCircleOutlined onClick={() => remove(field.name)} style={{ margin: "0 8px" }} />
                                                     </div>
-
                                                 </Form.Item>
                                             ))}
                                             <Form.Item>
