@@ -192,12 +192,6 @@ const RepairList = () => {
                             </IonCol>
                         </IonRow>
                         <p>แผนก: {department}</p>
-                        <IonRow>
-                            <IonCol>
-                                <IonIcon icon={time} ></IonIcon>
-                                <small>แจ้งเมื่อ 10 นาที่ที่แล้ว</small>
-                            </IonCol>
-                        </IonRow>
                         <Timeline>
                             {notiDate && <Timeline.Item color="#FFDD82">({notiDate}) แจ้งซ่อมโดย "{informer}" รอการตอบรับจาก เจ้าหน้าที่</Timeline.Item>}
                             {repairDate && <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>}
