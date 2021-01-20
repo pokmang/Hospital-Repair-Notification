@@ -52,13 +52,13 @@ const Register = () => {
                         </IonItem>
                         <IonItem>
                             <IonLabel>ตำแหน่ง</IonLabel>
-                            <IonSelect value={position} okText="Okay" cancelText="Dismiss" onIonChange={e => setPosition(e.detail.value)}>
+                            <IonSelect value={position} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setPosition(e.detail.value)}>
                                 {positions.map((value, index) => (<IonSelectOption key={index} value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
                         <IonItem>
                             <IonLabel>แผนก</IonLabel>
-                            <IonSelect value={department} okText="Okay" cancelText="Dismiss" onIonChange={e => setDepartment(e.detail.value)}>
+                            <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
                                 {departments.map((value, index) => (<IonSelectOption key={index} value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>

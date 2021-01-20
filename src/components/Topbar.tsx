@@ -82,6 +82,7 @@ const Topbar = (props) => {
   const name = user ? user.name : '';
   const position = user ? user.position.name : '';
   const uid = user ? user.uid : ''
+console.log(position);
 
   const showDrawer = () => {
     setVisible(true);
@@ -139,43 +140,48 @@ const Topbar = (props) => {
                 <IonIcon icon={settings} />
               </Link>
             </IonItem>
+  
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={homeOutline} />
               <IonLabel>
                 <Link to={`/home`} style={{ color: "#fafafa", "paddingLeft": "10px" }}> หน้าแรก</Link>
               </IonLabel>
             </IonItem>
-            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
-              <IonIcon icon={personOutline} />
-              <IonLabel>
-                <Link to="/users" style={{ color: "#fafafa", "paddingLeft": "10px" }}>รายชื่อผู้ใช้</Link>
-              </IonLabel>
-            </IonItem>
+            {
+              position === 'ผู้ใช้งานทั่วไป' ? '' : 
+                  <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
+                    <IonIcon icon={personOutline} />
+                      <IonLabel>
+                        <Link to="/users" style={{ color: "#fafafa", "paddingLeft": "10px" }}>รายชื่อผู้ใช้</Link>
+                      </IonLabel>
+                  </IonItem>
+            } 
+            {
+              position === 'ผู้ใช้งานทั่วไป' || position === 'เจ้าหน้าที่' ? '' : 
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={personAddOutline} />
               <IonLabel>
                 <Link to="/register" style={{ color: "#fafafa", "paddingLeft": "10px" }}>เพิ่มผู้ใช้</Link>
               </IonLabel>
             </IonItem>
+            }
+            
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaper} />
               <IonLabel>
                 <Link to={`/users/${uid}/request-repairing`} style={{ color: "#fafafa", "paddingLeft": "10px" }}>แจ้งซ่อม</Link>
               </IonLabel>
             </IonItem>
+
+            {
+              position === 'ผู้ใช้งานทั่วไป' || position === 'เจ้าหน้าที่' ? '' : 
             <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
               <IonIcon icon={newspaperOutline} />
               <IonLabel>
                 <Link to="/toppicEvaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
               </IonLabel>
             </IonItem>
-            <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
-              <IonIcon icon={newspaper} />
-              <IonLabel>
-                <Link to="/evaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }} >ประเมินแจ้งซ่อม</Link>
-              </IonLabel>
-            </IonItem>
-
+            }
           </div>
           <div>
             <IonButton expand="block" className="button" onClick={handleLogout} style={{ "--background": "#14ecec" }}>ออกจากระบบ</IonButton>
