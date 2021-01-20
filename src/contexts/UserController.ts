@@ -56,6 +56,9 @@ const UserController = () => {
     const updateUser = (id, data) => {
         return col.doc(id).update({ ...data })
     }
+    const deleteUser = (id) => {
+        return col.doc(id).delete()
+    }
 
     return {
         userObj,
@@ -63,6 +66,7 @@ const UserController = () => {
         departments,
         positions,
         updateUser,
+        deleteUser
     }
 }
 

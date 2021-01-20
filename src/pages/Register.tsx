@@ -83,16 +83,16 @@ const Register = () => {
                             isOpen={showAlert1}
                             onDidDismiss={() => setShowAlert1(false)}
                             cssClass='my-custom-class'
-                            header={'Register?'}
-                            message={`Please confirm ${name} to register.`}
+                            header={'ลงทะเบียน?'}
+                            message={`โปรดกด "ยืนยัน" เพื่อลงทะเบียน ${name}.`}
                             buttons={[
                                 {
-                                    text: 'Cancel',
-                                    role: 'cancel',
+                                    text: 'ยกเลิก',
+                                    role: 'ยกเลิก',
                                     cssClass: 'secondary',
                                 },
                                 {
-                                    text: 'Okay',
+                                    text: 'ยืนยัน',
                                     handler: confirmRegister
                                 }
                             ]}
@@ -102,9 +102,9 @@ const Register = () => {
                                 setShowAlert1(false)
                             }}
                             cssClass='my-custom-class'
-                            header={'Alert!'}
-                            message={'Please fill in all information.'}
-                            buttons={['OK']}
+                            header={'ล้มเหลว!'}
+                            message={'กรุณาใส่ข้อมูลให้ครบถ้วน.'}
+                            buttons={['ตกลง']}
                         />
                     }
                 </IonContent>

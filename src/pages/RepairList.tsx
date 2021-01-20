@@ -155,7 +155,7 @@ const RepairList = () => {
                 return (
                     <>
                         {userName === informer ? (
-                            <Link to={`repairlist/${params.id}/evaluate`}>
+                            <Link to={`/repairlist/${params.id}/evaluate`}>
                                 <IonButton color="primary" expand="block" className="bnt">ประเมิน</IonButton>
                             </Link>
                         ) : null}

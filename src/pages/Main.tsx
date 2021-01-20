@@ -16,10 +16,9 @@ const Main = () => {
         <div>
             <Switch>
                 <Route path="/register" component={Register} />
-                <Route path="/repairlist/:id/evaluate" component={Evaluate} />
-                <Route path="/home/repairlist/:id" component={RepairList} />
                 <Route path="/home" component={Home} />
-                <Route path="/users/:id/repairlist/:id" component={RepairList} />
+                <Route path="/repairlist/:id/evaluate" component={Evaluate} />
+                <Route path="/repairlist/:id" component={RepairList} />
                 <Route path="/users/:id/request-repairing" component={RequestRepair} />
                 <Route path="/users/:id/edit-profile" component={EditProfile} />
                 <Route path="/users/:id" component={DataUser} />

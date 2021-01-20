@@ -1,11 +1,12 @@
 import { IonPage, IonHeader, IonContent, IonList, IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/react';
-import React, { useContext, useState } from 'react'
+import { Button, Form, Input, Space } from 'antd';
+import React, { useContext, useEffect, useState } from 'react'
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import { AppContext } from '../contexts/AppProvider';
-
-
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
 
@@ -15,26 +16,31 @@ const StyledWrapper = styled.div`
     .button2{
         margin-top: 33px;
     }
+    .ant-form-item-label > label::after{
+        content: '';
+    }
+    .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+        content: '';
+    }
 `
 const ToppicEvaluate = () => {
     const history = useHistory();
-    // const { authController, userController ,repairsController } = useContext(AppContext);
-    // const { userObj, departments } = userController;
-    // const { addTopic } = repairsController;
+    const { topicsController } = useContext(AppContext);
+    const { topicObj, deleteTopic, updateTopic } = topicsController;
+    const topics = topicObj ? topicObj["R3HTlxTB9CYxSeYnpmMK"].item : null;
+    const [showAlert1, setShowAlert1] = useState(false);
 
-    const [ToppicOne, setToppicOne] = useState<string>('');
-    const [ToppicTwo, setToppicTwo] = useState<string>('');
-    const [ToppicThree, setToppicThree] = useState<string>('');
-    const [ToppicFour, setToppicFour] = useState<string>('');
-    const [ToppicFive, setToppicFive] = useState<string>('');
-    const [ToppicOther, setToppicOther] = useState<string>('');
-
-
-
-
-    const confirmAddTopic = () => {
-   
+    const deleteItem = (data) => {
+        deleteTopic(data)
     }
+
+    const onFinish = (values) => {
+        const newTopic = values["addTopic"].map(v => v.item)
+        const topic = [...topics, ...newTopic]
+        updateTopic({ item: topic })
+        // history.push('/toppicEvaluate');
+    };
+
     return (
         <StyledWrapper>
             <IonPage>
@@ -43,41 +49,77 @@ const ToppicEvaluate = () => {
                 </IonHeader>
                 <IonContent>
                     <h1 className="title">หัวข้อประเมิน</h1>
-                    <IonList>
-                        <IonItem>
-                            <IonLabel position="floating">1</IonLabel>
-                            <IonInput value={ToppicOne} onIonChange={e => setToppicOne(e.detail.value)}></IonInput>
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="floating">2</IonLabel>
-                            <IonInput value={ToppicTwo} onIonChange={e => setToppicTwo(e.detail.value)}></IonInput>
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="floating">3</IonLabel>
-                            <IonInput value={ToppicThree} onIonChange={e => setToppicThree(e.detail.value)}></IonInput>
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="floating">4</IonLabel>
-                            <IonInput value={ToppicFour} onIonChange={e => setToppicFour(e.detail.value)}></IonInput>
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="floating">5</IonLabel>
-                            <IonInput value={ToppicFive} onIonChange={e => setToppicFive(e.detail.value)}></IonInput>
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="floating">อื่นๆ</IonLabel>
-                            <IonInput value={ToppicOther} onIonChange={e => setToppicOther(e.detail.value)}></IonInput>
-                        </IonItem>
-                        
+                    <IonList style={{ padding: "10px" }}>
+                        {
+                            topics && topics.map((topic, index) => {
+                                return (
+                                    <Form.Item key={index} label={<h5>{index + 1}. </h5>} >
+                                        <div style={{ display: 'flex', marginBottom: 8, alignItems: "baseline" }}>
+                                            <h5>{topic}</h5>
+                                            <MinusCircleOutlined onClick={() => setShowAlert1(true)} style={{ margin: "0 8px" }} />
+                                        </div>
+                                        <IonAlert
+                                            isOpen={showAlert1}
+                                            onDidDismiss={() => setShowAlert1(false)}
+                                            cssClass='my-custom-class'
+                                            header={'ลบ!'}
+                                            message={'กด "ยืนยัน" เพื่อลบหัวข้อนี้.'}
+                                            buttons={[
+                                                {
+                                                    text: 'ยกเลิก',
+                                                    role: 'ยกเลิก',
+                                                    cssClass: 'secondary',
+                                                },
+                                                {
+                                                    text: 'ยืนยัน',
+                                                    handler: () => { deleteItem(topic) }
+                                                }
+                                            ]}
+                                        />
+                                    </Form.Item>
+                                )
+                            })
+                        }
+                        {
+                            <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
+                                <Form.List name="addTopic">
+                                    {(fields, { add, remove }) => (
+                                        <>
+                                            {fields.map((field, index) => (
+                                                <Form.Item
+                                                    {...field}
+                                                    name={[field.name, 'item']}
+                                                    fieldKey={[field.fieldKey, 'item']}
+                                                    rules={[{ required: true, message: 'ไม่พบข้อมูล! โปรดใส่ข้อมูล' }]}
+                                                    key={index}
+                                                    label={<h5>{topics && topics.length + index + 1}. </h5>}
+                                                >
+                                                    <div style={{ display: 'flex', marginBottom: 8, alignItems: "baseline" }}>
+                                                        <Input />
+                                                        <MinusCircleOutlined onClick={() => remove(field.name)} style={{ margin: "0 8px" }} />
+                                                    </div>
+
+                                                </Form.Item>
+                                            ))}
+                                            <Form.Item>
+                                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                                                    Add field
+                                            </Button>
+                                            </Form.Item>
+                                        </>
+                                    )}
+                                </Form.List>
+                                <Form.Item>
+                                    <Button type="primary" htmlType="submit" block style={{ borderRadius: "10px" }}>
+                                        ยืนยัน
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        }
                     </IonList>
-                    <div className="button2">
-                        <IonButton expand="block" onClick={confirmAddTopic}>เพิ่ม</IonButton>
-                    </div>
-                   
-               
                 </IonContent>
             </IonPage>
-        </StyledWrapper>
+        </StyledWrapper >
     );
 };
 export default ToppicEvaluate

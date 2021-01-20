@@ -53,8 +53,10 @@ const RequestRepair = () => {
             status: "รอการตอบรับ",
             avatar: user.avatar
         });
-        history.push(`/home/${user.id}`);
+        console.log(urls);
+        history.push(`/home`);
     }
+
 
     return (
         <StyledWrapper>
@@ -80,9 +82,9 @@ const RequestRepair = () => {
                             </IonSelect>
                         </IonItem>
                         <div className="up">
-                            <UploadGallery  fileList={fileList} onChange={setFileList} />
+                            <UploadGallery fileList={fileList} onChange={setFileList} />
                         </div>
-                        
+
                         <IonButton expand="block" className="button" onClick={handleConfirm}>ยืนยัน</IonButton>
                     </IonList>
                     {device !== '' && detail !== '' && department !== '' && fileList.length !== 0 ?
@@ -90,16 +92,16 @@ const RequestRepair = () => {
                             isOpen={showAlert1}
                             onDidDismiss={() => setShowAlert1(false)}
                             cssClass='my-custom-class'
-                            header={'Request repair?'}
-                            message={`Please confirm to request repair.`}
+                            header={'แจ้งซ่อม?'}
+                            message={`โปรดกด "ยืนยัน" เพื่อทำการแจ้งซ่อม.`}
                             buttons={[
                                 {
-                                    text: 'Cancel',
-                                    role: 'cancel',
+                                    text: 'ยกเลิก',
+                                    role: 'ยกเลิก',
                                     cssClass: 'secondary',
                                 },
                                 {
-                                    text: 'Okay',
+                                    text: 'ยืนยัน',
                                     handler: confirmRequest
                                 }
                             ]}
@@ -109,9 +111,9 @@ const RequestRepair = () => {
                                 setShowAlert1(false)
                             }}
                             cssClass='my-custom-class'
-                            header={'Alert!'}
-                            message={'Please fill in all information.'}
-                            buttons={['OK']}
+                            header={'ล้มเหลว!'}
+                            message={'กรุณาใส่ข้อมูลให้ครบถ้วน.'}
+                            buttons={['ตกลง']}
                         />
                     }
                 </IonContent>

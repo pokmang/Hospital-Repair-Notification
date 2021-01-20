@@ -126,7 +126,7 @@ const DataUser = () => {
                                 .sort((a, b) => b.noti_date.valueOf() - a.noti_date.valueOf())
                                 .map((repair, index) => {
                                     return (
-                                        <Link key={index} to={`/users/${user.id}/repairlist/${repair.id}`}>
+                                        <Link key={index} to={`/repairlist/${repair.id}`}>
                                             <IonItem>
                                                 <CardStatus repair={repair} />
                                             </IonItem>

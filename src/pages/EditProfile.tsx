@@ -1,6 +1,6 @@
 import { IonAlert, IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonPage, IonSelect, IonSelectOption } from '@ionic/react'
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import styled from 'styled-components'
 import Topbar from '../components/Topbar'
 import { AppContext } from '../contexts/AppProvider'
@@ -14,9 +14,6 @@ const StyledWrapper = styled.div`
         padding:0 13px;
         margin:13px 0 0 0 ;
         text-align: center;
-    }
-    .button{
-        margin-top:20px;
     }
     .img{
         text-align: center;
@@ -32,13 +29,15 @@ const getBase64 = (img) => {
 }
 
 const EditProfile = () => {
+    const history = useHistory()
     const { userController, authController } = useContext(AppContext);
     const { user } = authController
-    const { userObj, updateUser, positions, departments } = userController;
+    const { userObj, updateUser, positions, departments, deleteUser } = userController;
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [position, setPosition] = useState('');
     const [department, setDepartment] = useState('');
+    const [showAlert, setShowAlert] = useState(false);
     const [showAlert1, setShowAlert1] = useState(false);
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
@@ -46,6 +45,9 @@ const EditProfile = () => {
 
     const handleAlert = () => {
         setShowAlert1(true)
+    }
+    const Alert = () => {
+        setShowAlert(true)
     }
 
     const params = useParams<{ id: string }>();
@@ -135,6 +137,13 @@ const EditProfile = () => {
             avatar: imgUrl || imageUrl
         })
     }
+    const handleDeleted = () => {
+        setShowAlert(false);
+        deleteUser(params.id);
+        history.push(`/users`);
+        console.log("Deleted");
+
+    }
     return (
         <StyledWrapper>
             <IonPage className="page">
@@ -202,23 +211,24 @@ const EditProfile = () => {
                             </IonList>
                         </div>
                         <div>
-                            <IonButton expand="block" className="button" onClick={handleAlert}>บันทึก</IonButton>
+                            <IonButton expand="block" color="primary" onClick={handleAlert}>บันทึก</IonButton>
                         </div>
                         {name !== '' && phone !== '' && position !== '' && department !== '' ?
                             <IonAlert
                                 isOpen={showAlert1}
-                                onDidDismiss={handleUpdate}
+                                onDidDismiss={() => setShowAlert1(false)}
                                 cssClass='my-custom-class'
-                                header={'Edit?'}
-                                message={`Please confirm ${name} to edit.`}
+                                header={'บันทึกข้อมูล?'}
+                                message={`โปรดกด "ยืนยัน" เพื่อบันทึกข้อมูลการแก้ไขของ ${name}.`}
                                 buttons={[
                                     {
-                                        text: 'Cancel',
-                                        role: 'cancel',
+                                        text: 'ยกเลิก',
+                                        role: 'ยกเลิก',
                                         cssClass: 'secondary',
                                     },
                                     {
                                         text: 'ยืนยัน',
+                                        handler: handleUpdate
                                     }
                                 ]}
                             /> : <IonAlert
@@ -227,9 +237,36 @@ const EditProfile = () => {
                                     setShowAlert1(false)
                                 }}
                                 cssClass='my-custom-class'
-                                header={'Alert!'}
-                                message={'Please fill in all information.'}
-                                buttons={['OK']}
+                                header={'ล้มเหลว!'}
+                                message={'กรุณาใส่ข้อมูลให้ครบถ้วน.'}
+                                buttons={['ตกลง']}
+                            />
+                        }
+                        {
+                            authPosition !== "ผู้ใช้งานทั่วไป" ? (
+                                <div>
+                                    <IonButton expand="block" color="danger" onClick={Alert}>ลบผู้ใช้งาน</IonButton>
+                                </div>
+                            ) : null
+                        }
+                        {
+                            <IonAlert
+                                isOpen={showAlert}
+                                onDidDismiss={() => setShowAlert(false)}
+                                cssClass='my-custom-class'
+                                header={'ลบข้อมูลผู้ใช้?'}
+                                message={`กด "ยืนยัน" เพื่อลบข้อมูลของ ${name}`}
+                                buttons={[
+                                    {
+                                        text: 'ยกเลิก',
+                                        role: 'ยกเลิก',
+                                        cssClass: 'secondary',
+                                    },
+                                    {
+                                        text: 'ยืนยัน',
+                                        handler: handleDeleted
+                                    }
+                                ]}
                             />
                         }
                     </div>

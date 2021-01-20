@@ -54,7 +54,7 @@ const Home = () => {
                     b.noti_date.valueOf() - a.noti_date.valueOf())
                     .map((repair, index) => {
                         return (
-                            <Link key={index} to={`/home/repairlist/${repair.id}`}>
+                            <Link key={index} to={`/repairlist/${repair.id}`}>
                                 <CardStatus repair={repair} bnt={'ซ่อนปุ่ม'} />
                             </Link>
                         )
@@ -67,7 +67,7 @@ const Home = () => {
                     .sort((a, b) => b.noti_date.valueOf() - a.noti_date.valueOf())
                     .map((repair, index) => {
                         return (
-                            <Link key={index} to={`/home/repairlist/${repair.id}`}>
+                            <Link key={index} to={`/repairlist/${repair.id}`}>
                                 <IonItem>
                                     <CardStatus repair={repair} bnt={'ซ่อนปุ่ม'} />
                                 </IonItem>
