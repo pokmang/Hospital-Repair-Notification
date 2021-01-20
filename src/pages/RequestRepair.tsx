@@ -66,7 +66,7 @@ const RequestRepair = () => {
                     <h1 className="title">แจ้งซ่อม</h1>
                     <IonList>
                         <IonItem>
-                            <IonLabel position="floating">หัวข้อการแจ้งซ่อม</IonLabel>
+                            <IonLabel position="floating">อุปกรณ์แจ้งซ่อม</IonLabel>
                             <IonInput value={device} onIonChange={e => setDevail(e.detail.value)}></IonInput>
                         </IonItem>
                         <IonItem>
