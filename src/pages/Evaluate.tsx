@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
-import { Checkbox, Row, Col, Button } from 'antd';
+import { Row, Col } from 'antd';
 import { IonPage, IonContent, IonButton } from '@ionic/react';
-import { Radio, Input } from 'antd';
+import { Radio } from 'antd';
 import { useState } from 'react';
+import { AppContext } from '../contexts/AppProvider';
+import { useParams } from 'react-router';
+import { useHistory } from 'react-router';
 
 const StyledWrapper = styled.div`
     .list{
@@ -28,19 +31,50 @@ const StyledWrapper = styled.div`
     }
 `
 const Evaluate = () => {
-    const [one, setOne] = useState();
-    const [two, setTwo] = useState();
-    const [three, setThree] = useState();
-    const [four, setFour] = useState();
-    const [five, setFive] = useState('');
-    console.log(one, two, three, four, five);
+    const params = useParams<{ id: string }>();
+    const history = useHistory()
+    const { evaluatesController, topicsController, repairsController } = useContext(AppContext);
+    const { topics } = topicsController
+    const { addEvaluate } = evaluatesController
+    const { repairObj, updateRepair } = repairsController;
+    const repair = repairObj ? repairObj[params.id] : null;
 
+    const [evaluated, setEavaluated] = useState([]);
+    const [keep, setKeep] = useState({
+        topic: '',
+        score: 0
+    });
+
+    const Confirm = () => {
+        addEvaluate({
+            repairId: params.id,
+            evaluated
+        })
+        updateRepair(
+            params.id,
+            {
+                status: "เรียบร้อย",
+                evaluate_date: new Date,
+            }
+        )
+        history.push(`/repairlist/${params.id}`)
+    }
 
     const radioStyle = {
         display: 'block',
         height: '30px',
         lineHeight: '30px',
     };
+    useEffect(() => {
+        if (keep.topic !== '' && keep.score !== 0) {
+            if (!evaluated.find(e => e.topic === keep.topic)) {
+                setEavaluated([keep, ...evaluated])
+            }
+            if (evaluated.find(e => e.topic === keep.topic)) {
+                evaluated[evaluated.findIndex(e => e.topic === keep.topic)].score = keep.score
+            }
+        }
+    }, [keep])
 
     return (
         <StyledWrapper>
@@ -48,99 +82,44 @@ const Evaluate = () => {
                 <IonContent>
                     <Topbar title={"ประเมินการซ่อม"} />
                     <Row>
-                        <Col className="list">
-                            <h3>1.ความรวดเร็วในการดำเนินการ</h3>
-                            <div className="rdgp">
-                                <Radio.Group onChange={e => setOne(e.target.value)}>
-                                    <Radio style={radioStyle} value={5}>
-                                        พึงพอใจมาก
-                                    </Radio>
-                                    <Radio style={radioStyle} value={4}>
-                                        พึงพอใจ
-                                    </Radio>
-                                    <Radio style={radioStyle} value={3}>
-                                        ปานกลาง
-                                    </Radio>
-                                    <Radio style={radioStyle} value={2}>
-                                        แย่
-                                    </Radio>
-                                    <Radio style={radioStyle} value={1}>
-                                        แย่มาก
-                                    </Radio>
-                                </Radio.Group>
-                            </div>
-                        </Col >
-                        <Col className="list">
-                            <h3>2.ความชำนาญในการซ่อม</h3>
-                            <div className="rdgp">
-                                <Radio.Group onChange={e => setTwo(e.target.value)}>
-                                    <Radio style={radioStyle} value={5}>
-                                        พึงพอใจมาก
-                                    </Radio>
-                                    <Radio style={radioStyle} value={4}>
-                                        พึงพอใจ
-                                    </Radio>
-                                    <Radio style={radioStyle} value={3}>
-                                        ปานกลาง
-                                    </Radio>
-                                    <Radio style={radioStyle} value={2}>
-                                        แย่
-                                    </Radio>
-                                    <Radio style={radioStyle} value={1}>
-                                        แย่มาก
-                                    </Radio>
-                                </Radio.Group>
-                            </div>
-                        </Col >
-                        <Col className="list">
-                            <h3>3.ความเรียบร้อยในการซ่อม</h3>
-                            <div className="rdgp">
-                                <Radio.Group onChange={e => setThree(e.target.value)}>
-                                    <Radio style={radioStyle} value={5}>
-                                        พึงพอใจมาก
-                                    </Radio>
-                                    <Radio style={radioStyle} value={4}>
-                                        พึงพอใจ
-                                    </Radio>
-                                    <Radio style={radioStyle} value={3}>
-                                        ปานกลาง
-                                    </Radio>
-                                    <Radio style={radioStyle} value={2}>
-                                        แย่
-                                    </Radio>
-                                    <Radio style={radioStyle} value={1}>
-                                        แย่มาก
-                                    </Radio>
-                                </Radio.Group>
-                            </div>
-                        </Col >
-                        <Col className="list">
-                            <h3>4.ความสะดวกในการแจ้งซ่อม</h3>
-                            <div className="rdgp">
-                                <Radio.Group onChange={e => setFour(e.target.value)}>
-                                    <Radio style={radioStyle} value={5}>
-                                        พึงพอใจมาก
-                                    </Radio>
-                                    <Radio style={radioStyle} value={4}>
-                                        พึงพอใจ
-                                    </Radio>
-                                    <Radio style={radioStyle} value={3}>
-                                        ปานกลาง
-                                    </Radio>
-                                    <Radio style={radioStyle} value={2}>
-                                        แย่
-                                    </Radio>
-                                    <Radio style={radioStyle} value={1}>
-                                        แย่มาก
-                                    </Radio>
-                                </Radio.Group>
-                            </div>
-                        </Col >
+                        {
+                            topics && topics.item.map((topic, index) => {
+
+                                return (
+                                    <Col className="list" key={index}>
+                                        <h3>{index + 1}.{topic}</h3>
+                                        <div className="rdgp">
+                                            <Radio.Group onChange={e =>
+                                                setKeep({
+                                                    topic,
+                                                    score: e.target.value
+                                                })}>
+                                                <Radio style={radioStyle} value={5}>
+                                                    พึงพอใจมาก
+                                                </Radio>
+                                                <Radio style={radioStyle} value={4}>
+                                                    พึงพอใจ
+                                                </Radio>
+                                                <Radio style={radioStyle} value={3}>
+                                                    ปานกลาง
+                                                </Radio>
+                                                <Radio style={radioStyle} value={2}>
+                                                    แย่
+                                                </Radio>
+                                                <Radio style={radioStyle} value={1}>
+                                                    แย่มาก
+                                                </Radio>
+                                            </Radio.Group>
+                                        </div>
+                                    </Col >
+                                )
+                            })
+                        }
                     </Row>
-                    <IonButton color="primary" expand="block" className="bnt">ส่งการประเมิน</IonButton>
+                    <IonButton color="primary" expand="block" className="bnt" onClick={Confirm}>ส่งการประเมิน</IonButton>
                 </IonContent>
             </IonPage>
-        </StyledWrapper>
+        </StyledWrapper >
     )
 }
 

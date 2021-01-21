@@ -1,4 +1,3 @@
-import { type } from "os";
 
 type TPosition = {
     name: string;
