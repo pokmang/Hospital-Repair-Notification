@@ -53,7 +53,6 @@ const RequestRepair = () => {
             status: "รอการตอบรับ",
             avatar: user.avatar
         });
-        console.log(urls);
         history.push(`/home`);
     }
 

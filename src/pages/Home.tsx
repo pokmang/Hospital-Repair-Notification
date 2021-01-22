@@ -1,11 +1,11 @@
-import { IonButton, IonCol, IonItem, IonPage, IonRow } from '@ionic/react';
+import { IonButton, IonItem, IonPage } from '@ionic/react';
 import React, { useContext } from 'react'
 import styled from 'styled-components';
 import { IonContent } from '@ionic/react';
 import Topbar from '../components/Topbar';
 import CardStatus from '../components/CardStatus';
 import { AppContext } from '../contexts/AppProvider';
-import { useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const StyledWrapper = styled.div`
@@ -41,11 +41,13 @@ const StyledWrapper = styled.div`
 `
 
 const Home = () => {
+    const history = useHistory()
     const { repairsController, authController } = useContext(AppContext)
     const { repairs } = repairsController
     const { user } = authController
     const name = user ? user.name : null;
     const position = user ? user.position.name : null;
+    const uid = user ? user.id : null
 
     const positionCheck = () => {
         if (position === "ผู้ดูแลระบบ" || position === "เจ้าหน้าที่") {
@@ -61,9 +63,10 @@ const Home = () => {
                     })
             )
         }
+
         if (position === "ผู้ใช้งานทั่วไป") {
             return (
-                repairs && repairs.filter(repair => repair.informer === name)
+                repairs && repairs.filter(repair => repair.informer === name).length ? (repairs.filter(repair => repair.informer === name)
                     .sort((a, b) => b.noti_date.valueOf() - a.noti_date.valueOf())
                     .map((repair, index) => {
                         return (
@@ -73,7 +76,8 @@ const Home = () => {
                                 </IonItem>
                             </Link>
                         )
-                    })
+                    }))
+                    : <IonButton color="light" expand="block" shape="round" onClick={() => history.push(`/users/${uid}/request-repairing`)}> แจ้งซ่อม </IonButton>
             )
         }
     }
@@ -81,7 +85,7 @@ const Home = () => {
         <StyledWrapper>
             <IonPage >
                 <IonContent>
-                    <Topbar title={'หน้าแรก'} bnt={'ซ่อนปุ่ม'}/>
+                    <Topbar title={'หน้าแรก'} bnt={'ซ่อนปุ่ม'} />
                     <h1>รายการแจ้งซ่อม</h1>
                     {
                         user && positionCheck()

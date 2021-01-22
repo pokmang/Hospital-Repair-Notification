@@ -79,7 +79,6 @@ const CardStatus = props => {
     const repairName = repair ? repair.informer : null;
     const repairStatus = repair ? repair.status : null;
     const userAvatar = repair ? repair.avatar : null;
-console.log(repairStatus);
 
     return (
         <StyledWrapper>
