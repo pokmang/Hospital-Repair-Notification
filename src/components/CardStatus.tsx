@@ -14,17 +14,13 @@ const StyledWrapper = styled.div`
         opacity: 0.6;
    }
    .card{
-    
     margin-left: 19px;
     margin-right: 19px;
     border-radius: 29px;
    }
-
    .card.รอประเมิน {
     background:linear-gradient(135deg, #13f1fc 0%,#0470dc 100%);
-    
    }
-
    .card.รอการตอบรับ {
     background:linear-gradient(135deg, #19ff33 0%,#47a9e4 100%);
    }
@@ -34,8 +30,8 @@ const StyledWrapper = styled.div`
    .card.ยกเลิกแล้ว {
     background:linear-gradient(135deg, #eeb4ae 0%,#f63d3d 100%);
    }
-   .card.เสร็จสิ้น {
-    background:linear-gradient(135deg, #13f1fc 0%,#078ce3 100%);
+   .card.เรียบร้อย {
+    background:#0fd600 ;
    }
 
 

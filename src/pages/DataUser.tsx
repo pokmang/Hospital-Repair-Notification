@@ -106,7 +106,7 @@ const DataUser = () => {
                         </IonCol>
                     </IonRow>
                     <IonGrid>
-                        <h1>ภาพรวม</h1>
+                        {/* <h1>ภาพรวม</h1>
                         <IonRow>
                             <IonCard  >
                                 <IonCardContent className="dashbord" >
@@ -117,9 +117,9 @@ const DataUser = () => {
                                     </div>
                                 </IonCardContent>
                             </IonCard>
-                        </IonRow>
+                        </IonRow> */}
                         <IonRow>
-                            <h1>งานที่ดำเนินการ</h1>
+                            <h1>ประวัติงานที่ดำเนินการ</h1>
                         </IonRow>
                         {
                             repairs && repairs.filter(repair => repair.informer === name)
