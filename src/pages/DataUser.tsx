@@ -8,7 +8,8 @@ import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
 import { Link } from 'react-router-dom';
 import CardStatus from '../components/CardStatus';
-
+import Report from '../components/Report';
+import ReactPDF, { PDFDownloadLink } from '@react-pdf/renderer';
 const StyledWrapper = styled.div`
     height: 100vh;
     width: 100vw;
@@ -54,6 +55,9 @@ const StyledWrapper = styled.div`
    h1{
     font-size: 25px;
     padding-left: 15px;
+  }
+  .pdf{
+    padding-left: 18px;
   }
 
 
@@ -106,18 +110,11 @@ const DataUser = () => {
                         </IonCol>
                     </IonRow>
                     <IonGrid>
-                        {/* <h1>ภาพรวม</h1>
-                        <IonRow>
-                            <IonCard  >
-                                <IonCardContent className="dashbord" >
-                                    <RadialProgress percent={80} />
-                                    <div className="gg">
-                                        <h3>ความพึงพอใจ</h3>
-                                        <h3>20 งาน</h3>
-                                    </div>
-                                </IonCardContent>
-                            </IonCard>
-                        </IonRow> */}
+                        <h1>รายงานการทำเนินงาน</h1>
+                        <Report />
+                        {/* <PDFDownloadLink className="pdf" document={<Report />} fileName="สรุปรายงานการดำเนินงาน.pdf">
+                            {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'ดาวน์โหลดไฟล์!')}
+                        </PDFDownloadLink> */}
                         <IonRow>
                             <h1>ประวัติงานที่ดำเนินการ</h1>
                         </IonRow>
