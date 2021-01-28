@@ -50,7 +50,7 @@ const TopicsController = () => {
 
     return {
         topicObj,
-        topics: !topicObj ? null : Object.values(topicObj),
+        topics: !topicObj ? null : topicObj["R3HTlxTB9CYxSeYnpmMK"],
         addTopic,
         updateTopic,
         deleteTopic

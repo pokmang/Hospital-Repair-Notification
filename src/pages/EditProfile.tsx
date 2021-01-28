@@ -141,8 +141,6 @@ const EditProfile = () => {
         setShowAlert(false);
         deleteUser(params.id);
         history.push(`/users`);
-        console.log("Deleted");
-
     }
     return (
         <StyledWrapper>
@@ -171,7 +169,7 @@ const EditProfile = () => {
                                     <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
                                     <IonInput value={name} onIonChange={e => setName(e.detail.value)}></IonInput>
                                 </IonItem>
-                                {authPosition !== "ผู้ใช้งานทั่วไป" ? (
+                                {authPosition === "ผู้ดูแลระบบ" ? (
                                     <IonItem>
                                         <IonLabel>ตำแหน่ง</IonLabel>
                                         {
@@ -187,7 +185,7 @@ const EditProfile = () => {
                                         }
                                     </IonItem>
                                 ) : null}
-                                {authPosition !== "ผู้ใช้งานทั่วไป" ? (
+                                {authPosition === "ผู้ดูแลระบบ" ? (
                                     <IonItem>
                                         <IonLabel>แผนก</IonLabel>
                                         {
@@ -243,7 +241,7 @@ const EditProfile = () => {
                             />
                         }
                         {
-                            authPosition !== "ผู้ใช้งานทั่วไป" ? (
+                            authPosition === "ผู้ดูแลระบบ" ? (
                                 <div>
                                     <IonButton expand="block" color="danger" onClick={Alert}>ลบผู้ใช้งาน</IonButton>
                                 </div>

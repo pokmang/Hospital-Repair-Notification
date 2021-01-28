@@ -165,7 +165,6 @@ const RepairList = () => {
                 break;
         }
     }
-    // console.log("po", status, userName, informer, notiDate, repairDate);
 
     return (
         <StyledWrapper>
