@@ -4,6 +4,7 @@ import { IonContent, IonHeader, IonPage, IonInput, IonItem, IonLabel, IonList, I
 import { AppContext } from '../contexts/AppProvider'
 import Topbar from '../components/Topbar';
 import { useHistory } from 'react-router';
+import { Button } from 'antd';
 
 const StyledWrapper = styled.div`
     .title{
@@ -15,6 +16,13 @@ const StyledWrapper = styled.div`
         margin-top:20px;
 
     }
+
+    .lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
 `
 const Register = () => {
     const history = useHistory();
@@ -76,7 +84,7 @@ const Register = () => {
                         </IonItem>
                     </IonList>
                     <div className="button2">
-                        <IonButton expand="block" onClick={handleRegister}>เพิ่มผู้ใช้งาน</IonButton>
+                        <Button block  onClick={handleRegister} type="primary" >เพิ่มผู้ใช้งาน</Button>
                     </div>
                     {name !== '' && phone !== '' && email !== '' && password !== '' && position !== '' && department !== '' ?
                         <IonAlert
@@ -93,7 +101,9 @@ const Register = () => {
                                 },
                                 {
                                     text: 'ยืนยัน',
-                                    handler: confirmRegister
+                                    handler: confirmRegister,
+                                 
+                                    
                                 }
                             ]}
                         /> : <IonAlert

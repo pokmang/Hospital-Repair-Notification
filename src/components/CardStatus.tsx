@@ -3,8 +3,8 @@ import React from 'react'
 import styled from 'styled-components';
 import avatar from '../img/avatar.png';
 const StyledWrapper = styled.div`
-    width: 100vw;
-    background-size: cover;
+    /* width: 100vw; */
+    /* background-size: cover; */
     .title-card{
         display: flex;
         justify-content: space-between;
@@ -14,9 +14,7 @@ const StyledWrapper = styled.div`
         opacity: 0.6;
    }
    .card{
-    margin-left: 19px;
-    margin-right: 19px;
-    border-radius: 29px;
+    border-radius: 15px;
    }
    .card.รอประเมิน {
     background:linear-gradient(135deg, #13f1fc 0%,#0470dc 100%);
