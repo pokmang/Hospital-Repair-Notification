@@ -80,22 +80,28 @@ const printPDF =()=>{
         },
 
         { text: 'รายละเอียดการประเมิน',  style: 'title' },
-        {text: `วันที่ประเมินการซ่อม: ${date}`},
+        {text: `วันที่ประเมินการซ่อม: ${date}`,style: 'date'},
         {
           style: 'tableExample',
           table: {
             heights: 20,
-            widths: [100, 300],
+            widths: [30, 270,90],
             body: [
-              ['ข้อ1', {text: 'Header 1'}],
-              ['ข้อ2', 'column B'],
-              ['ข้อ3', 'column B'],
-              ['ข้อ4', 'column B'],
-              ['ข้อ5', 'column B'],
+              [{text: 'ข้อที่' ,style: 'evalu'}, {text: 'หัวข้อการประเมิน',style: 'evalu'},{text: 'เกณฑ์การประเมิน',style: 'evalu'}],
+              [{text: '1' ,style: 'number'}, 'column B',{text: 'ดี' ,style: 'number'}],
+              [{text: '2' ,style: 'number'}, 'column B',{text: 'ดีมาก' ,style: 'number'}],
+              [{text: '3' ,style: 'number'}, 'column B',{text: 'พอใช้' ,style: 'number'}],
+              [{text: '4' ,style: 'number'}, 'column B',{text: 'แย่' ,style: 'number'}],
+              [{text: '5' ,style: 'number'}, 'column B',{text: 'ดีมาก' ,style: 'number'}],
             ]
           }
         },
-
+        { text: '.............................................',  style: 'dot' },
+        { text: '( อุสมาน  สุหลง )',  style: 'name' },
+        { text: 'ผู้แจ้งซ่อม',  style: 'name' },
+        { text: '.............................................',  style: 'dot1' },
+        { text: '( หมัดซอฟฟี ยะโกะ )',  style: 'name' },
+        { text: 'ช่างซ่อม',  style: 'name' },
       ],
       styles: {
         header: {
@@ -108,7 +114,32 @@ const printPDF =()=>{
         },
         title:{
           fontSize: 16,
-          margin: [0, 20, 0, 5],
+          margin: [50, 20, 0, 5],
+        },
+        evalu:{
+          alignment: 'center',
+          fontSize: 16
+        },
+        tableExample: {
+          margin: [50, 0, 0, 0]
+        },
+        dot:{
+          margin: [0, 50, 0, 0],
+          alignment: 'center', 
+        },
+        dot1:{
+          margin: [0, 15, 0, 0],
+          alignment: 'center', 
+        },
+        name:{
+          alignment: 'center',
+          fontSize: 15
+        },
+        date:{
+          margin: [50, 0, 0, 0]
+        },
+        number:{
+          alignment: 'center',
         }
       
       },

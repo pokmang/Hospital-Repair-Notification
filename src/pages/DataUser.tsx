@@ -110,8 +110,7 @@ const DataUser = () => {
                         </IonCol>
                     </IonRow>
                     <IonGrid>
-                        <h1>สรุปรายงานการซ่อม</h1>
-                        <Report />
+                 
                         {/* <PDFDownloadLink className="pdf" document={<Report />} fileName="สรุปรายงานการดำเนินงาน.pdf">
                             {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'ดาวน์โหลดไฟล์!')}
                         </PDFDownloadLink> */}
