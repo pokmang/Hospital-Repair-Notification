@@ -29,19 +29,90 @@ const printPDF =()=>{
         var name3 ="ผู้ป่วยใน"
         var name4 ="หน้าจอ"
         var name5 ="แตก ไฟไม่ติด"
+
+        const stl = {
+          bold: true,
+          alignment: 'right',
+        }
+
     var docDefinition = {
       content: [
-        { text: 'สรุปรายงานการซ่อม', fontSize: 25  },
-        { text: `วันที่แจ้งซ่อม ${repairStatus}`, fontSize: 15 },
-        { text: `วันที่ซ่อมเสร็จ ${date}`, fontSize: 15 },
-        { text: `วันที่ประเมินการซ่อม ${date}`, fontSize: 15 },
-        { text: `ผู้แจ้งซ่อม ${name1}`, fontSize: 15 },
-        { text: `ผู้รับซ่อม ${name2}`, fontSize: 15 },
-        { text: `แผนก ${name3}`, fontSize: 15 },
-        { text: `อุปกรณ์ที่ซ่อม ${name4}`, fontSize: 15 },
-        { text: `รายละเอียดการซ่อม ${name5}`, fontSize: 15 },
+        { text: 'สรุปรายงานการซ่อม', style: 'header' },
+        { text: 'ข้อมูลการแจ้งซ่อม', style: 'title'},
+        {
+          style: 'tableExample',
+          table: {
+            heights: 20,
+            widths: [100, 300],
+            body: [
+              ['วันที่แจ้ง', 'column B'],
+              ['ชื่อผู้แจ้ง', 'column B'],
+              ['หน่วยงาน/แผนก', 'column B']
+            ]
+          }
+        },
+        { text: 'ข้อมูลการรับซ่อม',  style: 'title' },
+        {
+          style: 'tableExample',
+          table: {
+            heights: 20,
+            widths: [100, 300],
+            body: [
+              ['วันที่รับซ่อม', 'column B'],
+              ['วันที่ซ่อมเสร็จ', 'column B'],
+              ['ชื่อผู้รับซ่อม', 'column B'],
+            ]
+          }
+        },
+
+        { text: 'รายละเอียดการซ่อม',  style: 'title' },
+        {
+          style: 'tableExample',
+          table: {
+            heights: 20,
+            widths: [100, 300],
+            body: [
+              ['อุปกรณ์ที่ซ่อม', {text: 'Header 1'}],
+              ['รายละเอียดการซ่อม', 'column B'],
+       
+            ]
+          }
+        },
+
+        { text: 'รายละเอียดการประเมิน',  style: 'title' },
+        {text: `วันที่ประเมินการซ่อม: ${date}`},
+        {
+          style: 'tableExample',
+          table: {
+            heights: 20,
+            widths: [100, 300],
+            body: [
+              ['ข้อ1', {text: 'Header 1'}],
+              ['ข้อ2', 'column B'],
+              ['ข้อ3', 'column B'],
+              ['ข้อ4', 'column B'],
+              ['ข้อ5', 'column B'],
+            ]
+          }
+        },
 
       ],
+      styles: {
+        header: {
+          alignment: 'center',
+          fontSize: 25
+        },
+        tableHeader:{
+         
+          width: 100
+        },
+        title:{
+          fontSize: 16,
+          margin: [0, 20, 0, 5],
+        }
+      
+      },
+      
 
       defaultStyle:{
           font: 'THSarabunNew'
