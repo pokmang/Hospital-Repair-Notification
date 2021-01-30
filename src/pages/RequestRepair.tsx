@@ -76,7 +76,7 @@ const RequestRepair = () => {
                         </IonItem>
                         <IonItem>
                             <IonLabel>แผนก</IonLabel>
-                            <IonSelect value={department} okText="Okay" cancelText="Dismiss" onIonChange={e => setDepartment(e.detail.value)}>
+                            <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
                                 {departments.map((value, index) => (<IonSelectOption key={index} value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>

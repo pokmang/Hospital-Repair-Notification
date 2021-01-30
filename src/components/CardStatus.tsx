@@ -31,7 +31,7 @@ const StyledWrapper = styled.div`
     background: linear-gradient(to right, #d31027, #ea384d);
    }
    .card.เรียบร้อย {
-    background: linear-gradient(to right, #5433ff, #20bdff, #a5fecb);
+    background: linear-gradient(to right, #1dc58a, #93f9b9);
    }
 
 
