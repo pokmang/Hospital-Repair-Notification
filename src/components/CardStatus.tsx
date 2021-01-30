@@ -19,19 +19,19 @@ const StyledWrapper = styled.div`
     border-radius: 15px;
    }
    .card.รอประเมิน {
-    background:linear-gradient(135deg, #13f1fc 0%,#0470dc 100%);
+    background: linear-gradient(to right, #1488cc, #2b32b2);
    }
    .card.รอการตอบรับ {
-    background:linear-gradient(135deg, #19ff33 0%,#47a9e4 100%);
+    background: linear-gradient(to right, #ede574, #e1f5c4);
    }
    .card.กำลังดำเนินการ {
-    background:linear-gradient(135deg, #f3aed8 0%,#47a9e4 50%);
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
    }
    .card.ยกเลิกแล้ว {
-    background:linear-gradient(135deg, #eeb4ae 0%,#f63d3d 100%);
+    background: linear-gradient(to right, #d31027, #ea384d);
    }
    .card.เรียบร้อย {
-    background:#0fd600 ;
+    background: linear-gradient(to right, #5433ff, #20bdff, #a5fecb);
    }
 
 
