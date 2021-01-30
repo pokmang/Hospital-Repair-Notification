@@ -190,7 +190,7 @@ const Report = (props) => {
   }
   return (
     <StyledWrapper>
-      <IonButton color="primary" expand="block" className="bnt" onClick={printPDF}>ผลประเมิน</IonButton>
+      <IonButton color="primary" expand="block" className="bnt" onClick={printPDF}>สรุปรายงานการซ่อม</IonButton>
     </StyledWrapper>
   )
 }

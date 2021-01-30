@@ -91,7 +91,6 @@ const DataUser = () => {
                         </IonCol>
                     </IonRow>
                     <IonGrid>
-                        <h1>สรุปรายงานการซ่อม</h1>
                         <IonRow>
                             <h1>ประวัติงานที่ดำเนินการ</h1>
                         </IonRow>
