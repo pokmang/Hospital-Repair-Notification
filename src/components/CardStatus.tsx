@@ -18,7 +18,7 @@ const StyledWrapper = styled.div`
     border-radius: 15px;
    }
    .card.รอประเมิน {
-    background: linear-gradient(to right, #1488cc, #2b32b2);
+    background: linear-gradient(to right, #179eec, #2b32b2);
    }
    .card.รอการตอบรับ {
     background: linear-gradient(to right, #ede574, #e1f5c4);
@@ -27,10 +27,10 @@ const StyledWrapper = styled.div`
     background: linear-gradient(to right, #2193b0, #6dd5ed);
    }
    .card.ยกเลิกแล้ว {
-    background: linear-gradient(to right, #d31027, #ea384d);
+    background: linear-gradient(to right, #c93445, #ea384d);
    }
    .card.เรียบร้อย {
-    background: linear-gradient(to right, #1dc58a, #93f9b9);
+    background: linear-gradient(to right, #1dc569, #93f9b9);
    }
 
 
