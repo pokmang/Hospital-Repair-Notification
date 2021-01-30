@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Topbar from '../components/Topbar';
 import Home from './Home';
 import Register from './Register';
 import Evaluate from './Evaluate';

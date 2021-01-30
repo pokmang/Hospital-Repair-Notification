@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components'
-import { IonContent, IonHeader, IonPage, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonAlert } from '@ionic/react';
 import { AppContext } from '../contexts/AppProvider'
 import Topbar from '../components/Topbar';
 import { useHistory } from 'react-router';
@@ -84,7 +84,7 @@ const Register = () => {
                         </IonItem>
                     </IonList>
                     <div className="button2">
-                        <Button block  onClick={handleRegister} type="primary" >เพิ่มผู้ใช้งาน</Button>
+                        <Button block onClick={handleRegister} type="primary" >เพิ่มผู้ใช้งาน</Button>
                     </div>
                     {name !== '' && phone !== '' && email !== '' && password !== '' && position !== '' && department !== '' ?
                         <IonAlert
@@ -102,8 +102,8 @@ const Register = () => {
                                 {
                                     text: 'ยืนยัน',
                                     handler: confirmRegister,
-                                 
-                                    
+
+
                                 }
                             ]}
                         /> : <IonAlert

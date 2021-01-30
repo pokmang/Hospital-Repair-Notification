@@ -1,15 +1,13 @@
-import { IonGrid, IonRow, IonCol, IonIcon, IonCard, IonCardContent, IonImg, IonContent, IonPage, IonItem } from '@ionic/react';
+import { IonGrid, IonRow, IonCol, IonIcon, IonImg, IonContent, IonPage, IonItem } from '@ionic/react';
 import { settings } from 'ionicons/icons';
 import React, { useContext } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
-import RadialProgress from '../components/RadialProgress';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
 import { Link } from 'react-router-dom';
 import CardStatus from '../components/CardStatus';
-import Report from '../components/Report';
-import ReactPDF, { PDFDownloadLink } from '@react-pdf/renderer';
+
 const StyledWrapper = styled.div`
     height: 100vh;
     width: 100vw;
@@ -45,8 +43,6 @@ const StyledWrapper = styled.div`
         height: 100%;
         margin-left: 15px;
     }
-  
-
    .status{
     display: flex;
     margin-left: 8px;
@@ -59,21 +55,6 @@ const StyledWrapper = styled.div`
   .pdf{
     padding-left: 18px;
   }
-
-
-
-
-
-
-  /* ion-img{
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: inherit;
-    object-position: inherit;
-    border-radius: 100%;
-} */
-
 `
 
 const DataUser = () => {

@@ -32,6 +32,7 @@ const RequestRepair = () => {
     const [department, setDepartment] = useState<string>('');
     const [fileList, setFileList] = useState([]);
     const [showAlert1, setShowAlert1] = useState(false);
+    const [showAlert2, setShowAlert2] = useState(false);
 
     const handleConfirm = async () => {
         setShowAlert1(true)
@@ -39,9 +40,13 @@ const RequestRepair = () => {
 
     const confirmRequest = async () => {
         setShowAlert1(false)
+
         const promises = fileList.map((file) => {
             return uploadFile(file.originFileObj)
         });
+
+        setShowAlert2(true)
+
         const urls = await Promise.all(promises);
         addRepair({
             informer,
@@ -53,9 +58,9 @@ const RequestRepair = () => {
             status: "รอการตอบรับ",
             avatar: user.avatar
         });
-        history.push(`/home`);
-    }
+        history.push("/");
 
+    }
 
     return (
         <StyledWrapper>
@@ -76,7 +81,7 @@ const RequestRepair = () => {
                         </IonItem>
                         <IonItem>
                             <IonLabel>แผนก</IonLabel>
-                            <IonSelect value={department} okText="Okay" cancelText="Dismiss" onIonChange={e => setDepartment(e.detail.value)}>
+                            <IonSelect value={department} okText="ยืนยัน" cancelText="ยกเลิก" onIonChange={e => setDepartment(e.detail.value)}>
                                 {departments.map((value, index) => (<IonSelectOption key={index} value={value}>{value.name}</IonSelectOption>))}
                             </IonSelect>
                         </IonItem>
@@ -115,6 +120,14 @@ const RequestRepair = () => {
                             buttons={['ตกลง']}
                         />
                     }
+                    <IonAlert
+                        isOpen={showAlert2}
+                        onDidDismiss={() => {
+                            setShowAlert2(false)
+                        }}
+                        cssClass='my-custom-class'
+                        header={'กำลังดำเนินการ!'}
+                    />
                 </IonContent>
             </IonPage>
         </StyledWrapper>

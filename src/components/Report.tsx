@@ -1,7 +1,5 @@
-import { Button } from 'antd';
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { IonButton } from '@ionic/react';

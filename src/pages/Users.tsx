@@ -2,7 +2,6 @@ import { IonAvatar, IonContent, IonItem, IonLabel, IonList, IonPage, IonSearchba
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
-import Report from '../components/Report';
 import Topbar from '../components/Topbar';
 import { AppContext } from "../contexts/AppProvider";
 
@@ -33,7 +32,7 @@ const Users = () => {
                                                 <IonLabel >
                                                     <h3 className="testColor">{user.name}</h3>
                                                     <p>{user.department.name}</p>
-                                          
+
                                                 </IonLabel>
                                             </IonItem>
                                         </Link>
@@ -51,7 +50,7 @@ const Users = () => {
                                                 <IonLabel >
                                                     <h3 className="testColor">{user.name}</h3>
                                                     <p>{user.department.name}</p>
-                                              
+
                                                 </IonLabel>
                                             </IonItem>
                                         </Link>

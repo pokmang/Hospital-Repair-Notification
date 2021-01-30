@@ -1,9 +1,8 @@
-import { IonPage, IonContent, IonCol, IonRow, IonButton, IonImg, IonIcon, IonGrid } from '@ionic/react';
-import React, { useContext, useEffect, useState } from 'react'
+import { IonPage, IonContent, IonCol, IonRow, IonButton, IonImg, IonGrid } from '@ionic/react';
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
-import { time } from 'ionicons/icons';
-import { Button, Timeline } from 'antd';
+import { Timeline } from 'antd';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
 import { Link } from 'react-router-dom';
