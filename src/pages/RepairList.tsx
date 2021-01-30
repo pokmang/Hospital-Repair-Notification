@@ -7,6 +7,7 @@ import { Button, Timeline } from 'antd';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
 import { Link } from 'react-router-dom';
+import Report from '../components/Report';
 
 
 const StyledWrapper = styled.div`
@@ -49,7 +50,6 @@ const RepairList = () => {
     const status = repair ? repair.status : null;
     const informer = repair ? repair.informer : null;
     const repairer = repair ? repair.repairer : null;
-
     const notiDate = repair ? repair.noti_date.toLocaleDateString('th-TH', {
         day: 'numeric',
         month: 'numeric',
@@ -90,7 +90,6 @@ const RepairList = () => {
         minute: 'numeric',
         second: 'numeric'
     }) : null;
-
     const handleYes = () => {
         updateRepair(
             params.id,
@@ -160,6 +159,10 @@ const RepairList = () => {
                             </Link>
                         ) : null}
                     </>
+                )
+            case "เรียบร้อย":
+                return (
+                    <Report repairId={params.id} repair={{ detail, device, department, informer, repairer, notiDate, repairDate, repairedDate, cancelDate, evaluateDate }} />
                 )
             default:
                 break;

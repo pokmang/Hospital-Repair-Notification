@@ -55,7 +55,8 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "2.4.4"
+    "@capacitor/cli": "2.4.4",
+    "gulp": "^4.0.2"
   },
   "description": "An Ionic project"
 }

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import firebase from '../firebase'
+import TEvaluate from '../types/TEvaluate';
 import TTopic from '../types/TTopic';
 
 const col = firebase.firestore().collection('evaluates');
 
 const EvaluatesController = () => {
-    let [evaluateObj, setEvaluate] = useState(null);
+    let [evaluateObj, setEvaluate] = useState<{ [key: string]: TEvaluate }>(null);
     const getEvaluate = () => {
         return col.onSnapshot((s) => {
 
@@ -17,7 +18,7 @@ const EvaluatesController = () => {
                     ...dataObj,
                     id: doc.id,
                 };
-                evaluateObj[doc.id] = data as TTopic;
+                evaluateObj[doc.id] = data as TEvaluate;
             })
             setEvaluate({ ...evaluateObj });
         });
@@ -37,7 +38,7 @@ const EvaluatesController = () => {
 
     return {
         evaluateObj,
-        topics: !evaluateObj ? null : Object.values(evaluateObj),
+        evaluates: !evaluateObj ? null : Object.values(evaluateObj),
         addEvaluate,
     }
 }

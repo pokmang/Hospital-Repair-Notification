@@ -77,7 +77,7 @@ const ToppicEvaluate = () => {
                             })
                         }
                         {
-                            <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
+                            topics && topics.length < 5 ? <Form name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off" >
                                 <Form.List name="addTopic">
                                     {(fields, { add, remove }) => (
                                         <>
@@ -110,6 +110,7 @@ const ToppicEvaluate = () => {
                                     </Button>
                                 </Form.Item>
                             </Form>
+                                : null
                         }
                     </IonList>
                 </IonContent>
