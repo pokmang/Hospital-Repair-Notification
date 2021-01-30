@@ -25,7 +25,8 @@ const RequestRepair = () => {
 
     const params = useParams<{ id: string }>();
     const user = userObj ? userObj[params.id] : null;
-    const informer = user && user.name
+    const informer = user ? user.name : null
+    const avatar = user ? user.avatar : null
 
     const [device, setDevail] = useState<string>('');
     const [detail, setDetail] = useState<string>('');
@@ -49,14 +50,14 @@ const RequestRepair = () => {
 
         const urls = await Promise.all(promises);
         addRepair({
-            informer,
+            informer: informer,
             department,
             noti_date: new Date(),
             detail,
             device,
             photos: urls,
             status: "รอการตอบรับ",
-            avatar: user.avatar
+            avatar: avatar
         });
         history.push("/");
 

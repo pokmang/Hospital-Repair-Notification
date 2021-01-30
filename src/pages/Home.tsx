@@ -47,7 +47,8 @@ const Home = () => {
     const { user } = authController
     const name = user ? user.name : null;
     const position = user ? user.position.name : null;
-    const uid = user ? user.id : null
+    const uid = user ? user.uid : null
+    console.log("home", user);
 
     const positionCheck = () => {
         if (position === "ผู้ดูแลระบบ" || position === "เจ้าหน้าที่") {
