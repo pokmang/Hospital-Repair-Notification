@@ -40,11 +40,11 @@ const Report = (props) => {
   const topic4 = evaluates ? evaluate.evaluated[3].topic : ''
   const topic5 = evaluates ? evaluate.evaluated[4].topic : ''
 
-  const score1 = evaluates ? evaluate.evaluated[0].score : ''
-  const score2 = evaluates ? evaluate.evaluated[1].score : ''
-  const score3 = evaluates ? evaluate.evaluated[2].score : ''
-  const score4 = evaluates ? evaluate.evaluated[3].score : ''
-  const score5 = evaluates ? evaluate.evaluated[4].score : ''
+  const score1 = evaluates ? evaluate.evaluated[0].score : 0
+  const score2 = evaluates ? evaluate.evaluated[1].score : 0
+  const score3 = evaluates ? evaluate.evaluated[2].score : 0
+  const score4 = evaluates ? evaluate.evaluated[3].score : 0
+  const score5 = evaluates ? evaluate.evaluated[4].score : 0
 
 
   const printPDF = () => {
@@ -77,7 +77,6 @@ const Report = (props) => {
             ]
           }
         },
-
         { text: 'รายละเอียดการซ่อม', style: 'title' },
         {
           style: 'tableExample',
@@ -106,7 +105,7 @@ const Report = (props) => {
               [{ text: '3', style: 'number' }, topic3, { text: `${score3}`, style: 'number' }],
               [{ text: '4', style: 'number' }, topic4, { text: `${score4}`, style: 'number' }],
               [{ text: '5', style: 'number' }, topic5, { text: `${score5}`, style: 'number' }],
-              [, , { text: `${score5}`, style: 'number' }]
+              [{ text: '', style: 'number' }, "คะแนนเฉลี่ย", { text: `${(score5+score4+score3+score2+score1)/5}`, style: 'number' }]
             ]
           }
         },
@@ -120,19 +119,18 @@ const Report = (props) => {
       styles: {
         header: {
           alignment: 'center',
-          fontSize: 25
+          fontSize: 22
         },
         tableHeader: {
-
           width: 100
         },
         title: {
-          fontSize: 16,
-          margin: [50, 20, 0, 5],
+          fontSize: 15,
+          margin: [50, 20, 0, 0],
         },
         evalu: {
           alignment: 'center',
-          fontSize: 16
+          fontSize: 14
         },
         tableExample: {
           margin: [50, 0, 0, 0]
@@ -147,7 +145,7 @@ const Report = (props) => {
         },
         name: {
           alignment: 'center',
-          fontSize: 15
+          fontSize: 14
         },
         date: {
           margin: [50, 0, 0, 0]
@@ -155,7 +153,6 @@ const Report = (props) => {
         number: {
           alignment: 'center',
         }
-
       },
 
 
@@ -164,6 +161,7 @@ const Report = (props) => {
       }
     };
     pdfMake.createPdf(docDefinition).open()
+    
   }
   return (
     <StyledWrapper>
