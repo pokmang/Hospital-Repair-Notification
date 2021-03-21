@@ -39,36 +39,12 @@ const Report = (props) => {
   const topic3 = evaluates ? evaluate.evaluated[2].topic : ''
   const topic4 = evaluates ? evaluate.evaluated[3].topic : ''
   const topic5 = evaluates ? evaluate.evaluated[4].topic : ''
-  const score = (sc) => {
-    switch (sc) {
-      case 1:
-        return (
-          "แย่มาก"
-        )
-      case 2:
-        return (
-          "แย่"
-        )
-      case 3:
-        return (
-          "ปานกลาง"
-        )
-      case 4:
-        return (
-          "พึงพอใจ"
-        )
-      case 5:
-        return (
-          "พึงพอใจมาก"
-        )
-    }
-  }
 
-  const score1 = evaluates ? score(evaluate.evaluated[0].score) : ''
-  const score2 = evaluates ? score(evaluate.evaluated[1].score) : ''
-  const score3 = evaluates ? score(evaluate.evaluated[2].score) : ''
-  const score4 = evaluates ? score(evaluate.evaluated[3].score) : ''
-  const score5 = evaluates ? score(evaluate.evaluated[4].score) : ''
+  const score1 = evaluates ? evaluate.evaluated[0].score : ''
+  const score2 = evaluates ? evaluate.evaluated[1].score : ''
+  const score3 = evaluates ? evaluate.evaluated[2].score : ''
+  const score4 = evaluates ? evaluate.evaluated[3].score : ''
+  const score5 = evaluates ? evaluate.evaluated[4].score : ''
 
 
   const printPDF = () => {
@@ -130,6 +106,7 @@ const Report = (props) => {
               [{ text: '3', style: 'number' }, topic3, { text: `${score3}`, style: 'number' }],
               [{ text: '4', style: 'number' }, topic4, { text: `${score4}`, style: 'number' }],
               [{ text: '5', style: 'number' }, topic5, { text: `${score5}`, style: 'number' }],
+              [, , { text: `${score5}`, style: 'number' }]
             ]
           }
         },
