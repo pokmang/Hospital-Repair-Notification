@@ -105,6 +105,7 @@ const Report = (props) => {
               [{ text: '3', style: 'number' }, topic3, { text: `${score3}`, style: 'number' }],
               [{ text: '4', style: 'number' }, topic4, { text: `${score4}`, style: 'number' }],
               [{ text: '5', style: 'number' }, topic5, { text: `${score5}`, style: 'number' }],
+              [{ text: '', style: 'number' }, "ค่ารวม", { text: `${score5+score4+score3+score2+score1}`, style: 'number' }],
               [{ text: '', style: 'number' }, "คะแนนเฉลี่ย", { text: `${(score5+score4+score3+score2+score1)/5}`, style: 'number' }]
             ]
           }
