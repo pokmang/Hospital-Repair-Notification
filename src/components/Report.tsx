@@ -96,7 +96,7 @@ const Report = (props) => {
         {
           style: 'tableExample',
           table: {
-            heights: 20,
+            heights: 15,
             widths: [30, 270, 90],
             body: [
               [{ text: 'ข้อที่', style: 'evalu' }, { text: 'หัวข้อการประเมิน', style: 'evalu' }, { text: 'เกณฑ์การประเมิน', style: 'evalu' }],

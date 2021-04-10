@@ -14,6 +14,7 @@ type TRepair = {
     cancel_date: Date,
     evaluate_date: Date,
     department: TDepartment
+    cancel_detail: string
 }
 
 export default TRepair;

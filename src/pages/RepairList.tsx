@@ -1,12 +1,13 @@
 import { IonPage, IonContent, IonCol, IonRow, IonButton, IonImg, IonGrid } from '@ionic/react';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
-import { Timeline } from 'antd';
+import { Modal, Timeline } from 'antd';
 import { useParams } from 'react-router';
 import { AppContext } from '../contexts/AppProvider';
 import { Link } from 'react-router-dom';
 import Report from '../components/Report';
+import TextArea from 'antd/lib/input/TextArea';
 
 
 const StyledWrapper = styled.div`
@@ -49,6 +50,7 @@ const RepairList = () => {
     const status = repair ? repair.status : null;
     const informer = repair ? repair.informer : null;
     const repairer = repair ? repair.repairer : null;
+    const cancelDetail = repair ? repair.cancel_detail : null;
     const notiDate = repair ? repair.noti_date.toLocaleDateString('th-TH', {
         day: 'numeric',
         month: 'numeric',
@@ -89,6 +91,26 @@ const RepairList = () => {
         minute: 'numeric',
         second: 'numeric'
     }) : null;
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [cancel, setCancel] = useState('');
+
+    const handleOk = () => {
+        updateRepair(
+            params.id,
+            {
+                status: "ยกเลิกแล้ว",
+                cancel_date: new Date,
+                repairer: userName,
+                cancel_detail: cancel
+            }
+        )
+        setIsModalVisible(false);
+    };
+
+    const handleClose = () => {
+        setIsModalVisible(false);
+    };
+
     const handleYes = () => {
         updateRepair(
             params.id,
@@ -109,14 +131,7 @@ const RepairList = () => {
         )
     }
     const handleCancel = () => {
-        updateRepair(
-            params.id,
-            {
-                status: "ยกเลิกแล้ว",
-                cancel_date: new Date,
-                repairer: userName
-            }
-        )
+        setIsModalVisible(true);
     }
 
     const TimelineRepair = () => {
@@ -198,11 +213,19 @@ const RepairList = () => {
                             {repairDate && <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>}
                             {repairedDate && <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>}
                             {evaluateDate && <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>}
-                            {cancelDate && <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม</Timeline.Item>}
+                            {cancelDate && <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม เนื่องจาก "{cancelDetail}"</Timeline.Item>}
                         </Timeline>
                         {TimelineRepair()}
                     </IonGrid>
                 </IonContent>
+                <Modal title="รายละเอียดการยกเลิก" visible={isModalVisible} onOk={handleOk} onCancel={handleClose}>
+                    <TextArea
+                        value={cancel}
+                        onChange={e => setCancel(e.target.value)}
+                        placeholder="ตัวอย่าง : เนื่องจากต้องทำการเปลี่ยนจอใหม่เท่านั้น"
+                        autoSize={{ minRows: 3, maxRows: 5 }}
+                    />
+                </Modal>
             </IonPage>
         </StyledWrapper>
     )
