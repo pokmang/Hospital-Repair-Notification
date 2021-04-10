@@ -7,6 +7,8 @@ import CardStatus from '../components/CardStatus';
 import { AppContext } from '../contexts/AppProvider';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { List, Typography, Divider } from 'antd';
+
 
 const StyledWrapper = styled.div`
     height: 100vh;
@@ -36,8 +38,30 @@ const StyledWrapper = styled.div`
         border-radius: 50px;
     }
     .col{
-        padding: 0px;
+        display: flex;
+        justify-content: space-between;
     }
+    .container{
+        margin-left:20px;
+        margin-right: 20px;
+    }
+    .box1 {
+    background: linear-gradient(to right, #179eec, #2b32b2);
+   }
+   .box2 {
+    background: linear-gradient(to right, #ede574, #e1f5c4);
+   }
+   .box3 {
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+   }
+   .box4 {
+    background: linear-gradient(to right, #c93445, #ea384d);
+   }
+   .box5 {
+    background: linear-gradient(to right, #1dc569, #93f9b9);
+   }
+   
+    
 `
 
 const Home = () => {
@@ -88,6 +112,17 @@ const Home = () => {
                 <IonContent>
                     <Topbar title={'หน้าแรก'} bnt={'ซ่อนปุ่ม'} />
                     <h1>รายการแจ้งซ่อม</h1>
+                    <div className="container">
+                        <div>อธิบายสถานะ</div>
+                        <div className="col">
+                            <div className="box2">รอการตอบรับ</div>
+                            <div className="box3">กำลังดำเนินการ </div>
+                            <div className="box1">รอประเมิน </div>
+                            <div className="box4">ยกเลิกแล้ว</div>
+                            <div className="box5">เรียบร้อย </div>
+                        </div>
+                    </div>
+
                     {
                         user && positionCheck()
                     }
