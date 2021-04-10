@@ -213,7 +213,7 @@ const RepairList = () => {
                             {repairDate && <Timeline.Item color="#618AE0">({repairDate}) "{repairer}" รับเรื่องแจ้งซ่อม กำลังดำเนินการซ่อมแซม</Timeline.Item>}
                             {repairedDate && <Timeline.Item color="#6BB4DF">({repairedDate}) ดำเนินการเสร็จสิ้น รอประเมินจาก "{informer}"</Timeline.Item>}
                             {evaluateDate && <Timeline.Item color="#99D1A3">({evaluateDate}) "{informer}" ประเมินการซ่อมเรียบร้อย</Timeline.Item>}
-                            {cancelDate && <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม เนื่องจาก "{cancelDetail}"</Timeline.Item>}
+                            {cancelDate && <Timeline.Item color="#eb2929">({cancelDate}) "{repairer}" ยกเลิกการแจ้งซ่อม เนื่องจาก"{cancelDetail}"</Timeline.Item>}
                         </Timeline>
                         {TimelineRepair()}
                     </IonGrid>
@@ -222,7 +222,7 @@ const RepairList = () => {
                     <TextArea
                         value={cancel}
                         onChange={e => setCancel(e.target.value)}
-                        placeholder="ตัวอย่าง : เนื่องจากต้องทำการเปลี่ยนจอใหม่เท่านั้น"
+                        placeholder="ตัวอย่าง : อุปกรณ์ไม่พร้อม"
                         autoSize={{ minRows: 3, maxRows: 5 }}
                     />
                 </Modal>
