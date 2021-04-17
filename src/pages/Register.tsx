@@ -133,11 +133,11 @@ const Register = () => {
                             <IonInput type="email" pattern="email" value={email} onIonChange={e => setEmail(e.detail.value)}></IonInput>
                         </IonItem>
                         <IonItem>
-                            <IonLabel position="floating">รหัสผ่าน <span style={{ color: "gray" }}>*จำนวน 6 ตัวอักษรขึ้นไป"</span></IonLabel>
+                            <IonLabel position="floating">รหัสผ่าน <span style={{ color: "gray" }}>*จำนวน 6 ตัวอักษรขึ้นไป</span></IonLabel>
                             <IonInput type="password" minlength={6} value={password} onIonChange={e => setPassword(e.detail.value)}></IonInput>
                         </IonItem>
                         <IonItem>
-                            <IonLabel position="floating">ยืนยันรหัสผ่าน <span style={{ color: "gray" }}>*จำนวน 6 ตัวอักษรขึ้นไป"</span></IonLabel>
+                            <IonLabel position="floating">ยืนยันรหัสผ่าน <span style={{ color: "gray" }}>*จำนวน 6 ตัวอักษรขึ้นไป</span></IonLabel>
                             <IonInput type="password" minlength={6} value={Confirmpassword} onIonChange={e => setConfirmpassword(e.detail.value)}></IonInput>
                         </IonItem>
                     </IonList>
