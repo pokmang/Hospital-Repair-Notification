@@ -32,9 +32,6 @@ const StyledWrapper = styled.div`
    .card.เรียบร้อย {
     background: linear-gradient(to right, #1dc569, #93f9b9);
    }
-
-
-
    .depart{
     font-size: 16px;
     color: black;
@@ -60,7 +57,6 @@ const StyledWrapper = styled.div`
 
 const CardStatus = props => {
     const { repair } = props
-    // const Detail = repair ? repair.repair.detail : '';
     const repairDate = repair ? repair.noti_date.toLocaleDateString('th-TH', {
         day: 'numeric',
         month: 'long',

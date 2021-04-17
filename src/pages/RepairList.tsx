@@ -26,9 +26,7 @@ const StyledWrapper = styled.div`
     }
     .img{
         height:150px;
-        width:150px
-        G
-        
+        width:150px 
     }
     .photo{
         display: flex;

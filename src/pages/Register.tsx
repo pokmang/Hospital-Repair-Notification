@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components'
-import { IonContent, IonHeader, IonPage, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonAlert } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonInput, IonItem, IonLabel, IonList, IonSelect, IonSelectOption, IonAlert, IonButton } from '@ionic/react';
 import { AppContext } from '../contexts/AppProvider'
 import Topbar from '../components/Topbar';
 import { useHistory } from 'react-router';
@@ -32,8 +32,9 @@ const Register = () => {
     const [name, setName] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
     const [position, setPosition] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [Confirmpassword, setConfirmpassword] = useState<string>('');
     const [department, setDepartment] = useState<string>('');
     const [showAlert1, setShowAlert1] = useState(false);
 
@@ -45,6 +46,59 @@ const Register = () => {
         register(email, password, { name, phone, email, position, department });
         history.push("/users")
     }
+    const registerCheck = () => {
+        let emailCheck = email.split("").some(e => e === "@")
+        if (name === '' || phone === '' || position === '' || department === '') {
+            return (
+                <IonAlert
+                    isOpen={showAlert1}
+                    onDidDismiss={() => {
+                        setShowAlert1(false)
+                    }}
+                    cssClass='my-custom-class'
+                    header={'ล้มเหลว!'}
+                    message={'กรุณาใส่ข้อมูลให้ครบถ้วน.'}
+                    buttons={['ตกลง']}
+                />
+            )
+        }
+        else if (email === '' || password === '' || password.length < 6 || Confirmpassword !== password || emailCheck === false) {
+            return (
+                <IonAlert
+                    isOpen={showAlert1}
+                    onDidDismiss={() => {
+                        setShowAlert1(false)
+                    }}
+                    cssClass='my-custom-class'
+                    header={'ล้มเหลว!'}
+                    message={'email หรือ รหัสผ่านไม่ถูกต้อง.'}
+                    buttons={['ตกลง']}
+                />
+            )
+        }
+        else {
+            return (
+                <IonAlert
+                    isOpen={showAlert1}
+                    onDidDismiss={() => setShowAlert1(false)}
+                    cssClass='my-custom-class'
+                    header={'ลงทะเบียน?'}
+                    message={`โปรดกด "ยืนยัน" เพื่อลงทะเบียน ${name}.`}
+                    buttons={[
+                        {
+                            text: 'ยกเลิก',
+                            role: 'ยกเลิก',
+                            cssClass: 'secondary',
+                        },
+                        {
+                            text: 'ยืนยัน',
+                            handler: confirmRegister
+                        }
+                    ]}
+                />
+            )
+        }
+    }
     return (
         <StyledWrapper>
             <IonPage>
@@ -55,7 +109,7 @@ const Register = () => {
                     <h1 className="title">ข้อมูลผู้ใช้</h1>
                     <IonList>
                         <IonItem>
-                            <IonLabel position="floating">ชื่อ - สกุล</IonLabel>
+                            <IonLabel position="floating">ชื่อ - สกุล <span style={{ color: "gray" }}>*ตัวอย่าง: "นายชื่อ นามสกุล"</span></IonLabel>
                             <IonInput value={name} onIonChange={e => setName(e.detail.value)}></IonInput>
                         </IonItem>
                         <IonItem>
@@ -71,55 +125,29 @@ const Register = () => {
                             </IonSelect>
                         </IonItem>
                         <IonItem>
-                            <IonLabel position="floating">เบอร์โทรศัพท์</IonLabel>
-                            <IonInput value={phone} onIonChange={e => setPhone(e.detail.value)}></IonInput>
+                            <IonLabel position="floating">เบอร์โทรศัพท์ <span style={{ color: "gray" }}>*ตัวอย่าง: "0123456789"</span></IonLabel>
+                            <IonInput maxlength={10} value={phone} onIonChange={e => setPhone(e.detail.value)}></IonInput>
                         </IonItem>
                         <IonItem>
-                            <IonLabel position="floating">อีเมล์</IonLabel>
-                            <IonInput value={email} onIonChange={e => setEmail(e.detail.value)}></IonInput>
+                            <IonLabel position="floating">อีเมล์ <span style={{ color: "gray" }}>*ตัวอย่าง: "test@email.com"</span></IonLabel>
+                            <IonInput type="email" pattern="email" value={email} onIonChange={e => setEmail(e.detail.value)}></IonInput>
                         </IonItem>
                         <IonItem>
-                            <IonLabel position="floating">รหัสผ่าน</IonLabel>
-                            <IonInput value={password} onIonChange={e => setPassword(e.detail.value)}></IonInput>
+                            <IonLabel position="floating">รหัสผ่าน <span style={{ color: "gray" }}>*จำนวน 6 ตัวอักษรขึ้นไป"</span></IonLabel>
+                            <IonInput type="password" minlength={6} value={password} onIonChange={e => setPassword(e.detail.value)}></IonInput>
+                        </IonItem>
+                        <IonItem>
+                            <IonLabel position="floating">ยืนยันรหัสผ่าน <span style={{ color: "gray" }}>*จำนวน 6 ตัวอักษรขึ้นไป"</span></IonLabel>
+                            <IonInput type="password" minlength={6} value={Confirmpassword} onIonChange={e => setConfirmpassword(e.detail.value)}></IonInput>
                         </IonItem>
                     </IonList>
                     <div className="button2">
-                        <Button block onClick={handleRegister} type="primary" >เพิ่มผู้ใช้งาน</Button>
+                        <IonButton onClick={handleRegister} type="submit" expand="block" >เพิ่มผู้ใช้งาน</IonButton >
                     </div>
-                    {name !== '' && phone !== '' && email !== '' && password !== '' && position !== '' && department !== '' ?
-                        <IonAlert
-                            isOpen={showAlert1}
-                            onDidDismiss={() => setShowAlert1(false)}
-                            cssClass='my-custom-class'
-                            header={'ลงทะเบียน?'}
-                            message={`โปรดกด "ยืนยัน" เพื่อลงทะเบียน ${name}.`}
-                            buttons={[
-                                {
-                                    text: 'ยกเลิก',
-                                    role: 'ยกเลิก',
-                                    cssClass: 'secondary',
-                                },
-                                {
-                                    text: 'ยืนยัน',
-                                    handler: confirmRegister,
-
-
-                                }
-                            ]}
-                        /> : <IonAlert
-                            isOpen={showAlert1}
-                            onDidDismiss={() => {
-                                setShowAlert1(false)
-                            }}
-                            cssClass='my-custom-class'
-                            header={'ล้มเหลว!'}
-                            message={'กรุณาใส่ข้อมูลให้ครบถ้วน.'}
-                            buttons={['ตกลง']}
-                        />
-                    }
+                    {registerCheck()}
                 </IonContent>
             </IonPage>
-        </StyledWrapper>
+        </StyledWrapper >
     );
 };
 export default Register;
