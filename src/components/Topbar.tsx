@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { Drawer } from 'antd'
 import { IonAvatar, IonButton, IonIcon, IonItem, IonLabel, } from '@ionic/react';
-import { arrowBackOutline, homeOutline, newspaper, newspaperOutline, personAddOutline, personOutline, reorderThreeOutline, settings } from 'ionicons/icons';
+import { arrowBackOutline, helpBuoy, homeOutline, newspaper, newspaperOutline, personAddOutline, personOutline, reorderThreeOutline, settings } from 'ionicons/icons';
 import { Link, useHistory } from 'react-router-dom';
 import { AppContext } from '../contexts/AppProvider';
 
@@ -178,6 +178,15 @@ const Topbar = (props) => {
                   <IonIcon icon={newspaperOutline} />
                   <IonLabel>
                     <Link to="/toppicEvaluate" style={{ color: "#fafafa", "paddingLeft": "10px" }}>หัวข้อประเมิน</Link>
+                  </IonLabel>
+                </IonItem>
+            }
+            {
+              position === 'ผู้ใช้งานทั่วไป' ? '' :
+                <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
+                  <IonIcon icon={helpBuoy} />
+                  <IonLabel>
+                    <Link to="/supplies" style={{ color: "#fafafa", "paddingLeft": "10px" }}>รายการพัสดุ</Link>
                   </IonLabel>
                 </IonItem>
             }

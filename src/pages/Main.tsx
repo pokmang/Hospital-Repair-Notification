@@ -9,6 +9,7 @@ import EditProfile from './EditProfile';
 import DataUser from './DataUser';
 import Users from './Users';
 import ToppicEvaluate from './ToppicEvaluate';
+import Supplies from './Supplies';
 
 const Main = () => {
     return (
@@ -23,6 +24,7 @@ const Main = () => {
                 <Route path="/users/:id" component={DataUser} />
                 <Route path="/users" component={Users} />
                 <Route path="/toppicEvaluate" component={ToppicEvaluate} />
+                <Route path="/supplies" component={Supplies} />
                 <Route path="/" render={() => (<Redirect to='/home' />)} />
             </Switch>
         </div>

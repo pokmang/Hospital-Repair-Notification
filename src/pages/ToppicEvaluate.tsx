@@ -26,7 +26,6 @@ const ToppicEvaluate = () => {
     const { topicObj, deleteTopic, updateTopic } = topicsController;
     const topics = topicObj ? topicObj["R3HTlxTB9CYxSeYnpmMK"].item : null;
     const [showAlert1, setShowAlert1] = useState(false);
-
     const deleteItem = (data) => {
         deleteTopic(data)
     }
@@ -81,25 +80,25 @@ const ToppicEvaluate = () => {
                                 <Form.List name="addTopic">
                                     {(fields, { add, remove }) => (
                                         <>
-                                            {fields.map((field, index) => (
-                                                <Form.Item
-                                                    {...field}
-                                                    name={[field.name, 'item']}
-                                                    fieldKey={[field.fieldKey, 'item']}
-                                                    rules={[{ required: true, message: 'ไม่พบข้อมูล! โปรดใส่ข้อมูล' }]}
-                                                    key={index}
-                                                    label={<h5>{topics && topics.length + index + 1}. </h5>}
-                                                >
-                                                    <div style={{ display: 'flex', marginBottom: 8, alignItems: "baseline" }}>
-                                                        <Input />
-                                                        <MinusCircleOutlined onClick={() => remove(field.name)} style={{ margin: "0 8px" }} />
-                                                    </div>
-                                                </Form.Item>
-                                            ))}
+                                            {
+                                                fields.map((field, index) => (
+                                                    <Form.Item
+                                                        {...field}
+                                                        name={[field.name, 'item']}
+                                                        fieldKey={[field.fieldKey, 'item']}
+                                                        rules={[{ required: true, message: 'ไม่พบข้อมูล! โปรดใส่ข้อมูล' }]}
+                                                        key={index}
+                                                        label={<h5>{topics && topics.length + index + 1}. </h5>}
+                                                    >
+                                                        <div style={{ display: 'flex', marginBottom: 8, alignItems: "baseline" }}>
+                                                            <Input />
+                                                            <MinusCircleOutlined onClick={() => remove(field.name)} style={{ margin: "0 8px" }} />
+                                                        </div>
+                                                    </Form.Item>
+                                                ))
+                                            }
                                             <Form.Item>
-                                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                                    Add field
-                                            </Button>
+                                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}> เพิ่มหัวข้อประเมิน </Button>
                                             </Form.Item>
                                         </>
                                     )}
