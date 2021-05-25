@@ -24,12 +24,12 @@ const TopicsController = () => {
     }
 
     const addTopic = (data) => {
-        return col.doc().set({ ...data })
+        return col.doc("R3HTlxTB9CYxSeYnpmMK").set({ ...data })
     }
 
-    const updateTopic = (date) => {
+    const updateTopic = (data) => {
         return (
-            col.doc("R3HTlxTB9CYxSeYnpmMK").set({ ...date })
+            col.doc("R3HTlxTB9CYxSeYnpmMK").update({ ...data })
         )
     }
 

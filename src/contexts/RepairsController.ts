@@ -33,9 +33,9 @@ const RepairsController = () => {
         return col.doc().set({ ...data })
     }
 
-    const updateRepair = (id, date) => {
+    const updateRepair = (id, data) => {
         return (
-            col.doc(id).update({ ...date })
+            col.doc(id).update({ ...data })
         )
     }
 

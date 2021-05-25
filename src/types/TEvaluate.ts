@@ -1,9 +1,9 @@
 import TEvaluated from "./TEvaluated";
 
 type TEvaluate = {
+    id: string,
     evaluated: TEvaluated[],
     repairId: string,
-    id: string,
 }
 
 export default TEvaluate;

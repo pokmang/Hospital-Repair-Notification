@@ -23,7 +23,7 @@ const StyledWrapper = styled.div`
 `
 const ToppicEvaluate = () => {
     const { topicsController } = useContext(AppContext);
-    const { topicObj, deleteTopic, updateTopic } = topicsController;
+    const { topicObj, deleteTopic, addTopic } = topicsController;
     const topics = topicObj ? topicObj["R3HTlxTB9CYxSeYnpmMK"].item : null;
     const [showAlert1, setShowAlert1] = useState(false);
     const deleteItem = (data) => {
@@ -33,7 +33,7 @@ const ToppicEvaluate = () => {
     const onFinish = (values) => {
         const newTopic = values["addTopic"].map(v => v.item)
         const topic = [...topics, ...newTopic]
-        updateTopic({ item: topic })
+        addTopic({ item: topic })
     };
 
     return (

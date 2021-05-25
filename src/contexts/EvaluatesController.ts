@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import firebase from '../firebase'
 import TEvaluate from '../types/TEvaluate';
-import TTopic from '../types/TTopic';
 
 const col = firebase.firestore().collection('evaluates');
 
