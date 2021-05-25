@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
-import TSupplies from '../types/Tsupplies';
+import TSupplies from '../types/TSupplies';
 
 const col = firebase.firestore().collection('supplies')
 
