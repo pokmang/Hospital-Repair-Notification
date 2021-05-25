@@ -25,7 +25,7 @@ const ToppicEvaluate = () => {
     const { topicsController } = useContext(AppContext);
     const { topicObj, deleteTopic, addTopic } = topicsController;
     const topics = topicObj ? topicObj["R3HTlxTB9CYxSeYnpmMK"].item : null;
-    const [number, setNumber] = useState(0);
+    let [topicNumber, setTopicNumber] = useState(0);
     const [showAlert1, setShowAlert1] = useState(false);
     const deleteItem = (data) => {
         deleteTopic(data)
@@ -36,8 +36,6 @@ const ToppicEvaluate = () => {
         const topic = [...topics, ...newTopic]
         addTopic({ item: topic })
     };
-
-    let topicNumber = 0;
 
     return (
         <StyledWrapper>
@@ -92,7 +90,7 @@ const ToppicEvaluate = () => {
                                                             fieldKey={[field.fieldKey, 'item']}
                                                             rules={[{ required: true, message: 'ไม่พบข้อมูล! โปรดใส่ข้อมูล' }]}
                                                             key={index}
-                                                            label={<h5>{topicNumber = topics && topics.length + index + 1}. </h5>}
+                                                            label={<h5>{topicNumber = (topics && topics.length + index + 1)}. </h5>}
                                                         >
                                                             <div style={{ display: 'flex', marginBottom: 8, alignItems: "baseline" }}>
                                                                 <Input />
@@ -103,11 +101,10 @@ const ToppicEvaluate = () => {
                                                 })
                                             }
                                             <Form.Item>
-                                                {console.log()}
                                                 {
                                                     topicNumber < 5 ?
                                                         <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}> เพิ่มหัวข้อประเมิน </Button>
-                                                        : console.log(topicNumber = topics && topics.length)
+                                                        : <div style={{ display: "none" }}>{topicNumber = topics && topics.length}</div>
                                                 }
                                             </Form.Item>
                                         </>
