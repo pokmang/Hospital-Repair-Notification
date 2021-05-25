@@ -1,6 +1,6 @@
 import { IonPage, IonHeader, IonContent, IonList, IonAlert } from '@ionic/react';
 import { Button, Form, Input, } from 'antd';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components';
 import Topbar from '../components/Topbar';
 import { AppContext } from '../contexts/AppProvider';
@@ -25,6 +25,7 @@ const ToppicEvaluate = () => {
     const { topicsController } = useContext(AppContext);
     const { topicObj, deleteTopic, addTopic } = topicsController;
     const topics = topicObj ? topicObj["R3HTlxTB9CYxSeYnpmMK"].item : null;
+    const [number, setNumber] = useState(0);
     const [showAlert1, setShowAlert1] = useState(false);
     const deleteItem = (data) => {
         deleteTopic(data)
@@ -35,6 +36,8 @@ const ToppicEvaluate = () => {
         const topic = [...topics, ...newTopic]
         addTopic({ item: topic })
     };
+
+    let topicNumber = 0;
 
     return (
         <StyledWrapper>
@@ -81,24 +84,31 @@ const ToppicEvaluate = () => {
                                     {(fields, { add, remove }) => (
                                         <>
                                             {
-                                                fields.map((field, index) => (
-                                                    <Form.Item
-                                                        {...field}
-                                                        name={[field.name, 'item']}
-                                                        fieldKey={[field.fieldKey, 'item']}
-                                                        rules={[{ required: true, message: 'ไม่พบข้อมูล! โปรดใส่ข้อมูล' }]}
-                                                        key={index}
-                                                        label={<h5>{topics && topics.length + index + 1}. </h5>}
-                                                    >
-                                                        <div style={{ display: 'flex', marginBottom: 8, alignItems: "baseline" }}>
-                                                            <Input />
-                                                            <MinusCircleOutlined onClick={() => remove(field.name)} style={{ margin: "0 8px" }} />
-                                                        </div>
-                                                    </Form.Item>
-                                                ))
+                                                fields.map((field, index) => {
+                                                    return (
+                                                        <Form.Item
+                                                            {...field}
+                                                            name={[field.name, 'item']}
+                                                            fieldKey={[field.fieldKey, 'item']}
+                                                            rules={[{ required: true, message: 'ไม่พบข้อมูล! โปรดใส่ข้อมูล' }]}
+                                                            key={index}
+                                                            label={<h5>{topicNumber = topics && topics.length + index + 1}. </h5>}
+                                                        >
+                                                            <div style={{ display: 'flex', marginBottom: 8, alignItems: "baseline" }}>
+                                                                <Input />
+                                                                <MinusCircleOutlined onClick={() => remove(field.name)} style={{ margin: "0 8px" }} />
+                                                            </div>
+                                                        </Form.Item>
+                                                    )
+                                                })
                                             }
                                             <Form.Item>
-                                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}> เพิ่มหัวข้อประเมิน </Button>
+                                                {console.log()}
+                                                {
+                                                    topicNumber < 5 ?
+                                                        <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}> เพิ่มหัวข้อประเมิน </Button>
+                                                        : console.log(topicNumber = topics && topics.length)
+                                                }
                                             </Form.Item>
                                         </>
                                     )}
