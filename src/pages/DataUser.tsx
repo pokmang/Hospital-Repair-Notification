@@ -95,7 +95,7 @@ const DataUser = () => {
                             <h1>ประวัติงานที่ดำเนินการ</h1>
                         </IonRow>
                         {
-                            repairs && repairs.filter(repair => repair.informer === name)
+                            repairs && repairs.filter(repair => (repair.informer === name || repair.repairer === name))
                                 .sort((a, b) => b.noti_date.valueOf() - a.noti_date.valueOf())
                                 .map((repair, index) => {
                                     return (
