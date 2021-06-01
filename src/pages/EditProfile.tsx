@@ -141,6 +141,7 @@ const EditProfile = () => {
         setShowAlert(false);
         deleteUser(params.id);
         history.push(`/users`);
+        window.location.reload(false);
     }
     return (
         <StyledWrapper>
