@@ -82,8 +82,8 @@ const CardSupplies = (props) => {
                 isOpen={Deleted}
                 onDidDismiss={() => setDeleted(false)}
                 cssClass='my-custom-class'
-                header={'Confirm!'}
-                message={'Message <strong>text</strong>!!!'}
+                header={'ลบพัสดุ!'}
+                message={`ต้องการลบพัสดุ "${value.name}" ใช่หรือไม่?`}
                 buttons={[
                     {
                         text: 'ยกเลิก',
