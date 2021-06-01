@@ -36,11 +36,15 @@ const SuppliesController = () => {
     const updateSupply = (id, data) => {
         return col.doc(id).update({ ...data })
     }
+    const deleteSupply = (id) => {
+        return col.doc(id).delete()
+    }
     return {
         supplyObj,
         supplies: !supplyObj ? null : Object.values(supplyObj),
         createdSupply,
-        updateSupply
+        updateSupply,
+        deleteSupply
     }
 }
 

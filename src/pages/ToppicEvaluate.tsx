@@ -7,7 +7,6 @@ import { AppContext } from '../contexts/AppProvider';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 
 const StyledWrapper = styled.div`
-
     .title{
         padding-left: 25px;
     }

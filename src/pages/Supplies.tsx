@@ -22,7 +22,7 @@ const StyledWrapper = styled.div`
 
 const Supplies = () => {
     const { suppliesController } = useContext(AppContext)
-    const { createdSupply, supplies, updateSupply } = suppliesController;
+    const { createdSupply, supplies, updateSupply, deleteSupply } = suppliesController;
     const { Option } = Select;
     const [search, setSearch] = useState('');
     const [name, setName] = useState('');
@@ -136,7 +136,12 @@ const Supplies = () => {
                                                 {
                                                     value[1].filter(value => value.type.toLowerCase().indexOf(search.toLowerCase()) >= 0)
                                                         .map((value, index) => (
-                                                            <CardSupplies key={index} value={value} onUpdate={(id, numb) => updateSupply(id, { number: numb })} />
+                                                            <CardSupplies
+                                                                key={index}
+                                                                value={value}
+                                                                onUpdate={(id, numb) => updateSupply(id, { number: numb })}
+                                                                onDeleted={(id) => deleteSupply(id)}
+                                                            />
                                                         ))
                                                 }
                                             </div>

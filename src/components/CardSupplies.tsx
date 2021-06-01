@@ -1,5 +1,5 @@
 import { IonActionSheet, IonAlert, IonItem, IonLabel, IonThumbnail } from '@ionic/react';
-import { share, trash } from 'ionicons/icons';
+import { share, trash, checkbox } from 'ionicons/icons';
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
@@ -13,9 +13,10 @@ const StyledWrapper = styled.div`
     }
 `
 const CardSupplies = (props) => {
-    const { value, onUpdate } = props
+    const { value, onUpdate, onDeleted } = props
     const [showActionSheet, setShowActionSheet] = useState(false);
-    const [deletedFail, setDeletedFail] = useState(false);
+    const [usedFail, setusedFail] = useState(false);
+    const [Deleted, setDeleted] = useState(false);
 
     return (
         <StyledWrapper>
@@ -35,20 +36,17 @@ const CardSupplies = (props) => {
                 onDidDismiss={() => setShowActionSheet(false)}
                 cssClass='my-custom-class'
                 buttons={[
-                    value.number == 0 ? {
+                    {
                         text: 'ใช้พัสดุ',
                         role: 'destructive',
-                        icon: trash,
+                        icon: checkbox,
                         handler: () => {
-                            setDeletedFail(true);
-                        }
-                    } : {
-                        text: 'ใช้พัสดุ',
-                        role: 'destructive',
-                        icon: trash,
-                        handler: () => {
-                            value.number--;
-                            onUpdate(value.id, value.number);
+                            if (value.number == 0)
+                                setusedFail(true)
+                            else {
+                                value.number--;
+                                onUpdate(value.id, value.number)
+                            }
                         }
                     }, {
                         text: 'เพิ่มจำนวนพัสดุ',
@@ -56,6 +54,12 @@ const CardSupplies = (props) => {
                         handler: () => {
                             value.number++;
                             onUpdate(value.id, value.number);
+                        }
+                    }, {
+                        text: 'ลบพัสดุ',
+                        icon: trash,
+                        handler: () => {
+                            setDeleted(true);
                         }
                     }, {
                         text: 'ยกเลิก',
@@ -67,14 +71,35 @@ const CardSupplies = (props) => {
             >
             </IonActionSheet>
             <IonAlert
-                isOpen={deletedFail}
-                onDidDismiss={() => setDeletedFail(false)}
+                isOpen={usedFail}
+                onDidDismiss={() => setusedFail(false)}
                 cssClass='my-custom-class'
                 header={'ไม่มีพัสดุในคลัง!'}
                 message={'ไม่สามารถใช้ได้ เนื่องจากไม่มีพัสดุในคลัง'}
-                buttons={['OK']}
+                buttons={['ตกลง']}
             />
-        </StyledWrapper>
+            <IonAlert
+                isOpen={Deleted}
+                onDidDismiss={() => setDeleted(false)}
+                cssClass='my-custom-class'
+                header={'Confirm!'}
+                message={'Message <strong>text</strong>!!!'}
+                buttons={[
+                    {
+                        text: 'ยกเลิก',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                    },
+                    {
+                        text: 'ตกลง',
+                        handler: () => {
+                            onDeleted(value.id)
+                            window.location.reload(false);
+                        }
+                    }
+                ]}
+            />
+        </StyledWrapper >
     )
 }
 
