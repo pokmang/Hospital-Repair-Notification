@@ -81,7 +81,7 @@ const Home = () => {
                     .map((repair, index) => {
                         return (
                             <Link key={index} to={`/repairlist/${repair.id}`}>
-                                <CardStatus repair={repair} bnt={'ซ่อนปุ่ม'} />
+                                <CardStatus number={repairs.length - index} repair={repair} bnt={'ซ่อนปุ่ม'} />
                             </Link>
                         )
                     })
@@ -96,7 +96,7 @@ const Home = () => {
                         return (
                             <Link key={index} to={`/repairlist/${repair.id}`}>
                                 <IonItem>
-                                    <CardStatus repair={repair} bnt={'ซ่อนปุ่ม'} />
+                                    <CardStatus number={repairs.length - index} repair={repair} bnt={'ซ่อนปุ่ม'} />
                                 </IonItem>
                             </Link>
                         )

@@ -147,7 +147,7 @@ const Topbar = (props) => {
               </IonLabel>
             </IonItem>
             {
-              position === 'ผู้ใช้งานทั่วไป' ? '' :
+              position === 'ผู้ใช้งานทั่วไป' || position === 'เจ้าหน้าที่' ? '' :
                 <IonItem style={{ "--background": "#3395f0", "marginBottom": "10px" }}>
                   <IonIcon icon={personOutline} />
                   <IonLabel>

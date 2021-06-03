@@ -56,7 +56,7 @@ const StyledWrapper = styled.div`
 `
 
 const CardStatus = props => {
-    const { repair } = props
+    const { repair, number } = props
     const repairDate = repair ? repair.noti_date.toLocaleDateString('th-TH', {
         day: 'numeric',
         month: 'long',
@@ -70,13 +70,14 @@ const CardStatus = props => {
     const repairName = repair ? repair.informer : null;
     const repairStatus = repair ? repair.status : null;
     const userAvatar = repair ? repair.avatar : null;
-
+    console.log(number);
+    
     return (
         <StyledWrapper>
             <IonCard className={`card ${repairStatus}`}>
                 <IonCardContent >
                     <div className="title-card">
-                        <h2>อุปกรณ์:{repairDevice}</h2>
+                        <h2>อุปกรณ์:{repairDevice} <p>คิว:{number}</p></h2>
                         <h2 color="light" className="status">{repairStatus}</h2>
                     </div>
                     <div >
